@@ -1,0 +1,75 @@
+﻿using SGRA2._0.Model;
+using SGRA2._0.Repositories;
+
+namespace SGRA2._0.Service
+{
+    public interface IFlipService
+    {
+        Task<List<Flip>> GetAll();
+        Task<Flip> GetFlip(int IdFlip);
+        Task<Flip> CreateFlip(int IdWaste, int Flipfrequency, string UniformedDescription);
+        Task<Flip> UpdateFlip(int IdFlip, int? IdWaste = null, int? Flipfrequency = null, string? UniformedDescription = null);
+        Task<Flip> DeleteFlip(int IdFlip);
+    }
+    public class FlipService : IFlipService
+    {
+        public readonly FlipRepositories _flipRepositories;
+        public FlipService(FlipRepositories flipRepositories)
+        {
+            _flipRepositories = flipRepositories;
+        }
+        public async Task<Flip> CreateFlip(int IdWaste, int Flipfrequency, string UniformedDescription)
+        {
+            return await _flipRepositories.CreateFlip(IdWaste, Flipfrequency, UniformedDescription);
+            //throw new NotImplementedException();
+        }
+
+        public async Task<Flip> DeleteFlip(int IdFlip)
+        {
+            // comprobar si existe
+            Flip flipToDelete = await _flipRepositories.GetFlip(IdFlip);
+            if (flipToDelete == null)
+            {
+                throw new Exception($"El volteo con el Id {IdFlip} no existe");
+            }
+
+            return await _flipRepositories.DeleteFlip(flipToDelete);
+            //throw new NotImplementedException();
+        }
+
+        public async Task<List<Flip>> GetAll()
+        {
+            return await _flipRepositories.GetAll();
+            //throw new NotImplementedException();
+        }
+
+        public async Task<Flip> GetFlip(int IdFlip)
+        {
+            return await _flipRepositories.GetFlip(IdFlip);
+
+            //throw new NotImplementedException();
+        }
+
+        public async Task<Flip> UpdateFlip(int IdFlip, int? IdWaste = null, int? Flipfrequency = null, string? UniformedDescription = null)
+        {
+            Flip newflip = await _flipRepositories.GetFlip(IdFlip);
+            if (newflip != null)
+            {
+                if (IdWaste != null)
+                {
+                    newflip.IdWaste = (int)IdWaste;
+                }
+                if (Flipfrequency != null)
+                {
+                    newflip.Flipfrequency = (int)Flipfrequency;
+                }
+                if (UniformedDescription != null)
+                {
+                    newflip.UniformedDescription = UniformedDescription;
+                }
+                return await _flipRepositories.UpdateFlip(newflip);
+            }
+            throw new NotImplementedException();
+        }
+    }
+}

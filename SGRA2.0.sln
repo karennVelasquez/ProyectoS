@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGRA2.0", "SGRA2.0\SGRA2.0.csproj", "{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1D12D57-8145-4BD3-AF33-F16605C7B069}
+	EndGlobalSection
+EndGlobal

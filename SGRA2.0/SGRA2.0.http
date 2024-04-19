@@ -1,0 +1,6 @@
+@SGRA2._0_HostAddress = http://localhost:5200
+
+GET {{SGRA2._0_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
