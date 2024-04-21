@@ -32,7 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"La temperatura con el Id {IdTemperature} no existe");
             }
-
+            temperatureToDelete.IsDelete = true;
+            temperatureToDelete.Date = DateTime.Now;
             return await _temperatureRepositories.DeleteTemperature(temperatureToDelete);
             //throw new NotImplementedException();
         }

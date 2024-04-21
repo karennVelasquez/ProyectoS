@@ -32,7 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El usuario con el Id {IdUser} no existe");
             }
-
+            userToDelete.IsDelete = true;
+            userToDelete.Date = DateTime.Now;
             return await _userRepositories.DeleteUser(userToDelete);
             //throw new NotImplementedException();
         }

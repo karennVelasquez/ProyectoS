@@ -32,7 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"La transaccion con el Id {IdTransaction} no existe");
             }
-
+            transactionToDelete.IsDelete = true;
+            transactionToDelete.Date = DateTime.Now;
             return await _transactionRepositories.DeleteTransaction(transactionToDelete);
             //throw new NotImplementedException();
         }

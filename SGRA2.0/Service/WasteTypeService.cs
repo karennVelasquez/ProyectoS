@@ -34,7 +34,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El tipo de residuo con el Id {IdWasteType} no existe");
             }
-
+            wasteTypeToDelete.IsDelete = true;
+            wasteTypeToDelete.Date = DateTime.Now;
             return await _wasteTypeRepositories.DeleteWasteType(wasteTypeToDelete);
             //throw new NotImplementedException();
         }

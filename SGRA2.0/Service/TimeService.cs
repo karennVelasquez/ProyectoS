@@ -33,6 +33,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El tiempo con el Id {IdTime} no existe");
             }
+            timeToDelete.IsDelete = true;
+            timeToDelete.Date = DateTime.Now;
 
             return await _timeRepositories.DeleteTime(timeToDelete);
             //throw new NotImplementedException();

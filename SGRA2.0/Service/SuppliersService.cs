@@ -32,6 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El proveedor con el Id {IdSuppliers} no existe");
             }
+            suppliersToDelete.IsDelete = true;
+            suppliersToDelete.Date = DateTime.Now;
 
             return await _suppliersRepositories.DeleteSuppliers(suppliersToDelete);
             //throw new NotImplementedException();

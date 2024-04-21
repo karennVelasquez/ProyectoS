@@ -32,6 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El puntaje con el Id {IdScore} no existe");
             }
+            scoreToDelete.IsDelete = true;
+            scoreToDelete.Date = DateTime.Now;
 
             return await _scoreRepositories.DeleteScore(scoreToDelete);
             //throw new NotImplementedException();
