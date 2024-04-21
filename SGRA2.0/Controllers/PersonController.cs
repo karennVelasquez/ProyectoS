@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SGRA2._0.Model;
 using SGRA2._0.Service;
+using System.Numerics;
 using System.Reflection.Metadata;
 namespace SGRA2._0.Controllers
 {
@@ -36,5 +39,103 @@ namespace SGRA2._0.Controllers
             return Ok(Person);
         }
 
+    }
+}
+
+using HClinicalV2._0.Model;
+using HClinicalV2._0.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Threading.ExecutionContext;
+using Microsoft.AspNetCore.Http;
+using static Azure.Core.HttpHeader;
+
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace HClinicalV2._0.Controllers
+{
+    [Route("HClinical/[controller]")]
+    [ApiController]
+    public class EpsController : ControllerBase
+    {
+        private readonly IEpsService _epsService;
+        public EpsController(IEpsService epsService)
+        {
+            _epsService = epsService;
+        }
+
+
+        // GET: api/<epsController>
+        [HttpGet]
+        public async Task<ActionResult<List<Eps>>> GetAllEps()
+        {
+            return Ok(await _epsService.GetAll());
+        }
+
+        // GET api/<epsController>/5
+        [HttpGet("{idEps}")]
+        public async Task<ActionResult<Eps>> GetEps(int idEps)
+        {
+            var eps = await _epsService.GetEps(idEps);
+            if (eps == null)
+            {
+                return BadRequest("Eps not found");
+            }
+            return Ok(eps);
+        }
+
+        // POST: api/Eps
+        [HttpPost("{nameEps}")]
+        public async Task<ActionResult<Eps>> PostEps(string nameEps)
+        {
+            var epsToPut = _epsService.CreateEps(nameEps);
+
+            if (epsToPut != null)
+            {
+                return Ok(epsToPut);
+            }
+            else
+            {
+                return BadRequest("Error when inserting into the database");
+            }
+
+
+        }
+
+        // PUT: api/Eps/5
+        [HttpPut("Update/{idEps}")]
+        public async Task<ActionResult<Eps>> PutEps(int idEps, string nameEps)
+        {
+            var epsToPut = await _epsService.UpdateEps(idEps, nameEps);
+
+            if (epsToPut != null)
+            {
+                return Ok(epsToPut);
+            }
+            else
+            {
+                return BadRequest("Error updating the database :(");
+            }
+
+        }
+
+        // Delete: api/Eps/5
+        [HttpPut("Delete/{idEps}")]
+        public async Task<ActionResult<Eps>> DeleteEps(int idEps)
+        {
+
+            var epsToDelete = await _epsService.DeleteEps(idEps);
+
+            if (epsToDelete != null)
+            {
+                return Ok(epsToDelete);
+            }
+            else
+            {
+                return BadRequest("Error updating the database");
+            }
+        }
     }
 }

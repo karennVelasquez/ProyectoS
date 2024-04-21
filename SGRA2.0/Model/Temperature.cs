@@ -11,5 +11,8 @@ namespace SGRA2._0.Model
       //  public required Waste Waste { get; set; }
         public required string Decompositiontemperature { get; set; }
         public required string Range { get; set; }
+        public bool IsDelete { get; set; }
+        public DateTime Date { get; set; }
+        public string ModifiedBy { get; set; }
     }
 }
