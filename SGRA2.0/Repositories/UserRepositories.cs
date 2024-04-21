@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IUserRepositories
     {
         Task<List<User>> GetAll();
-        Task<User> GetUser(int id);
+        Task<User> GetUser(int IdUser);
         Task<User> CreateUser(string UserName, string Password);
         Task<User> UpdateUser(User user);
         Task<User> DeleteUser(User user);
@@ -48,10 +48,21 @@ namespace SGRA2._0.Repositories
         }
         public async Task<User> UpdateUser(User user)
         {
-            _db.users.Attach(user); 
-            _db.Entry(user).State = EntityState.Modified;
+            User UserUpdate = await _db.users.FindAsync(user.IdUser);
+            {
+                UserUpdate.UserName = user.UserName;
+                UserUpdate.Password = user.Password;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return UserUpdate;
+            /*
+            _db.historicalCost.Attach(historicalCost); //Llamamos la actualizacion
+            _db.Entry(historicalCost).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return user;
+            return historicalCost;
+            */
         }
     }
 }

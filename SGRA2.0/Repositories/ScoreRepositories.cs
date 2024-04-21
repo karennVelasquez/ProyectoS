@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IScoreRepositories
     {
         Task<List<Score>> GetAll();
-        Task<Score> GetScore(int id);
+        Task<Score> GetScore(int IdScore);
         Task<Score> CreateScore(int IdUser, int IdGames, int NumScore);
         Task<Score> UpdateScore(Score score);
         Task<Score> DeleteScore(Score score);
@@ -50,10 +50,23 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Score> UpdateScore(Score score)
         {
-            _db.scores.Attach(score); //Llamamos la actualizacion
-            _db.Entry(score).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
-            return score; 
+            Score ScoreUpdate = await _db.scores.FindAsync(score.IdScore);
+            if (ScoreUpdate != null) 
+            {
+                ScoreUpdate.IdUser =score.IdUser;
+                ScoreUpdate.IdGames =score.IdGames; 
+                ScoreUpdate.NumScore = score.NumScore;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return ScoreUpdate;
+            /*
+           _db.historicalCost.Attach(historicalCost); //Llamamos la actualizacion
+           _db.Entry(historicalCost).State = EntityState.Modified;
+           await _db.SaveChangesAsync();
+           return historicalCost;
+           */
         }
     }
 }

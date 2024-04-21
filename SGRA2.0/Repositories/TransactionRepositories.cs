@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ITransactionRepositories
     {
         Task<List<Transaction>> GetAll();
-        Task<Transaction> GetTransaction(int id);
+        Task<Transaction> GetTransaction(int IdTransaction);
         Task<Transaction> CreateTransaction(int IdSuppliers, int DeliveredQuantity, DateTime DeliveredDate, string Price, string Quality);
         Task<Transaction> UpdateTransaction(Transaction transaction);
         Task<Transaction> DeleteTransaction(Transaction transaction);
@@ -52,10 +52,24 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Transaction> UpdateTransaction(Transaction transaction)
         {
-            _db.transactions.Attach(transaction); //Llamamos la actualizacion
-            _db.Entry(transaction).State = EntityState.Modified;
+            Transaction TransactionUpdate = await _db.transactions.FindAsync(transaction.IdTransaction);
+            if (TransactionUpdate != null) 
+            {
+                TransactionUpdate.IdSuppliers = transaction.IdSuppliers;
+                TransactionUpdate.DeliveredQuantity = transaction.DeliveredQuantity;    
+                TransactionUpdate.DeliveredDate = transaction.DeliveredDate;
+                TransactionUpdate.Price = transaction.Price;    
+                TransactionUpdate.Quality = transaction.Quality;  
+
+                await _db.SaveChangesAsync();
+            }
+            return TransactionUpdate;
+            /*
+            _db.historicalCost.Attach(historicalCost); //Llamamos la actualizacion
+            _db.Entry(historicalCost).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return transaction;
+            return historicalCost;
+            */
         }
     }
 }

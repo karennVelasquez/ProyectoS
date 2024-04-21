@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     public interface IWasteRepositories
     {
         Task<List<Waste>> GetAll();
-        Task<Waste> GetWaste(int id);
+        Task<Waste> GetWaste(int IdWaste);
         Task<Waste> CreateWaste(int IdWasteType, string Humidity);
         Task<Waste> UpdateWaste(Waste waste);
         Task<Waste> DeleteWaste(Waste waste);
@@ -50,10 +50,21 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Waste> UpdateWaste(Waste waste)
         {
+            Waste WasteUpdate = await _db.wastes.FindAsync(waste.IdWaste);
+            if (WasteUpdate != null) 
+            {
+                WasteUpdate.Humidity = waste.Humidity;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return WasteUpdate;
+            /*
             _db.wastes.Attach(waste); //Llamamos la actualizacion
             _db.Entry(waste).State = EntityState.Modified;
             await _db.SaveChangesAsync();
             return waste;
+            */
         }
     }
 }

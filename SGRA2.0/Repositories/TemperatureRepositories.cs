@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ITemperatureRepositories
     {
         Task<List<Temperature>> GetAll();
-        Task<Temperature> GetTemperature(int id);
+        Task<Temperature> GetTemperature(int IdTemperature);
         Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature, string Range);
         Task<Temperature> UpdateTemperature (Temperature temperature);
         Task<Temperature> DeleteTemperature(Temperature temperature);
@@ -51,10 +51,22 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Temperature> UpdateTemperature(Temperature temperature)
         {
-            _db.temperatures.Attach(temperature); //Llamamos la actualizacion
-            _db.Entry(temperature).State = EntityState.Modified;
+            Temperature TemperatureUpdate = await _db.temperatures.FindAsync(temperature.IdTemperature);    
+            if (TemperatureUpdate != null) 
+            {
+                TemperatureUpdate.IdWaste = temperature.IdWaste;
+                TemperatureUpdate.Decompositiontemperature = temperature.Decompositiontemperature;  
+                TemperatureUpdate.Range = temperature.Range;
+
+                await _db.SaveChangesAsync();
+            }
+            return TemperatureUpdate;
+            /*
+            _db.historicalCost.Attach(historicalCost); //Llamamos la actualizacion
+            _db.Entry(historicalCost).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return temperature;
+            return historicalCost;
+            */
         }
     }
 }

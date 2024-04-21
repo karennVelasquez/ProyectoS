@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ISuppliersRepositories
     {
         Task<List<Suppliers>> GetAll();
-        Task<Suppliers> GetSuppliers(int id);
+        Task<Suppliers> GetSuppliers(int IdSuppliers);
         Task<Suppliers> CreateSuppliers(int IdPerson, int IdWasteType);
         Task<Suppliers> UpdateSuppliers(Suppliers suppliers);
         Task<Suppliers> DeleteSuppliers(Suppliers suppliers);
@@ -48,10 +48,22 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Suppliers> UpdateSuppliers(Suppliers suppliers)
         {
-            _db.suppliers.Attach(suppliers); //Llamamos la actualizacion
-            _db.Entry(suppliers).State = EntityState.Modified;
+            Suppliers SuppliersUpdate = await _db.suppliers.FindAsync(suppliers.IdSuppliers);   
+            if(SuppliersUpdate != null) 
+            {
+                SuppliersUpdate.Person = suppliers.Person;
+                SuppliersUpdate.IdWasteType = suppliers.IdWasteType;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return SuppliersUpdate;
+            /*
+            _db.historicalCost.Attach(historicalCost); //Llamamos la actualizacion
+            _db.Entry(historicalCost).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return suppliers;  
+            return historicalCost;
+            */
         }
     }
 }

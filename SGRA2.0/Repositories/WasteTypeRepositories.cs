@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IWasteTypeRepositories
     {
         Task<List<WasteType>> GetAll();
-        Task<WasteType> GetWasteType(int id);
+        Task<WasteType> GetWasteType(int IdWasteType);
         Task<WasteType> CreateWasteType(string Waste_Type, string Description, string Descomposition);
         Task<WasteType> UpdateWasteType(WasteType wasteType);
         Task<WasteType> DeleteWasteType(WasteType wasteType);
@@ -50,10 +50,22 @@ namespace SGRA2._0.Repositories
         }
         public async Task<WasteType> UpdateWasteType(WasteType wasteType)
         {
-            _db.wasteTypes.Attach(wasteType); //Llamamos la actualizacion
-            _db.Entry(wasteType).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
-            return wasteType;
+            WasteType WasteTypeUpdate = await _db.wasteTypes.FindAsync(wasteType.IdWasteType);
+            if (WasteTypeUpdate != null) 
+            {
+                WasteTypeUpdate.Waste_Type = wasteType.Waste_Type;
+                WasteTypeUpdate.Description = wasteType.Description;
+                WasteTypeUpdate.Descomposition = wasteType.Descomposition;
+
+                await _db.SaveChangesAsync();
+            }
+            return WasteTypeUpdate;
+            /*
+             _db.historicalCost.Attach(historicalCost); //Llamamos la actualizacion
+             _db.Entry(historicalCost).State = EntityState.Modified;
+             await _db.SaveChangesAsync();
+             return historicalCost;
+             */
         }
     }
 }
