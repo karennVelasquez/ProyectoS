@@ -1,20 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SGRA2._0.Model
 {
     public class Transaction
     {
         //Transaccion
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTransaction { get; set; }
-        public required int IdSuppliers { get; set; }
+        public  int IdSuppliers { get; set; }
         public  Suppliers Suppliers { get; set; }
-        public required int DeliveredQuantity { get; set; }
-        public required DateTime DeliveredDate { get; set; }
-        public required string Price { get; set; }
-        public required string Quality { get; set; }
+        public  int DeliveredQuantity { get; set; }
+        public  DateTime DeliveredDate { get; set; }
+        public  string Price { get; set; }
+        public string Quality { get; set; }
         public bool IsDelete { get; set; }
         public DateTime Date { get; set; }
-        public string ModifiedBy { get; set; }
     }
 }

@@ -1,18 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SGRA2._0.Model
 {
     public class Suppliers
     {
         //Proveedores
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdSuppliers { get; set; }
-        public required int IdPerson { get; set; }
-     //   public required Person Person { get; set; }
-        public required int IdWasteType { get; set; }
-        // public required WasteType WasteType { get; set; }
+        public  int IdPerson { get; set; }
+        public  Person Person { get; set; }
+        public  int IdWasteType { get; set; }
+        public  WasteType WasteType { get; set; }
         public bool IsDelete { get; set; }
         public DateTime Date { get; set; }
-        public string ModifiedBy { get; set; }
     }
 }
