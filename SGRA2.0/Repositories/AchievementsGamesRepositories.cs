@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IAchievementsGamesRespositories
     {
         Task<List<AchievementsGames>> GetAll();
-        Task<AchievementsGames> GetAchievementsGames(int id);
+        Task<AchievementsGames> GetAchievementsGames(int IdAchievementsG);
         Task<AchievementsGames> CreateAchievementsGames(int IdGames, int IdAchievements);
         Task<AchievementsGames> UpdateAchievementsGames(AchievementsGames achievementsGames);
         Task<AchievementsGames> DeleteAchievementsGames(AchievementsGames achievementsGames);
@@ -47,10 +47,19 @@ namespace SGRA2._0.Repositories
             }
             public async Task<AchievementsGames> UpdateAchievementsGames(AchievementsGames achievementsGames)
             {
-                _db.achievementsGames.Attach(achievementsGames); //Llamamos la actualizacion
-                _db.Entry(achievementsGames).State = EntityState.Modified;
-                await _db.SaveChangesAsync();
-                return achievementsGames;
+                AchievementsGames AchievementsGamesUpdate = await _db.achievementsGames.FindAsync(achievementsGames.IdAchievementsG);
+                if (AchievementsGamesUpdate != null)
+                {
+                    AchievementsGamesUpdate.IdGames = achievementsGames.IdGames;
+                    AchievementsGamesUpdate.IdAchievements = achievementsGames.IdAchievements;
+
+                    await _db.SaveChangesAsync();
+                }
+                return AchievementsGamesUpdate;
+                //_db.achievementsGames.Attach(achievementsGames); //Llamamos la actualizacion
+                //_db.Entry(achievementsGames).State = EntityState.Modified;
+                //await _db.SaveChangesAsync();
+                //return achievementsGames;
             }
         }
     }

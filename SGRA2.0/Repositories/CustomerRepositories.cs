@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ICustomerRepositories
     {
         Task<List<Customer>> GetAll();
-        Task<Customer> GetCustomer(int id);
+        Task<Customer> GetCustomer(int IdCustomer);
         Task<Customer> CreateCustomer(int IdPerson);
         Task<Customer> UpdateCustomer(Customer customer);
         Task<Customer> DeleteCustomer(Customer customer);
@@ -47,9 +47,17 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Customer> UpdateCustomer(Customer customer)
         {
-            _db.customers.Attach(customer); //Llamamos la actualizacion
-            _db.Entry(customer).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
+           Customer CustomerUpdate = await _db.customers.FindAsync(customer.IdCustomer);
+            if (CustomerUpdate != null)
+            {
+                CustomerUpdate.IdCustomer = customer.IdCustomer;
+                CustomerUpdate.IdPerson = customer.IdPerson;
+
+                await _db.SaveChangesAsync();
+            }
+            //_db.customers.Attach(customer); //Llamamos la actualizacion
+            //_db.Entry(customer).State = EntityState.Modified;
+            //await _db.SaveChangesAsync();
             return customer;
         }
     }

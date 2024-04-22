@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IDocumentTypeRepositories
     {
         Task<List<DocumentType>> GetAll();
-        Task<DocumentType> GetDocumentType(int id);
+        Task<DocumentType> GetDocumentType(int IdDocument);
         Task<DocumentType> CreateDocumentType(string Document);
         Task<DocumentType> UpdateDocumentType(DocumentType documentType);
         Task<DocumentType> DeleteDocumentType(DocumentType documentType);
@@ -47,9 +47,17 @@ namespace SGRA2._0.Repositories
         }
         public async Task<DocumentType> UpdateDocumentType(DocumentType documentType)
         {
-            _db.documentTypes.Attach(documentType); //Llamamos la actualizacion
-            _db.Entry(documentType).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
+            DocumentType DocumentTypeUpdate = await _db.documentTypes.FindAsync(documentType.IdDocumentType;
+            if (DocumentTypeUpdate != null)
+            {
+                DocumentTypeUpdate.IdDocumentType = documentType.IdDocumentType;
+                DocumentTypeUpdate.Document = documentType.Document;
+
+                await _db.SaveChangesAsync();
+            }
+            //_db.documentTypes.Attach(documentType); //Llamamos la actualizacion
+            //_db.Entry(documentType).State = EntityState.Modified;
+            //await _db.SaveChangesAsync();
             return documentType;
         }
     }

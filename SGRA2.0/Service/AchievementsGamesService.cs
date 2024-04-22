@@ -63,7 +63,7 @@ namespace SGRA2._0.Service
                 {
                     newachievementsGames.IdAchievements = (int)IdAchievements;
                 }
-                return await _achievementsGamesRespositories.UpdateAchievementsGames(newachievementsGames);
+                return _achievementsGamesRespositories.UpdateAchievementsGames(newachievementsGames);
             }
             throw new NotImplementedException();
         }

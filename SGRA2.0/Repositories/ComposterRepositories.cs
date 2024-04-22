@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IComposterRepositories
     {
         Task<List<Composter>> GetAll();
-        Task<Composter> GetComposter(int id);
+        Task<Composter> GetComposter(int IdComposter);
         Task<Composter> CreateComposter(string Size, string Material, string DrainageSystem);
         Task<Composter> UpdateComposter(Composter composter);
         Task<Composter> DeleteComposter(Composter composter);
@@ -49,9 +49,19 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Composter> UpdateComposter(Composter composter)
         {
-            _db.composters.Attach(composter); //Llamamos la actualizacion
-            _db.Entry(composter).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
+            Composter ComposterUpdate = await _db.composters.FindAsync(composter.IdComposter);
+            if (ComposterUpdate != null)
+            {
+                ComposterUpdate.IdComposter = composter.IdComposter;
+                ComposterUpdate.Size = composter.Size;
+                ComposterUpdate.Material = composter.Material;
+                ComposterUpdate.DrainageSystem = composter.DrainageSystem;
+
+                await _db.SaveChangesAsync();
+            }
+            //_db.composters.Attach(composter); //Llamamos la actualizacion
+            //_db.Entry(composter).State = EntityState.Modified;
+            //await _db.SaveChangesAsync();
             return composter; 
         }
     }

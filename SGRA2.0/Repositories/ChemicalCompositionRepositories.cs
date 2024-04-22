@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IChemicalCompositionRepositories
     {
         Task<List<ChemicalComposition>> GetAll();
-        Task<ChemicalComposition> GetChemicalComposition(int id);
+        Task<ChemicalComposition> GetChemicalComposition(int IdChemicalComposition);
         Task<ChemicalComposition> CreateChemicalComposition(int IdWaste, string Chemical_Composition);
         Task<ChemicalComposition> UpdateChemicalComposition(ChemicalComposition chemicalComposition);
         Task<ChemicalComposition> DeleteChemicalComposition(ChemicalComposition chemicalComposition);
@@ -50,9 +50,18 @@ namespace SGRA2._0.Repositories
         }
         public async Task<ChemicalComposition> UpdateChemicalComposition(ChemicalComposition chemicalComposition)
         {
-            _db.chemicalCompositions.Attach(chemicalComposition); //Llamamos la actualizacion
-            _db.Entry(chemicalComposition).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
+            ChemicalComposition ChemicalCompositionUpdate = await _db.chemicalCompositions.FindAsync(chemicalComposition.IdChemicalComposition);
+            if (ChemicalCompositionUpdate != null)
+            {
+                ChemicalCompositionUpdate.IdChemicalComposition = chemicalComposition.IdChemicalComposition;
+                ChemicalCompositionUpdate.IdWaste= chemicalComposition.IdWaste;
+                ChemicalCompositionUpdate.Chemical_Composition = chemicalComposition.Chemical_Composition;
+
+                await _db.SaveChangesAsync();
+            }
+            //_db.chemicalCompositions.Attach(chemicalComposition); //Llamamos la actualizacion
+            //_db.Entry(chemicalComposition).State = EntityState.Modified;
+            //await _db.SaveChangesAsync();
             return chemicalComposition;
         }
     }

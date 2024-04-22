@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IEmployeeRepository
     {
         Task<List<Employee>> GetAll();
-        Task<Employee> GetEmployee(int id);
+        Task<Employee> GetEmployee(int IdEmployee);
         Task<Employee> CreateEmployee(int IdPerson, string Position);
         Task<Employee> UpdateEmployee(Employee employee);
         Task<Employee> DeleteEmployee(Employee employee);
@@ -48,9 +48,18 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Employee> UpdateEmployee(Employee employee)
         {
-            _db.employees.Attach(employee); //Llamamos la actualizacion
-            _db.Entry(employee).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
+            Employee EmployeeUpdate = await _db.employees.FindAsync(employee.IdEmployee);
+            if (EmployeeUpdate != null)
+            {
+                EmployeeUpdate.IdEmployee = employee.IdEmployee;
+                EmployeeUpdate.IdPerson = employee.IdPerson;
+                EmployeeUpdate.Position = employee.Position;
+
+                await _db.SaveChangesAsync();
+            }
+            //_db.employees.Attach(employee); //Llamamos la actualizacion
+            //_db.Entry(employee).State = EntityState.Modified;
+            //await _db.SaveChangesAsync();
             return employee;
         }
     }

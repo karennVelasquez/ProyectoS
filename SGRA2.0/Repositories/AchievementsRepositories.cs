@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IAchievementsRepositories
     {
         Task<List<Achievements>> GetAll();
-        Task<Achievements> GetAchievements(int id);
+        Task<Achievements> GetAchievements(int IdAchievements);
         Task<Achievements> CreateAchievements(string Achievement);
         Task<Achievements> UpdateAchievements(Achievements achievements);
         Task<Achievements> DeleteAchievements(Achievements achievements);
@@ -46,9 +46,17 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Achievements> UpdateAchievements(Achievements achievements)
         {
-            _db.achievements.Attach(achievements); //Llamamos la actualizacion
-            _db.Entry(achievements).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
+            Achievements AchievementsUpdate = await _db.achievements.FindAsync(achievements.IdAchievements);
+            if (AchievementsUpdate != null)
+            {
+                AchievementsUpdate.IdAchievements = achievements.IdAchievements;
+                AchievementsUpdate.Achievement = achievements.Achievement;
+
+                await _db.SaveChangesAsync();
+            }
+            //_db.achievements.Attach(achievements); //Llamamos la actualizacion
+            //_db.Entry(achievements).State = EntityState.Modified;
+            //await _db.SaveChangesAsync();
             return achievements;
         }
     }
