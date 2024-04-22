@@ -33,6 +33,9 @@ namespace SGRA2._0.Service
                 throw new Exception($"El volteo con el Id {IdAchievements} no existe");
             }
 
+            achievementsToDelete.IsDeleted = true;
+            achievementsToDelete.Date = DateTime.Now;
+
             return await _achievementsRepositories.DeleteAchievements(achievementsToDelete);
             //throw new NotImplementedException();
         }

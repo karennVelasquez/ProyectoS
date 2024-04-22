@@ -33,6 +33,9 @@ namespace SGRA2._0.Service
                 throw new Exception($"La recolecta con el Id {IdCollectWaste} no existe");
             }
 
+            collectWasteToDelete.IsDeleted = true;
+            collectWasteToDelete.Date = DateTime.Now;
+
             return await _collectWasteRepositories.DeleteCollectWaste(collectWasteToDelete);
             //throw new NotImplementedException();
         }

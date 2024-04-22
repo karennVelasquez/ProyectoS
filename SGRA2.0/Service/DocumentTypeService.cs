@@ -33,6 +33,9 @@ namespace SGRA2._0.Service
                 throw new Exception($"El tipo de documento con el Id {IdDocumentType} no existe");
             }
 
+            documentTypeToDelete.IdDocumentType = IdDocumentType;
+            documentTypeToDelete.Date = DateTime.Now;
+
             return await _documentTypeRepositories.DeleteDocumentType(documentTypeToDelete);
             //throw new NotImplementedException();
         }

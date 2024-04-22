@@ -33,6 +33,9 @@ namespace SGRA2._0.Service
                 throw new Exception($"La composicion quimica con el Id {IdChemicalComposition} no existe");
             }
 
+            chemicalCompositionToDelete.IsDeleted = true;
+            chemicalCompositionToDelete.Date = DateTime.Now;
+
             return await _chemicalCompositionRepositories.DeleteChemicalComposition(chemicalCompositionToDelete);
             //throw new NotImplementedException();
         }

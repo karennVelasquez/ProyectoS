@@ -33,6 +33,9 @@ namespace SGRA2._0.Service
                 throw new Exception($"El cliente con el Id {IdCustomer} no existe");
             }
 
+            customerToDelete.IsDeleted = true;
+            customerToDelete.Date = DateTime.Now;
+
             return await _customerRepositories.DeleteCustomer(customerToDelete);
             //throw new NotImplementedException();
         }

@@ -34,6 +34,9 @@ namespace SGRA2._0.Service
                 throw new Exception($"El compostador con el Id {IdComposter} no existe");
             }
 
+            composterToDelete.IsDeleted = true;
+            composterToDelete.Date = DateTime.Now;
+
             return await _composterRepositories.DeleteComposter(composterToDelete);
             //throw new NotImplementedException();
         }
