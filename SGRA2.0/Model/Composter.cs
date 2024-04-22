@@ -1,14 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SGRA2._0.Model
 {
     public class Composter
     {
         //Compostador
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdComposter { get; set; }
         public required string Size { get; set; }
         public required string Material { get; set; }
         public required string DrainageSystem { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime Date { get; set; }
     }
 }
