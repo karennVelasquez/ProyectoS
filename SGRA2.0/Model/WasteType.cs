@@ -12,6 +12,6 @@ namespace SGRA2._0.Model
         public  string Description { get; set; }
         public  string Descomposition { get; set; }
         public bool IsDelete { get; set; }  
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

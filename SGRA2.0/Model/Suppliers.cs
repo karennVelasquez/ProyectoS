@@ -13,6 +13,6 @@ namespace SGRA2._0.Model
         public  int IdWasteType { get; set; }
         public  WasteType WasteType { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

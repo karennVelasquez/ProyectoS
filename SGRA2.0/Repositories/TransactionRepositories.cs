@@ -20,15 +20,18 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Transaction> CreateTransaction(int IdSuppliers, int DeliveredQuantity, DateTime DeliveredDate, string Price, string Quality)
+        public async Task<Transaction> CreateTransaction(int idSuppliers, int DeliveredQuantity, DateTime DeliveredDate, string Price, string Quality)
         {
+            Suppliers? suppliers = _db.suppliers.FirstOrDefault(ut => ut.IdSuppliers == idSuppliers);
             Transaction newTransaction = new Transaction
             {
-                IdSuppliers = IdSuppliers,
+                IdSuppliers = idSuppliers,
                 DeliveredQuantity = DeliveredQuantity,
                 DeliveredDate = DeliveredDate,
                 Price = Price,
-                Quality = Quality
+                Quality = Quality,
+                IsDelete = false,
+                Date = null
             };
             _db.transactions.AddAsync(newTransaction);
             _db.SaveChanges();

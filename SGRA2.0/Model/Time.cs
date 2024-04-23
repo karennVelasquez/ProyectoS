@@ -13,6 +13,6 @@ namespace SGRA2._0.Model
         public  int IdProcessStage { get; set; }
         public ProcessStage EtapProcessStageaProceso { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

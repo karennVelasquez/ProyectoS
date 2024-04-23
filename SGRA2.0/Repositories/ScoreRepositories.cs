@@ -21,13 +21,18 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Score> CreateScore(int IdUser, int IdGames, int NumScore)
+        public async Task<Score> CreateScore(int idUser, int idGames, int NumScore)
         {    
+            User? user = _db.users.FirstOrDefault(ut => ut.IdUser == idUser);
+            Games? games = _db.games.FirstOrDefault(ut => ut.IdGames == idGames);
+
             Score newScore = new Score
             {
-                IdUser = IdUser,
-                IdGames = IdGames,
-                NumScore = NumScore
+                IdUser = idUser,
+                IdGames = idGames,
+                NumScore = NumScore,
+                IsDelete = false,
+                Date = null
             };
             _db.scores.AddAsync(newScore);
             _db.SaveChanges();

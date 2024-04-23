@@ -15,6 +15,6 @@ namespace SGRA2._0.Model
         public  string Price { get; set; }
         public string Quality { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

@@ -25,7 +25,9 @@ namespace SGRA2._0.Repositories
             User newUser = new User
             {
                 UserName = UserName,
-                Password = Password
+                Password = Password,
+                IsDelete = false,
+                Date = null
             };
             _db.users.AddAsync(newUser);
             _db.SaveChanges();

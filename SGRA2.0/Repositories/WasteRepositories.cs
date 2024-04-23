@@ -22,12 +22,15 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Waste> CreateWaste(int IdWasteType, string Humidity)
+        public async Task<Waste> CreateWaste(int idWasteType, string Humidity)
         {
+            WasteType? wasteType = _db.wasteTypes.FirstOrDefault(ut => ut.IdWasteType == idWasteType);
             Waste newWaste = new Waste
             {
-                IdWasteType = IdWasteType,
-                Humidity = Humidity
+                IdWasteType = idWasteType,
+                Humidity = Humidity,
+                IsDelete = false,
+                Date = null
             };
             _db.wastes.AddAsync(newWaste);
             _db.SaveChanges();

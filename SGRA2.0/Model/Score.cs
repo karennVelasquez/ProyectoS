@@ -14,6 +14,6 @@ namespace SGRA2._0.Model
         public  Games Games { get; set; }
         public  int NumScore { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

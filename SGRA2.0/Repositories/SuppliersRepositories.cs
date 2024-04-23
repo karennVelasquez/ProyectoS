@@ -20,12 +20,15 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Suppliers> CreateSuppliers(int IdPerson, int IdWasteType)
+        public async Task<Suppliers> CreateSuppliers(int idPerson, int idWasteType)
         {
+            Person? person = _db.persons.FirstOrDefault(ut => ut.IdPerson == idPerson);
+            WasteType? wasteType = _db.wasteTypes.FirstOrDefault(ut => ut.IdWasteType == idWasteType);  
+
             Suppliers newSuppliers = new Suppliers
             {
-                IdPerson = IdPerson,
-                IdWasteType = IdWasteType
+                IdPerson = idPerson,
+                IdWasteType = idWasteType
             };
             _db.suppliers.AddAsync(newSuppliers);
             _db.SaveChanges();

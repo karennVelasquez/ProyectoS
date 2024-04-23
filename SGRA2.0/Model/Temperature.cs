@@ -13,6 +13,6 @@ namespace SGRA2._0.Model
         public  string Decompositiontemperature { get; set; }
         public  string Range { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

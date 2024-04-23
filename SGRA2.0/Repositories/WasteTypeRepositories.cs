@@ -27,7 +27,9 @@ namespace SGRA2._0.Repositories
             {
                 Waste_Type = Waste_Type,
                 Description = Description,
-                Descomposition = Descomposition
+                Descomposition = Descomposition,
+                IsDelete = false,
+                Date = null
             };
             _db.wasteTypes.AddAsync(newWasteType);
             _db.SaveChanges();

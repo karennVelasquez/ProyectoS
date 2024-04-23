@@ -21,13 +21,17 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature, string Range)
+        public async Task<Temperature> CreateTemperature(int idWaste, string Decompositiontemperature, string Range)
         {
+            Waste? waste = _db.wastes.FirstOrDefault(ut => ut.IdWaste == idWaste);
+
             Temperature newTemperature = new Temperature
             {
-                IdWaste = IdWaste,
+                IdWaste = idWaste,
                 Decompositiontemperature = Decompositiontemperature,
-                Range = Range
+                Range = Range,
+                IsDelete = false,
+                Date = null
             };
             _db.temperatures.AddAsync(newTemperature);
             _db.SaveChanges();

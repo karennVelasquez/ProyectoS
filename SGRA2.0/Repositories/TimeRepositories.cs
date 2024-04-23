@@ -20,13 +20,17 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Time> CreateTime(int IdWaste, int Processduration, int IdProcessStage)
+        public async Task<Time> CreateTime(int idWaste, int Processduration, int idProcessStage)
         {
+            Waste? waste = _db.wastes.FirstOrDefault(ut =>ut.IdWaste == idWaste);
+            ProcessStage? processStage = _db.processStages.FirstOrDefault(ut => ut.IdProcessStage == idProcessStage);
             Time newTime = new Time
             {
-                IdWaste = IdWaste,
+                IdWaste = idWaste,
                 Processduration = Processduration,
-                IdProcessStage = IdProcessStage
+                IdProcessStage = idProcessStage,
+                IsDelete = false,   
+                Date = null
             };
             _db.times.AddAsync(newTime);
             _db.SaveChanges();
