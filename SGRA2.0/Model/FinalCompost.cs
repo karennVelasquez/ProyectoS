@@ -8,7 +8,7 @@ namespace SGRA2._0.Model
         [Key]
         public int IdFinalCompost { get; set; }
         public required int IdWaste { get; set; }
-    //    public required Waste Waste { get; set; }
+       public required Waste Waste { get; set; }
         public required string HumidityLevel { get; set; }
         //Nivel de humedad
         public required string FinalPh { get; set; }

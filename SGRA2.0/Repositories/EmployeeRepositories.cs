@@ -22,10 +22,12 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Employee> CreateEmployee(int IdPerson, string Position)
         {
+            //
             Employee newEmployee = new Employee
             {
                 IdPerson = IdPerson,
                 Position = Position
+                //
             };
             _db.employees.AddAsync(newEmployee);
             _db.SaveChanges();
@@ -51,7 +53,6 @@ namespace SGRA2._0.Repositories
             Employee EmployeeUpdate = await _db.employees.FindAsync(employee.IdEmployee);
             if (EmployeeUpdate != null)
             {
-                EmployeeUpdate.IdEmployee = employee.IdEmployee;
                 EmployeeUpdate.IdPerson = employee.IdPerson;
                 EmployeeUpdate.Position = employee.Position;
 

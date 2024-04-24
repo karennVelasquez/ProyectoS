@@ -22,12 +22,14 @@ namespace SGRA2._0.Repositories
             }
             public async Task<RecordTime> CreateRecordTime(int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected)
             {
+                //
                 RecordTime newTiempoRecord = new RecordTime
                 {
                     IdLevel = IdLevel,
                     IdWaste = IdWaste,
                     Collecttime = Collecttime,
                     AmountCollected = AmountCollected,
+                    //
                 };
                 _db.recordTimes.AddAsync(newTiempoRecord);
                 _db.SaveChanges();
@@ -51,6 +53,7 @@ namespace SGRA2._0.Repositories
             }
             public async Task<RecordTime> UpdateRecordTime(RecordTime recordTime)
             {
+                //
                 _db.recordTimes.Attach(recordTime); //Llamamos la actualizacion
                 _db.Entry(recordTime).State = EntityState.Modified;
                 await _db.SaveChangesAsync();

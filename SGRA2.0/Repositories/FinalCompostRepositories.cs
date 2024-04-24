@@ -22,12 +22,14 @@ namespace SGRA2._0.Repositories
         }
         public async Task<FinalCompost> CreateFinalCompost(int IdWaste, string HumidityLevel, string FinalPh, string Nutrients)
         {
+            //
             FinalCompost newFinalCompost = new FinalCompost
             {
                 IdWaste = IdWaste,
                 HumidityLevel = HumidityLevel,
                 FinalPh = FinalPh,
                 Nutrients = Nutrients
+                //
             };
             _db.finalComposts.AddAsync(newFinalCompost);
             _db.SaveChanges();
@@ -50,6 +52,7 @@ namespace SGRA2._0.Repositories
         }
         public async Task<FinalCompost> UpdateFinalCompost(FinalCompost finalCompost)
         {
+            //
             _db.finalComposts.Attach(finalCompost); //Llamamos la actualizacion
             _db.Entry(finalCompost).State = EntityState.Modified;
             await _db.SaveChangesAsync();

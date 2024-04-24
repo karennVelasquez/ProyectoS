@@ -22,11 +22,13 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Flip> CreateFlip(int IdWaste, int Flipfrequency, string UniformedDescription)
         {
+            //
             Flip newFlip = new Flip
             {
                 IdWaste = IdWaste,
                 Flipfrequency = Flipfrequency,
                 UniformedDescription = UniformedDescription
+                //
             };
             _db.flips.Add(newFlip);
             _db.SaveChanges();
@@ -49,6 +51,7 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Flip> UpdateFlip(Flip flip)
         {
+            //
             _db.flips.Attach(flip); //Llamamos la actualizacion
             _db.Entry(flip).State = EntityState.Modified;
             await _db.SaveChangesAsync();

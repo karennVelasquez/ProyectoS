@@ -27,6 +27,7 @@ namespace SGRA2._0.Repositories
                 Size = Size,
                 Material = Material,
                 DrainageSystem = DrainageSystem
+                //
             };
             _db.composters.AddAsync(newCompostador);
             _db.SaveChanges();
@@ -52,7 +53,7 @@ namespace SGRA2._0.Repositories
             Composter ComposterUpdate = await _db.composters.FindAsync(composter.IdComposter);
             if (ComposterUpdate != null)
             {
-                ComposterUpdate.IdComposter = composter.IdComposter;
+                
                 ComposterUpdate.Size = composter.Size;
                 ComposterUpdate.Material = composter.Material;
                 ComposterUpdate.DrainageSystem = composter.DrainageSystem;

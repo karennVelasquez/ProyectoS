@@ -8,13 +8,13 @@ namespace SGRA2._0.Model
         //RecolectaResiduos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdCollectWaste { get; set; }
-        public required int IdSuppliers { get; set; }
-    //    public required Suppliers Suppliers { get; set; }
-        public required int IdComposter { get; set; }
-    //    public required Composter Composter { get; set; }
-        public required DateTime CollectionDate { get; set; }
-        public required int Amount { get; set; }
+        public int IdSuppliers { get; set; }
+        public Suppliers Suppliers { get; set; }
+        public int IdComposter { get; set; }
+        public  Composter Composter { get; set; }
+        public  DateTime CollectionDate { get; set; }
+        public  int Amount { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime Date {  get; set; }
+        public DateTime? Date {  get; set; }
     }
 }

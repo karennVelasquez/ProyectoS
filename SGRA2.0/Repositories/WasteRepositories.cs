@@ -56,6 +56,7 @@ namespace SGRA2._0.Repositories
             Waste WasteUpdate = await _db.wastes.FindAsync(waste.IdWaste);
             if (WasteUpdate != null) 
             {
+                WasteUpdate.IdWasteType = waste.IdWasteType;
                 WasteUpdate.Humidity = waste.Humidity;
 
                 await _db.SaveChangesAsync();

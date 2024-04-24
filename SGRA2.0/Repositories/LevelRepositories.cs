@@ -23,7 +23,10 @@ namespace SGRA2._0.Repositories
         public async Task<Level> CreateLevel(int NumLevel)
         {
             Level newLevel = new Level
-            { NumLevel = NumLevel };
+            { 
+                NumLevel = NumLevel 
+                //
+            };
             _db.levels.AddAsync(newLevel);
             _db.SaveChanges();
             return newLevel;
@@ -45,6 +48,7 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Level> UpdateLevel(Level level)
         {
+            //
             _db.levels.Attach(level); //Llamamos la actualizacion
             _db.Entry(level).State = EntityState.Modified;
             await _db.SaveChangesAsync();

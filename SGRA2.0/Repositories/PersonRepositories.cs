@@ -25,6 +25,7 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int Document)
         {
+            //
             Person newPerson = new Person
             {
                 Name = Name,
@@ -32,7 +33,7 @@ namespace SGRA2._0.Repositories
                 Email = Email,
                 IdDocumentType = IdDocumentType,
                 Document = Document
-
+                //
             };
             _db.persons.AddAsync(newPerson);
             _db.SaveChanges();
@@ -56,6 +57,7 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Person> UpdatePerson(Person person)
         {
+            //
             _db.persons.Attach(person); //Llamamos la actualizacion
             _db.Entry(person).State = EntityState.Modified;
             await _db.SaveChangesAsync();

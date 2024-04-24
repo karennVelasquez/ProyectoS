@@ -21,10 +21,12 @@ namespace SGRA2._0.Repositories
             }
             public async Task<AchievementsGames> CreateAchievementsGames(int IdGames, int IdAchievements)
             {
+                //
                 AchievementsGames newAchievementsGames = new AchievementsGames
                 {
                     IdGames = IdGames,
                     IdAchievements = IdAchievements
+                    //
                 };
                 _db.achievementsGames.AddAsync(newAchievementsGames);
                 return newAchievementsGames;

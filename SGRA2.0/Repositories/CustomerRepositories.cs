@@ -24,8 +24,12 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Customer> CreateCustomer(int IdPerson)
         {
+            //
             Customer newCustomer = new Customer
-            { IdPerson = IdPerson };
+            {
+                IdPerson = IdPerson 
+                //
+            };
             _db.customers.AddAsync(newCustomer);
             _db.SaveChanges();
             return newCustomer;
@@ -50,7 +54,7 @@ namespace SGRA2._0.Repositories
            Customer CustomerUpdate = await _db.customers.FindAsync(customer.IdCustomer);
             if (CustomerUpdate != null)
             {
-                CustomerUpdate.IdCustomer = customer.IdCustomer;
+               
                 CustomerUpdate.IdPerson = customer.IdPerson;
 
                 await _db.SaveChangesAsync();

@@ -8,10 +8,10 @@ namespace SGRA2._0.Model
         //ComposicionQuimica
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdChemicalComposition { get; set; }
-        public required int IdWaste { get; set; }
-    //    public required Waste Waste { get; set; }
-        public required string Chemical_Composition { get; set; }
+        public int IdWaste { get; set; }
+        public Waste Waste { get; set; }
+        public string Chemical_Composition { get; set; }
         public bool IsDeleted {  get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

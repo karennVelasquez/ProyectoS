@@ -22,12 +22,14 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Games> CreateGames(int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate)
         {
+            //
             Games newPartidas = new Games
             {
                 IdUser = IdUser,
                 IdLevel = IdLevel,
                 StartDate = StartDate,
                 FinalDate = FinalDate
+                //
             };
             _db.games.AddAsync(newPartidas);
             _db.SaveChanges();
@@ -50,6 +52,7 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Games> UpdateGames(Games games)
         {
+            //
             _db.games.Attach(games); //Llamamos la actualizacion
             _db.Entry(games).State = EntityState.Modified;
             await _db.SaveChangesAsync();

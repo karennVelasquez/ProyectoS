@@ -8,8 +8,8 @@ namespace SGRA2._0.Model
         //TipoDocumento
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdDocumentType { get; set; }
-        public required string Document { get; set; }
+        public string Document { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime Date {  get; set; }
+        public DateTime? Date {  get; set; }
     }
 }

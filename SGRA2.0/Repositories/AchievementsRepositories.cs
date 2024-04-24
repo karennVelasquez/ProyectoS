@@ -24,7 +24,10 @@ namespace SGRA2._0.Repositories
         public async Task<Achievements> CreateAchievements(string Achievement)
         {
             Achievements newAchievements = new Achievements
-            { Achievement = Achievement };
+            { 
+                Achievement = Achievement 
+                //
+            };
             _db.achievements.AddAsync(newAchievements);
             _db.SaveChanges();
             return newAchievements;
@@ -49,7 +52,6 @@ namespace SGRA2._0.Repositories
             Achievements AchievementsUpdate = await _db.achievements.FindAsync(achievements.IdAchievements);
             if (AchievementsUpdate != null)
             {
-                AchievementsUpdate.IdAchievements = achievements.IdAchievements;
                 AchievementsUpdate.Achievement = achievements.Achievement;
 
                 await _db.SaveChangesAsync();

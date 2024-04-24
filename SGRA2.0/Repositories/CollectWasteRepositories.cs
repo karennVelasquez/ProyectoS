@@ -23,12 +23,14 @@ namespace SGRA2._0.Repositories
         }
         public async Task<CollectWaste> CreateCollectWaste(int IdSuppliers, int IdComposter, DateTime CollectionDate, int Amount)
         {
+            //
             CollectWaste newCollectWaste = new CollectWaste
             {
                 IdSuppliers = IdSuppliers,
                 IdComposter = IdComposter,
                 CollectionDate = CollectionDate,
                 Amount = Amount
+                //
             };
             _db.collectWastes.AddAsync(newCollectWaste);
             _db.SaveChanges();
@@ -55,7 +57,6 @@ namespace SGRA2._0.Repositories
             CollectWaste CollectWasteUpdate = await _db.collectWastes.FindAsync(collectWaste.IdCollectWaste);
             if (CollectWasteUpdate != null)
             {
-                CollectWasteUpdate.IdCollectWaste = collectWaste.IdCollectWaste;
                 CollectWasteUpdate.IdSuppliers = collectWaste.IdSuppliers;
                 CollectWasteUpdate.IdComposter = collectWaste.IdComposter;
                 CollectWasteUpdate.CollectionDate = collectWaste.CollectionDate;

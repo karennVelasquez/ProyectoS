@@ -25,6 +25,7 @@ namespace SGRA2._0.Repositories
             DocumentType newDocumentType = new DocumentType
             {
                 Document = Document,
+                //
             };
             _db.documentTypes.AddAsync(newDocumentType);
             _db.SaveChanges();
@@ -47,10 +48,10 @@ namespace SGRA2._0.Repositories
         }
         public async Task<DocumentType> UpdateDocumentType(DocumentType documentType)
         {
-            DocumentType DocumentTypeUpdate = await _db.documentTypes.FindAsync(documentType.IdDocumentType;
+            DocumentType DocumentTypeUpdate = await _db.documentTypes.FindAsync(documentType.IdDocumentType);
             if (DocumentTypeUpdate != null)
             {
-                DocumentTypeUpdate.IdDocumentType = documentType.IdDocumentType;
+                
                 DocumentTypeUpdate.Document = documentType.Document;
 
                 await _db.SaveChangesAsync();

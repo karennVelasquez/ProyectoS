@@ -8,11 +8,11 @@ namespace SGRA2._0.Model
         //LogrosPartidas
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdAchievementsG { get; set; }
-        public required int IdGames { get; set; }
-     //   public required Games Games { get; set; }
-        public required int IdAchievements { get; set; }
-     //   public required Achievements Achievements { get; set; }
+        public  int IdGames { get; set; }
+        public  Games Games { get; set; }
+        public  int IdAchievements { get; set; }
+        public  Achievements Achievements { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime Date {  get; set; }
+        public DateTime? Date {  get; set; }
     }
 }

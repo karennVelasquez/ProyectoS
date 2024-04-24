@@ -22,10 +22,12 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Sale> CreateSale(int IdCustomer, DateTime SaleDate)
         {
+            //
             Sale newSale = new Sale
             {
                 IdCustomer = IdCustomer,
                 SaleDate = SaleDate
+                //
             };
             _db.sales.Add(newSale);
             _db.SaveChanges();
@@ -48,6 +50,7 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Sale> UpdateSale(Sale sale)
         {
+            //
             _db.sales.Attach(sale); //Llamamos la actualizacion
             _db.Entry(sale).State = EntityState.Modified;
             await _db.SaveChangesAsync();

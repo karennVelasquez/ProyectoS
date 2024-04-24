@@ -11,7 +11,7 @@ namespace SGRA2._0.Model
         public Waste Waste { get; set; }
         public int Processduration { get; set; }
         public  int IdProcessStage { get; set; }
-        public ProcessStage EtapProcessStageaProceso { get; set; }
+        public ProcessStage ProcessStage { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
     }

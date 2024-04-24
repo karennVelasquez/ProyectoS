@@ -8,9 +8,9 @@ namespace SGRA2._0.Model
         //Cliente
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdCustomer { get; set; }
-        public required int IdPerson { get; set; }
-    //    public required Person Person { get; set; }
+        public int IdPerson { get; set; }
+        public  Person Person { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime Date {  get; set; }
+        public DateTime? Date {  get; set; }
     }
 }
