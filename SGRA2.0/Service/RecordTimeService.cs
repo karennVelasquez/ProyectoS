@@ -34,6 +34,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El tiempo record con el Id {IdRecordTime} no existe");
             }
+            recordTimeToDelete.IsDelete = true;
+            recordTimeToDelete.Date = DateTime.Now;
 
             return await _recordTimeRepositories.DeleteRecordTime(recordTimeToDelete);
             //throw new NotImplementedException();

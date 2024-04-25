@@ -32,7 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El compost con el Id {IdFinalCompost} no existe");
             }
-
+            finalCompostToDelete.IsDelete = true;
+            finalCompostToDelete.Date = DateTime.Now;
             return await _finalCompostRepositories.DeleteFinalCompost(finalCompostToDelete);
             //throw new NotImplementedException();
         }

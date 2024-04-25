@@ -20,16 +20,18 @@ namespace SGRA2._0.Repositories
                 _db = db;
 
             }
-            public async Task<RecordTime> CreateRecordTime(int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected)
+            public async Task<RecordTime> CreateRecordTime(int idLevel, int idWaste, DateTime Collecttime, int AmountCollected)
             {
-                //
+                Waste? waste = _db.wastes.FirstOrDefault(ut => ut.IdWaste == idWaste);
+                Level? level = _db.levels.FirstOrDefault(ut => ut.IdLevel == idLevel);
                 RecordTime newTiempoRecord = new RecordTime
                 {
-                    IdLevel = IdLevel,
-                    IdWaste = IdWaste,
+                    IdLevel = idLevel,
+                    IdWaste = idWaste,
                     Collecttime = Collecttime,
                     AmountCollected = AmountCollected,
-                    //
+                    IsDelete = false,
+                    Date = null
                 };
                 _db.recordTimes.AddAsync(newTiempoRecord);
                 _db.SaveChanges();
@@ -53,11 +55,21 @@ namespace SGRA2._0.Repositories
             }
             public async Task<RecordTime> UpdateRecordTime(RecordTime recordTime)
             {
-                //
-                _db.recordTimes.Attach(recordTime); //Llamamos la actualizacion
+                RecordTime RecordTimeUpdate = await _db.recordTimes.FindAsync(recordTime.IdRecordTime);
+                if (RecordTimeUpdate != null)
+                {
+                    RecordTimeUpdate.IdLevel = recordTime.IdLevel;
+                    RecordTimeUpdate.IdWaste = recordTime.IdWaste;
+                    RecordTimeUpdate.Collecttime = recordTime.Collecttime;
+                    RecordTimeUpdate.AmountCollected = recordTime.AmountCollected;
+                    await _db.SaveChangesAsync();
+                }
+
+                return RecordTimeUpdate;
+                /*_db.recordTimes.Attach(recordTime); //Llamamos la actualizacion
                 _db.Entry(recordTime).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
-                return recordTime;
+                return recordTime;*/
             }
         }
     }

@@ -32,6 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"La venta con el Id {IdSale} no existe");
             }
+            saleToDelete.IsDelete = true;
+            saleToDelete.Date = DateTime.Now;
 
             return await _saleRepositories.DeleteSale(saleToDelete);
             //throw new NotImplementedException();

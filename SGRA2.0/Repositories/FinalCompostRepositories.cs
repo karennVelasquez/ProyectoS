@@ -2,6 +2,7 @@
 using SGRA2._0.Context;
 using SGRA2._0.Model;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.ConstrainedExecution;
 
 namespace SGRA2._0.Repositories
 {
@@ -20,16 +21,17 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<FinalCompost> CreateFinalCompost(int IdWaste, string HumidityLevel, string FinalPh, string Nutrients)
+        public async Task<FinalCompost> CreateFinalCompost(int idWaste, string HumidityLevel, string FinalPh, string Nutrients)
         {
-            //
+            Waste? waste = _db.wastes.FirstOrDefault(ut => ut.IdWaste == idWaste);
             FinalCompost newFinalCompost = new FinalCompost
             {
-                IdWaste = IdWaste,
+                IdWaste = idWaste,
                 HumidityLevel = HumidityLevel,
                 FinalPh = FinalPh,
-                Nutrients = Nutrients
-                //
+                Nutrients = Nutrients,
+                IsDelete = false,
+                Date = null
             };
             _db.finalComposts.AddAsync(newFinalCompost);
             _db.SaveChanges();
@@ -52,11 +54,24 @@ namespace SGRA2._0.Repositories
         }
         public async Task<FinalCompost> UpdateFinalCompost(FinalCompost finalCompost)
         {
-            //
+            FinalCompost FinalCompostUpdate = await _db.finalComposts.FindAsync(finalCompost.IdFinalCompost);
+            if (FinalCompostUpdate != null)
+            {
+                FinalCompostUpdate.IdWaste = finalCompost.IdWaste;
+                FinalCompostUpdate.HumidityLevel = finalCompost.HumidityLevel;
+                FinalCompostUpdate.FinalPh = finalCompost.FinalPh;
+                FinalCompostUpdate.Nutrients = finalCompost.Nutrients;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return FinalCompostUpdate;
+            /*
             _db.finalComposts.Attach(finalCompost); //Llamamos la actualizacion
             _db.Entry(finalCompost).State = EntityState.Modified;
             await _db.SaveChangesAsync();
             return finalCompost;
+            */
         }
     }
 }

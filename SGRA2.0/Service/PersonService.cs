@@ -27,19 +27,15 @@ namespace SGRA2._0.Service
         }
         public async Task<Person> DeletePerson(int IdPerson)
         {
-            /*   Person person = await _personRepositories.GetPerson(IdPerson);
-                  person.IsDeleted = true;
-                  person.Date = DateTime.Now;
-                  person.ModifiedBy = Personapp*/
+
             // comprobar si existe
             Person personToDelete = await _personRepositories.GetPerson(IdPerson);
             if (personToDelete == null)
             {
                 throw new Exception($"La persona con el Id {IdPerson} no existe");
             }
-            personToDelete.IsDeleted = true;
+            personToDelete.IsDelete = true;
             personToDelete.Date = DateTime.Now;
-            personToDelete.ModifiedBy = " /";
 
             return await _personRepositories.DeletePerson(personToDelete);
         }

@@ -20,16 +20,18 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Games> CreateGames(int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate)
+        public async Task<Games> CreateGames(int idUser, int idLevel, DateTime StartDate, DateTime FinalDate)
         {
-            //
+            User? user = _db.users.FirstOrDefault(ut => ut.IdUser == idUser);
+            Level? level = _db.levels.FirstOrDefault(ut => ut.IdLevel == idLevel);
             Games newPartidas = new Games
             {
-                IdUser = IdUser,
-                IdLevel = IdLevel,
+                IdUser = idUser,
+                IdLevel = idLevel,
                 StartDate = StartDate,
-                FinalDate = FinalDate
-                //
+                FinalDate = FinalDate,
+                IsDelete = false,
+                Date = null
             };
             _db.games.AddAsync(newPartidas);
             _db.SaveChanges();
@@ -52,11 +54,23 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Games> UpdateGames(Games games)
         {
-            //
+            Games GamesUpdate = await _db.games.FindAsync(games.IdGames);
+            if (GamesUpdate != null)
+            {
+                GamesUpdate.IdUser = games.IdUser;
+                GamesUpdate.IdLevel = games.IdLevel;
+                GamesUpdate.StartDate = games.StartDate;
+                GamesUpdate.FinalDate = games.FinalDate;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return GamesUpdate;
+            /*
             _db.games.Attach(games); //Llamamos la actualizacion
             _db.Entry(games).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return games;
+            return games;*/
         }
     }
 }

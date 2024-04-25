@@ -20,14 +20,15 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Sale> CreateSale(int IdCustomer, DateTime SaleDate)
+        public async Task<Sale> CreateSale(int idCustomer, DateTime SaleDate)
         {
-            //
+            Customer? customer = _db.customers.FirstOrDefault(ut => ut.IdCustomer == idCustomer);
             Sale newSale = new Sale
             {
-                IdCustomer = IdCustomer,
-                SaleDate = SaleDate
-                //
+                IdCustomer = idCustomer,
+                SaleDate = SaleDate,
+                IsDelete = false,
+                Date = null
             };
             _db.sales.Add(newSale);
             _db.SaveChanges();
@@ -50,11 +51,20 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Sale> UpdateSale(Sale sale)
         {
-            //
-            _db.sales.Attach(sale); //Llamamos la actualizacion
+            Sale SaleUpdate = await _db.sales.FindAsync(sale.IdSale);
+            if (SaleUpdate != null)
+            {
+                SaleUpdate.IdCustomer = sale.IdCustomer;
+                SaleUpdate.SaleDate = sale.SaleDate;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return SaleUpdate;
+            /*_db.sales.Attach(sale); //Llamamos la actualizacion
             _db.Entry(sale).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return sale;
+            return sale;*/
         }
     }
 }

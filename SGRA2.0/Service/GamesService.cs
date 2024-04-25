@@ -32,6 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"La partida con el Id {IdGames} no existe");
             }
+            gamesToDelete.IsDelete = true;
+            gamesToDelete.Date = DateTime.Now;
 
             return await _gamesRepositories.DeleteGames(gamesToDelete);
             //throw new NotImplementedException();

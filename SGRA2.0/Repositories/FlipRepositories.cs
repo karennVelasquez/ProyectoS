@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<Flip>> GetAll();
         Task<Flip> GetFlip(int id);
-        Task<Flip> CreateFlip(int IdResiduos, int FrecuenciaVolteo, string DescripcionUniformidad);
+        Task<Flip> CreateFlip(int IdWaste, int Flipfrequency, string UniformedDescription);
         Task<Flip> UpdateFlip(Flip flip);
         Task<Flip> DeleteFlip(Flip flip);
     }
@@ -20,26 +20,27 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Flip> CreateFlip(int IdWaste, int Flipfrequency, string UniformedDescription)
+        public async Task<Flip> CreateFlip(int idWaste, int Flipfrequency, string UniformedDescription)
         {
-            //
+            Waste? waste = _db.wastes.FirstOrDefault(ut => ut.IdWaste == idWaste);
             Flip newFlip = new Flip
             {
-                IdWaste = IdWaste,
+                IdWaste = idWaste,
                 Flipfrequency = Flipfrequency,
-                UniformedDescription = UniformedDescription
-                //
+                UniformedDescription = UniformedDescription,
+                IsDelete = false,
+                Date = null
             };
             _db.flips.Add(newFlip);
             _db.SaveChanges();
             return newFlip;
         }
-        public async Task<Flip> DeleteFlip(Flip volteo)
+        public async Task<Flip> DeleteFlip(Flip flip)
         {
-            _db.flips.Attach(volteo); //Llamamos la actualizacion
-            _db.Entry(volteo).State = EntityState.Modified;
+            _db.flips.Attach(flip); //Llamamos la actualizacion
+            _db.Entry(flip).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return volteo;  
+            return flip;  
         }
         public async Task<List<Flip>> GetAll()
         {
@@ -51,11 +52,22 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Flip> UpdateFlip(Flip flip)
         {
-            //
+            Flip FlipUpdate = await _db.flips.FindAsync(flip.IdFlip);
+            if (FlipUpdate != null)
+            {
+                FlipUpdate.IdWaste = flip.IdWaste;
+                FlipUpdate.Flipfrequency = flip.Flipfrequency;
+                FlipUpdate.UniformedDescription = flip.UniformedDescription;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return FlipUpdate;
+            /*
             _db.flips.Attach(flip); //Llamamos la actualizacion
             _db.Entry(flip).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return flip;
+            return flip;*/
         }
     }
 }
