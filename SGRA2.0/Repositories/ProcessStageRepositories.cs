@@ -24,8 +24,9 @@ namespace SGRA2._0.Repositories
         {
             ProcessStage newProcessStage = new ProcessStage
             { 
-                Stage = Stage 
-                //
+                Stage = Stage,
+                IsDelete = false,
+                Date = null
             };
             _db.processStages.AddAsync(newProcessStage);
             _db.SaveChanges();
@@ -48,11 +49,19 @@ namespace SGRA2._0.Repositories
         }
         public async Task<ProcessStage> UpdateProcessStage(ProcessStage processStage)
         {
-            //
-            _db.processStages.Attach(processStage); //Llamamos la actualizacion
+            ProcessStage ProcessStageUpdate = await _db.processStages.FindAsync(processStage.IdProcessStage);
+            if (ProcessStageUpdate != null)
+            {
+                ProcessStageUpdate.Stage = processStage.Stage;
+
+                await _db.SaveChangesAsync();
+            }
+
+            return ProcessStageUpdate;
+            /*_db.processStages.Attach(processStage); //Llamamos la actualizacion
             _db.Entry(processStage).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return processStage;
+            return processStage;*/
         }
     }
 }
