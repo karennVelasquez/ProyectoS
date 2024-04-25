@@ -33,7 +33,7 @@ namespace SGRA2._0.Controllers
             var person = await _personService.GetPerson(IdPerson);
             if (person == null)
             {
-                return BadRequest("Waste type noy found. ");
+                return BadRequest("Waste type not found. ");
             }
             return Ok(person);
         }
@@ -42,7 +42,7 @@ namespace SGRA2._0.Controllers
         [HttpPost("{n}")]
         public async Task<ActionResult<Person>> PostPerson(int IdPerson, string Name, string Lastname, string Email, int IdDocumentType, int Document)
         {
-            var personToPut = _personService.CreatePerson(IdPerson, Name, Lastname, Email, IdDocumentType, Document);
+            var personToPut = _personService.CreatePerson( Name, Lastname, Email, IdDocumentType, Document);
             if (personToPut != null)
             {
                 return Ok(personToPut);
@@ -74,82 +74,6 @@ namespace SGRA2._0.Controllers
         {
             var personToDelete = await _personService.DeletePerson(IdPerson);
             if (personToDelete != null)
-            {
-                return Ok(personToDelete);
-            }
-            else
-            {
-                return BadRequest("Error updating the database. ");
-            }
-        }
-
-    }
-}
-/*
-using HClinicalV2._0.Model;
-using HClinicalV2._0.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static System.Threading.ExecutionContext;
-using Microsoft.AspNetCore.Http;
-using static Azure.Core.HttpHeader;
-
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace HClinicalV2._0.Controllers
-{
-    [Route("HClinical/[controller]")]
-    [ApiController]
-    public class EpsController : ControllerBase
-    {
-        private readonly IEpsService _epsService;
-        public EpsController(IEpsService epsService)
-        {
-            _epsService = epsService;
-        }
-
-
-        // GET: api/<epsController>
-        [HttpGet]
-        public async Task<ActionResult<List<Eps>>> GetAllEps()
-        {
-            return Ok(await _epsService.GetAll());
-        }
-
-        // GET api/<epsController>/5
-        [HttpGet("{idEps}")]
-        public async Task<ActionResult<Eps>> GetEps(int idEps)
-        {
-            var eps = await _epsService.GetEps(idEps);
-            if (eps == null)
-            {
-                return BadRequest("Eps not found");
-            }
-        }
-
-        //PUT api/<Person>
-        [HttpPut("Update/{IdPerson}")]
-        public async Task<ActionResult<Person>> PutPerson(int IdPerson, string Name, string Lastname, string Email, int IdDocumentType, int Document)
-        {
-            var personToPut = _personService.UpdatePerson(IdPerson, Name, Lastname, Email, IdDocumentType, Document);
-            if (personToPut != null) 
-            {
-                return Ok(personToPut);
-            }
-            else
-            {
-                return BadRequest("Error updating the database. ");
-            }
-        }
-
-        //DELETE api/<Person>
-        [HttpPut("Delete/{IdPerson}")]
-        public async Task<ActionResult<Person>> DeletePerson(int IdPerson)
-        {
-            var personToDelete = await _personService.DeletePerson(IdPerson);  
-            if (personToDelete != null) 
             {
                 return Ok(personToDelete);
             }

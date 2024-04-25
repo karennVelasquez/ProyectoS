@@ -29,7 +29,7 @@ namespace SGRA2._0.Controllers
             var level = await _levelService.GetLevel(IdLevel);
             if (level == null)
             {
-                return BadRequest("Waste type noy found. ");
+                return BadRequest("Waste type not found. ");
             }
             return Ok(level);
         }
@@ -38,7 +38,7 @@ namespace SGRA2._0.Controllers
         [HttpPost("{n}")]
         public async Task<ActionResult<Level>> PostLevel(int IdLevel, int NumLevel)
         {
-            var levelToPut = _levelService.CreateLevel(IdLevel, NumLevel);
+            var levelToPut = _levelService.CreateLevel( NumLevel);
             if (levelToPut != null)
             {
                 return Ok(levelToPut);

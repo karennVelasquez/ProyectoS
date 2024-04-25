@@ -29,7 +29,7 @@ namespace SGRA2._0.Controllers
             var sale = await _saleService.GetSale(IdSale);
             if (sale == null)
             {
-                return BadRequest("Waste type noy found. ");
+                return BadRequest("Waste type not found. ");
             }
             return Ok(sale);
         }
@@ -38,7 +38,7 @@ namespace SGRA2._0.Controllers
         [HttpPost("{n}")]
         public async Task<ActionResult<Sale>> PostSale(int IdSale, int IdCustomer, DateTime SaleDate)
         {
-            var saleToPut = _saleService.CreateSale(IdSale, IdCustomer, SaleDate);
+            var saleToPut = _saleService.CreateSale( IdCustomer, SaleDate);
             if (saleToPut != null)
             {
                 return Ok(saleToPut);

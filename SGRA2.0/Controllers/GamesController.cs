@@ -29,7 +29,7 @@ namespace SGRA2._0.Controllers
             var games = await _gamesService.GetGames(IdGames);
             if (games == null)
             {
-                return BadRequest("Waste type noy found. ");
+                return BadRequest("Waste type not found. ");
             }
             return Ok(games);
         }
@@ -38,7 +38,7 @@ namespace SGRA2._0.Controllers
         [HttpPost("{n}")]
         public async Task<ActionResult<Games>> PostGame(int IdGames, int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate)
         {
-            var gamesToPut = _gamesService.CreateGames(IdGames, IdUser, IdLevel, StartDate, FinalDate);
+            var gamesToPut = _gamesService.CreateGames(IdUser, IdLevel, StartDate, FinalDate);
             if (gamesToPut != null)
             {
                 return Ok(gamesToPut);

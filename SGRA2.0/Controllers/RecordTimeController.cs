@@ -29,7 +29,7 @@ namespace SGRA2._0.Controllers
             var recordTime = await _recordTimeService.GetRecordTime(IdRecordTime);
             if (recordTime == null)
             {
-                return BadRequest("Waste type noy found. ");
+                return BadRequest("Waste type not found. ");
             }
             return Ok(recordTime);
         }
@@ -38,7 +38,7 @@ namespace SGRA2._0.Controllers
         [HttpPost("{n}")]
         public async Task<ActionResult<RecordTime>> PostRecordTime(int IdRecordTime, int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected)
         {
-            var recordTimeToPut = _recordTimeService.CreateRecordTime(IdRecordTime, IdLevel, IdWaste, Collecttime, AmountCollected);
+            var recordTimeToPut = _recordTimeService.CreateRecordTime(IdLevel, IdWaste, Collecttime, AmountCollected);
             if (recordTimeToPut != null)
             {
                 return Ok(recordTimeToPut);

@@ -29,7 +29,7 @@ namespace SGRA2._0.Controllers
             var processStage = await _processStageService.GetProcessStage(IdProcessStage);
             if (processStage == null)
             {
-                return BadRequest("Waste type noy found. ");
+                return BadRequest("Waste type not found. ");
             }
             return Ok(processStage);
         }
@@ -38,7 +38,7 @@ namespace SGRA2._0.Controllers
         [HttpPost("{n}")]
         public async Task<ActionResult<ProcessStage>> PostProcessStage(int IdProcessStage, string Stage)
         {
-            var processStageToPut = _processStageService.CreateProcessStage(IdProcessStage,Stage);
+            var processStageToPut = _processStageService.CreateProcessStage(Stage);
             if (processStageToPut != null)
             {
                 return Ok(processStageToPut);
