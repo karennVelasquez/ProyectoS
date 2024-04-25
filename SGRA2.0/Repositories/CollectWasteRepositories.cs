@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     public interface ICollectWasteRepositories
     {
         Task<List<CollectWaste>> GetAll();
-        Task<CollectWaste> GetCollectWaste(int IdCollectWaste);
+        Task<CollectWaste> GetCollectWaste(int id);
         Task<CollectWaste> CreateCollectWaste(int IdSuppliers, int IdComposter, DateTime CollectionDate, int Amount);
         Task<CollectWaste> UpdateCollectWaste(CollectWaste collectWaste);
         Task<CollectWaste> DeleteCollectWaste(CollectWaste collectWaste);

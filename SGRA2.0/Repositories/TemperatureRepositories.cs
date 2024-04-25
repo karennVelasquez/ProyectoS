@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ITemperatureRepositories
     {
         Task<List<Temperature>> GetAll();
-        Task<Temperature> GetTemperature(int IdTemperature);
+        Task<Temperature> GetTemperature(int id);
         Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature, string Range);
         Task<Temperature> UpdateTemperature (Temperature temperature);
         Task<Temperature> DeleteTemperature(Temperature temperature);

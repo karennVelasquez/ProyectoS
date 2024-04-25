@@ -14,8 +14,8 @@ namespace SGRA2._0.Service
     }
     public class TimeService : ITimeService
     {
-        public readonly TimeRepositories _timeRepositories;
-        public TimeService(TimeRepositories timeRepositories)
+        public readonly ITimeRepositories _timeRepositories;
+        public TimeService(ITimeRepositories timeRepositories)
         {
             _timeRepositories = timeRepositories;
         }

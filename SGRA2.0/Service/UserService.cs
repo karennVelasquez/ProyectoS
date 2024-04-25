@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class UserService : IUserService
     {
-        public readonly UserRepositories _userRepositories;
-        public UserService(UserRepositories userRepositories)
+        public readonly IUserRepositories _userRepositories;
+        public UserService(IUserRepositories userRepositories)
         {
             _userRepositories = userRepositories;
         }

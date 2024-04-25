@@ -15,8 +15,8 @@ namespace SGRA2._0.Service
     }
     public class PersonService : IPersonService
     {
-        public readonly PersonRepositories _personRepositories;
-        public PersonService(PersonRepositories personRepositories)
+        public readonly IPersonRepository _personRepositories;
+        public PersonService(IPersonRepository personRepositories)
         {
             _personRepositories = personRepositories;
         }

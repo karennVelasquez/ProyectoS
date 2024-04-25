@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IDocumentTypeRepositories
     {
         Task<List<DocumentType>> GetAll();
-        Task<DocumentType> GetDocumentType(int IdDocumentType);
+        Task<DocumentType> GetDocumentType(int id);
         Task<DocumentType> CreateDocumentType(string Document);
         Task<DocumentType> UpdateDocumentType(DocumentType documentType);
         Task<DocumentType> DeleteDocumentType(DocumentType documentType);

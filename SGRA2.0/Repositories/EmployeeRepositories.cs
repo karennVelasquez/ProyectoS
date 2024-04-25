@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IEmployeeRepository
     {
         Task<List<Employee>> GetAll();
-        Task<Employee> GetEmployee(int IdEmployee);
+        Task<Employee> GetEmployee(int id);
         Task<Employee> CreateEmployee(int IdPerson, string Position);
         Task<Employee> UpdateEmployee(Employee employee);
         Task<Employee> DeleteEmployee(Employee employee);

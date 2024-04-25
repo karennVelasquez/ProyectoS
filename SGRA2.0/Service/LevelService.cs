@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class LevelService : ILevelService
     {
-        public readonly LevelRepositories _levelRepositories;
-        public LevelService(LevelRepositories levelRepositories)
+        public readonly ILevelRepositories _levelRepositories;
+        public LevelService(ILevelRepositories levelRepositories)
         {
             _levelRepositories = levelRepositories;
         }

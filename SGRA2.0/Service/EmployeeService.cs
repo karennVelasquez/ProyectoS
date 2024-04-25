@@ -33,7 +33,7 @@ namespace SGRA2._0.Service
                 throw new Exception($"El empleado con el Id {IdEmployee} no existe");
             }
 
-            employeeToDelete.IsDeleted = true;
+            employeeToDelete.IsDelete = true;
             employeeToDelete.Date = DateTime.Now;
 
             return await _employeeRepositories.DeleteEmployee(employeeToDelete);

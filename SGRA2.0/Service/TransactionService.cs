@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class TransactionService : ITransactionService
     {
-        public readonly TransactionRepositories _transactionRepositories;
-        public TransactionService(TransactionRepositories transactionRepositories)
+        public readonly ITransactionRepositories _transactionRepositories;
+        public TransactionService(ITransactionRepositories transactionRepositories)
         {
             _transactionRepositories = transactionRepositories;
         }

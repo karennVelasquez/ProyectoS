@@ -14,8 +14,8 @@ namespace SGRA2._0.Service
     }
     public class GamesService : IGamesService
     {
-        public readonly GamesRepositories _gamesRepositories;
-        public GamesService(GamesRepositories gamesRepositories)
+        public readonly IGamesRepositories _gamesRepositories;
+        public GamesService(IGamesRepositories gamesRepositories)
         {
             _gamesRepositories = gamesRepositories;
         }

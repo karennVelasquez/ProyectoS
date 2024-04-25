@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ICustomerRepositories
     {
         Task<List<Customer>> GetAll();
-        Task<Customer> GetCustomer(int IdCustomer);
+        Task<Customer> GetCustomer(int id);
         Task<Customer> CreateCustomer(int IdPerson);
         Task<Customer> UpdateCustomer(Customer customer);
         Task<Customer> DeleteCustomer(Customer customer);

@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class FinalCompostService : IFinalCompostService
     {
-        public readonly FinalCompostRepositories _finalCompostRepositories;
-        public FinalCompostService(FinalCompostRepositories finalCompostRepositories)
+        public readonly IFinalCompostRepositories _finalCompostRepositories;
+        public FinalCompostService(IFinalCompostRepositories finalCompostRepositories)
         {
             _finalCompostRepositories = finalCompostRepositories;
         }

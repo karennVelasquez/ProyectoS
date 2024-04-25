@@ -14,8 +14,8 @@ namespace SGRA2._0.Service
     }
     public class WasteTypeService : IWasteTypeService
     {
-        public readonly WasteTypeRepositories _wasteTypeRepositories;
-        public WasteTypeService(WasteTypeRepositories wasteTypeRepositories)
+        public readonly IWasteTypeRepositories _wasteTypeRepositories;
+        public WasteTypeService(IWasteTypeRepositories wasteTypeRepositories)
         {
             _wasteTypeRepositories = wasteTypeRepositories;
         }

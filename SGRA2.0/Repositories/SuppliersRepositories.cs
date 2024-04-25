@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ISuppliersRepositories
     {
         Task<List<Suppliers>> GetAll();
-        Task<Suppliers> GetSuppliers(int IdSuppliers);
+        Task<Suppliers> GetSuppliers(int id);
         Task<Suppliers> CreateSuppliers(int IdPerson, int IdWasteType);
         Task<Suppliers> UpdateSuppliers(Suppliers suppliers);
         Task<Suppliers> DeleteSuppliers(Suppliers suppliers);

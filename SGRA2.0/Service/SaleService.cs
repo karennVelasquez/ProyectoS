@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class SaleService : ISaleService
     {
-        public readonly SaleRepositories _saleRepositories;
-        public SaleService(SaleRepositories saleRepositories)
+        public readonly ISaleRepositories _saleRepositories;
+        public SaleService(ISaleRepositories saleRepositories)
         {
             _saleRepositories = saleRepositories;
         }

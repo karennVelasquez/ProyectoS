@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class ProcessStageService : IProcessStageService
     {
-        public readonly ProcessStageRepositories _processStageRepositories;
-        public ProcessStageService(ProcessStageRepositories etapaProcesoRepositories)
+        public readonly IProcessStageRepositories _processStageRepositories;
+        public ProcessStageService(IProcessStageRepositories etapaProcesoRepositories)
         {
             _processStageRepositories = etapaProcesoRepositories;
         }

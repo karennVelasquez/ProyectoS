@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IChemicalCompositionRepositories
     {
         Task<List<ChemicalComposition>> GetAll();
-        Task<ChemicalComposition> GetChemicalComposition(int IdChemicalComposition);
+        Task<ChemicalComposition> GetChemicalComposition(int id);
         Task<ChemicalComposition> CreateChemicalComposition(int IdWaste, string Chemical_Composition);
         Task<ChemicalComposition> UpdateChemicalComposition(ChemicalComposition chemicalComposition);
         Task<ChemicalComposition> DeleteChemicalComposition(ChemicalComposition chemicalComposition);

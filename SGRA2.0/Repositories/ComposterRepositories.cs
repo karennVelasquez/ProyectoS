@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     public interface IComposterRepositories
     {
         Task<List<Composter>> GetAll();
-        Task<Composter> GetComposter(int IdComposter);
+        Task<Composter> GetComposter(int id);
         Task<Composter> CreateComposter(string Size, string Material, string DrainageSystem);
         Task<Composter> UpdateComposter(Composter composter);
         Task<Composter> DeleteComposter(Composter composter);

@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IAchievementsRepositories
     {
         Task<List<Achievements>> GetAll();
-        Task<Achievements> GetAchievements(int IdAchievements);
+        Task<Achievements> GetAchievements(int id);
         Task<Achievements> CreateAchievements(string Achievement);
         Task<Achievements> UpdateAchievements(Achievements achievements);
         Task<Achievements> DeleteAchievements(Achievements achievements);

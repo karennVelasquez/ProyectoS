@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class TemperatureService : ITemperatureService
     {
-        public readonly TemperatureRepositories _temperatureRepositories;
-        public TemperatureService(TemperatureRepositories _temperatureRepositories)
+        public readonly ITemperatureRepositories _temperatureRepositories;
+        public TemperatureService(ITemperatureRepositories _temperatureRepositories)
         {
             _temperatureRepositories = _temperatureRepositories;
         }

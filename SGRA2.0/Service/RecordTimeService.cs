@@ -14,8 +14,8 @@ namespace SGRA2._0.Service
     }
     public class RecordTimeService : IRecordTimeService
     {
-        public readonly RecordTimeRepositories _recordTimeRepositories;
-        public RecordTimeService(RecordTimeRepositories recordTimeRepositories)
+        public readonly IRecordTimeRepositories _recordTimeRepositories;
+        public RecordTimeService(IRecordTimeRepositories recordTimeRepositories)
         {
             _recordTimeRepositories = recordTimeRepositories;
         }

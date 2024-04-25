@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class FlipService : IFlipService
     {
-        public readonly FlipRepositories _flipRepositories;
-        public FlipService(FlipRepositories flipRepositories)
+        public readonly IFlipRepositories _flipRepositories;
+        public FlipService(IFlipRepositories flipRepositories)
         {
             _flipRepositories = flipRepositories;
         }

@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class SuppliersService : ISuppliersService
     {
-        public readonly SuppliersRepositories _suppliersRepositories;
-        public SuppliersService(SuppliersRepositories suppliersRepositories)
+        public readonly ISuppliersRepositories _suppliersRepositories;
+        public SuppliersService(ISuppliersRepositories suppliersRepositories)
         {
             _suppliersRepositories = suppliersRepositories;
         }

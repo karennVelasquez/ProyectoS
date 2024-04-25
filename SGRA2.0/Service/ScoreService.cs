@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class ScoreService : IScoreService
     {
-        public readonly ScoreRepositories _scoreRepositories;
-        public ScoreService(ScoreRepositories scoreRepositories)
+        public readonly IScoreRepositories _scoreRepositories;
+        public ScoreService(IScoreRepositories scoreRepositories)
         {
             _scoreRepositories = scoreRepositories;
         }

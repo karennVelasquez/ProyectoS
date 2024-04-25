@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     public interface IAchievementsGamesRespositories
     {
         Task<List<AchievementsGames>> GetAll();
-        Task<AchievementsGames> GetAchievementsGames(int IdAchievementsG);
+        Task<AchievementsGames> GetAchievementsGames(int id);
         Task<AchievementsGames> CreateAchievementsGames(int IdGames, int IdAchievements);
         Task<AchievementsGames> UpdateAchievementsGames(AchievementsGames achievementsGames);
         Task<AchievementsGames> DeleteAchievementsGames(AchievementsGames achievementsGames);

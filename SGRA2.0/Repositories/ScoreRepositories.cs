@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IScoreRepositories
     {
         Task<List<Score>> GetAll();
-        Task<Score> GetScore(int IdScore);
+        Task<Score> GetScore(int id);
         Task<Score> CreateScore(int IdUser, int IdGames, int NumScore);
         Task<Score> UpdateScore(Score score);
         Task<Score> DeleteScore(Score score);
