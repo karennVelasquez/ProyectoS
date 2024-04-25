@@ -127,59 +127,37 @@ namespace HClinicalV2._0.Controllers
             {
                 return BadRequest("Eps not found");
             }
-            return Ok(eps);
         }
 
-        // POST: api/Eps
-        [HttpPost("{nameEps}")]
-        public async Task<ActionResult<Eps>> PostEps(string nameEps)
+        //PUT api/<Person>
+        [HttpPut("Update/{IdPerson}")]
+        public async Task<ActionResult<Person>> PutPerson(int IdPerson, string Name, string Lastname, string Email, int IdDocumentType, int Document)
         {
-            var epsToPut = _epsService.CreateEps(nameEps);
-
-            if (epsToPut != null)
+            var personToPut = _personService.UpdatePerson(IdPerson, Name, Lastname, Email, IdDocumentType, Document);
+            if (personToPut != null) 
             {
-                return Ok(epsToPut);
+                return Ok(personToPut);
             }
             else
             {
-                return BadRequest("Error when inserting into the database");
+                return BadRequest("Error updating the database. ");
             }
-
-
         }
 
-        // PUT: api/Eps/5
-        [HttpPut("Update/{idEps}")]
-        public async Task<ActionResult<Eps>> PutEps(int idEps, string nameEps)
+        //DELETE api/<Person>
+        [HttpPut("Delete/{IdPerson}")]
+        public async Task<ActionResult<Person>> DeletePerson(int IdPerson)
         {
-            var epsToPut = await _epsService.UpdateEps(idEps, nameEps);
-
-            if (epsToPut != null)
+            var personToDelete = await _personService.DeletePerson(IdPerson);  
+            if (personToDelete != null) 
             {
-                return Ok(epsToPut);
+                return Ok(personToDelete);
             }
             else
             {
-                return BadRequest("Error updating the database :(");
-            }
-
-        }
-
-        // Delete: api/Eps/5
-        [HttpPut("Delete/{idEps}")]
-        public async Task<ActionResult<Eps>> DeleteEps(int idEps)
-        {
-
-            var epsToDelete = await _epsService.DeleteEps(idEps);
-
-            if (epsToDelete != null)
-            {
-                return Ok(epsToDelete);
-            }
-            else
-            {
-                return BadRequest("Error updating the database");
+                return BadRequest("Error updating the database. ");
             }
         }
+
     }
-}*/
+}

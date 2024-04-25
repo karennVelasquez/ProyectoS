@@ -42,8 +42,8 @@ namespace SGRA2._0.Controllers
         [HttpPost("{n}")]
         public async Task<ActionResult<User>> PostUser(int IdUser, string UserName, string Password)
         {
-            var userToPut = _userService.GetUser(IdUser);
-            if(userToPut == null) 
+            var userToPut = _userService.CreateUser(UserName, Password);
+            if(userToPut != null) 
             {
                 return Ok(userToPut);
             }

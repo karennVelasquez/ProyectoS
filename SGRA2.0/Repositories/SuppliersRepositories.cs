@@ -28,7 +28,9 @@ namespace SGRA2._0.Repositories
             Suppliers newSuppliers = new Suppliers
             {
                 IdPerson = idPerson,
-                IdWasteType = idWasteType
+                IdWasteType = idWasteType,
+                IsDelete = false,
+                Date = null
             };
             _db.suppliers.AddAsync(newSuppliers);
             _db.SaveChanges();
