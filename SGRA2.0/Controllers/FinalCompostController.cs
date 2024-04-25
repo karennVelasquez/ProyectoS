@@ -58,7 +58,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdFinalCompost}")]
         public async Task<ActionResult<FinalCompost>> PutFinalCompost(int IdFinalCompost, int IdWaste, string HumidityLevel, string FinalPh, string Nutrients)
         {
-            var finalCompostToPut = _finalCompostService.UpdateFinalCompost(IdWaste, HumidityLevel, FinalPh, Nutrients);
+            var finalCompostToPut = _finalCompostService.UpdateFinalCompost(IdFinalCompost, IdWaste, HumidityLevel, FinalPh, Nutrients);
             if (finalCompostToPut != null)
             {
                 return Ok(finalCompostToPut);

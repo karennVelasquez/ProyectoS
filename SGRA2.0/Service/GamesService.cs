@@ -10,6 +10,7 @@ namespace SGRA2._0.Service
         Task<Games> CreateGames(int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate);
         Task<Games> UpdateGames(int IdGames, int? IdUser = null, int? IdLevel = null, DateTime? StartDate = null, DateTime? FinalDate = null);
         Task<Games> DeleteGames(int IdGames);
+        object CreateGames(int idGames, int idUser, int idLevel, DateTime startDate, DateTime finalDate);
     }
     public class GamesService : IGamesService
     {
