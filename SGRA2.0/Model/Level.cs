@@ -8,7 +8,7 @@ namespace SGRA2._0.Model
         //Nivel
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdLevel { get; set; }
-        public required int NumLevel { get; set; }
+        public int NumLevel { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
     }

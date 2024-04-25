@@ -8,9 +8,9 @@ namespace SGRA2._0.Model
         //Venta
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdSale { get; set; }
-        public required int IdCustomer { get; set; }
-        public required Customer Customer { get; set; }
-        public required DateTime SaleDate { get; set; }
+        public int IdCustomer { get; set; }
+        public Customer Customer { get; set; }
+        public DateTime SaleDate { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
         
