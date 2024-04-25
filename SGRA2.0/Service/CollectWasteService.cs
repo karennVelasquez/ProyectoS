@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class CollectWasteService : ICollectWasteService
     {
-        public readonly CollectWasteRepositories _collectWasteRepositories;
-        public CollectWasteService(CollectWasteRepositories collectWasteRepositories)
+        public readonly ICollectWasteRepositories _collectWasteRepositories;
+        public CollectWasteService(ICollectWasteRepositories collectWasteRepositories)
         {
             _collectWasteRepositories = collectWasteRepositories;
         }
