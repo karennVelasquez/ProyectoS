@@ -32,6 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El nivel con el Id {IdLevel} no existe");
             }
+            levelToDelete.IsDelete = true;
+            levelToDelete.Date = DateTime.Now;
 
             return await _levelRepositories.DeleteLevel(levelToDelete);
             //throw new NotImplementedException();

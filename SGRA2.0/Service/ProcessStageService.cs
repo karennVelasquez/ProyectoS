@@ -33,6 +33,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"La etapa con el Id {IdProcessStage} no existe");
             }
+            processStageToDelete.IsDelete = true;
+            processStageToDelete.Date = DateTime.Now;
 
             return await _processStageRepositories.DeleteProcessStage(processStageToDelete);
             //throw new NotImplementedException();

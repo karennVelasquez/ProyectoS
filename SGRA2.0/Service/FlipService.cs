@@ -32,6 +32,8 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El volteo con el Id {IdFlip} no existe");
             }
+            flipToDelete.IsDelete = true;
+            flipToDelete.Date = DateTime.Now;
 
             return await _flipRepositories.DeleteFlip(flipToDelete);
             //throw new NotImplementedException();
