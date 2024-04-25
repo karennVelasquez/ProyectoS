@@ -22,7 +22,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<ScoreController>
         [HttpGet]
-        public async Task<ActionResult<List<Score>>> GetAllUser()
+        public async Task<ActionResult<List<Score>>> GetAllScore()
         {
             return Ok(await _scoreService.GetAll());
         }
