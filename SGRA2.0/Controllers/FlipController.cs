@@ -58,7 +58,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdFlip}")]
         public async Task<ActionResult<FinalCompost>> PutFlip(int IdFlip, int IdWaste, int Flipfrequency, string UniformedDescription)
         {
-            var flipToPut = _flipService.UpdateFlip(IdWaste, Flipfrequency, UniformedDescription);
+            var flipToPut = _flipService.UpdateFlip(IdFlip, IdWaste, Flipfrequency, UniformedDescription);
             if (flipToPut != null)
             {
                 return Ok(flipToPut);
