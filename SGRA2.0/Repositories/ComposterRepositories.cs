@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SGRA2._0.Context;
 using SGRA2._0.Model;
 using System.ComponentModel.DataAnnotations;
@@ -22,12 +23,14 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Composter> CreateComposter(string Size, string Material, string DrainageSystem)
         {
+            Composter? composter = _db.composters.FirstOrDefault(ut => ut.Size == Size);
             Composter newCompostador = new Composter
             {
                 Size = Size,
                 Material = Material,
-                DrainageSystem = DrainageSystem
-                //
+                DrainageSystem = DrainageSystem,
+                IsDelete = false,
+                Date = null
             };
             _db.composters.AddAsync(newCompostador);
             _db.SaveChanges();

@@ -21,14 +21,16 @@ namespace SGRA2._0.Repositories
             }
             public async Task<AchievementsGames> CreateAchievementsGames(int IdGames, int IdAchievements)
             {
-                //
+                AchievementsGames? achievementsGames = _db.achievementsGames.FirstOrDefault(ut => ut.IdAchievements == IdAchievements);
                 AchievementsGames newAchievementsGames = new AchievementsGames
                 {
                     IdGames = IdGames,
-                    IdAchievements = IdAchievements
-                    //
+                    IdAchievements = IdAchievements,
+                    IsDelete = false,
+                    Date = null
                 };
                 _db.achievementsGames.AddAsync(newAchievementsGames);
+                _db.SaveChanges();
                 return newAchievementsGames;
             }
             public async Task<AchievementsGames> DeleteAchievementsGames(AchievementsGames achievementsGames)

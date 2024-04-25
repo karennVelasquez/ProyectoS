@@ -14,7 +14,7 @@ namespace SGRA2._0.Model
         public  Composter Composter { get; set; }
         public  DateTime CollectionDate { get; set; }
         public  int Amount { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDelete { get; set; }
         public DateTime? Date {  get; set; }
     }
 }

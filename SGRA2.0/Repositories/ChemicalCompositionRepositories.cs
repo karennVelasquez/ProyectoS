@@ -24,11 +24,13 @@ namespace SGRA2._0.Repositories
         }
         public async Task<ChemicalComposition> CreateChemicalComposition(int IdWaste, string Chemical_Composition)
         {
-            //
+            //ChemicalComposition? chemicalComposition = _db.chemicalCompositions.FirstOrDefault(ut => ut.IdWaste = IdWaste);    
             ChemicalComposition newChemicalComposition = new ChemicalComposition
             {
                 IdWaste = IdWaste,
-                Chemical_Composition = Chemical_Composition
+                Chemical_Composition = Chemical_Composition,
+                IsDelete = false,
+                Date = null
                 //
             };
             _db.chemicalCompositions.AddAsync(newChemicalComposition);

@@ -10,7 +10,7 @@ namespace SGRA2._0.Model
         public int IdCustomer { get; set; }
         public int IdPerson { get; set; }
         public  Person Person { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDelete { get; set; }
         public DateTime? Date {  get; set; }
     }
 }

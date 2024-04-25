@@ -33,7 +33,7 @@ namespace SGRA2._0.Service
             {
                 throw new Exception($"El logro de la partida con el Id {IdAchievementsG} no existe");
             }
-            achievementsGamesToDelete.IsDeleted = true;
+            achievementsGamesToDelete.IsDelete = true;
             achievementsGamesToDelete.Date = DateTime.Now;
 
             return await _achievementsGamesRespositories.DeleteAchievementsGames(achievementsGamesToDelete);

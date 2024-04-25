@@ -11,7 +11,7 @@ namespace SGRA2._0.Model
         public  string Size { get; set; }
         public  string Material { get; set; }
         public string DrainageSystem { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
     }
 }

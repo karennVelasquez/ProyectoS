@@ -22,12 +22,13 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Employee> CreateEmployee(int IdPerson, string Position)
         {
-            //
+            Employee? employee = _db.employees.FirstOrDefault(ut => ut.IdPerson == IdPerson);
             Employee newEmployee = new Employee
             {
                 IdPerson = IdPerson,
-                Position = Position
-                //
+                Position = Position,
+                IsDelete = false,
+                Date = null
             };
             _db.employees.AddAsync(newEmployee);
             _db.SaveChanges();

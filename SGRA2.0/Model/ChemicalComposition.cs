@@ -11,7 +11,7 @@ namespace SGRA2._0.Model
         public int IdWaste { get; set; }
         public Waste Waste { get; set; }
         public string Chemical_Composition { get; set; }
-        public bool IsDeleted {  get; set; }
+        public bool IsDelete {  get; set; }
         public DateTime? Date { get; set; }
     }
 }

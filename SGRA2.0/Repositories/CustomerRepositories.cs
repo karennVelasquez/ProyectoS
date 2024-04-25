@@ -24,11 +24,12 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Customer> CreateCustomer(int IdPerson)
         {
-            //
+            Customer? customer = _db.customers.FirstOrDefault(ut => ut.IdPerson == IdPerson);
             Customer newCustomer = new Customer
             {
-                IdPerson = IdPerson 
-                //
+                IdPerson = IdPerson, 
+                IsDelete = false,
+                Date = null
             };
             _db.customers.AddAsync(newCustomer);
             _db.SaveChanges();

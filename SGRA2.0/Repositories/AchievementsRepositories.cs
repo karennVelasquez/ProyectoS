@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<Achievements>> GetAll();
         Task<Achievements> GetAchievements(int IdAchievements);
-        Task<Achievements> CreateAchievements(string Achievement);
+        Task<Achievements> CreateAchievements(int IdAchievements,string Achievement);
         Task<Achievements> UpdateAchievements(Achievements achievements);
         Task<Achievements> DeleteAchievements(Achievements achievements);
     }
@@ -21,11 +21,15 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Achievements> CreateAchievements(string Achievement)
+        public async Task<Achievements> CreateAchievements(int IdAchievements,string Achievement)
         {
+            Achievements? achievements = _db.achievements.FirstOrDefault(ut => ut.IdAchievements == IdAchievements);
             Achievements newAchievements = new Achievements
             { 
-                Achievement = Achievement 
+                IdAchievements = IdAchievements,
+                Achievement = Achievement,
+                IsDelete = false,
+                Date = null
                 //
             };
             _db.achievements.AddAsync(newAchievements);

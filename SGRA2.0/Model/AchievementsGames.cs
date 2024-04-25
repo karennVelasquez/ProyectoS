@@ -12,7 +12,7 @@ namespace SGRA2._0.Model
         public  Games Games { get; set; }
         public  int IdAchievements { get; set; }
         public  Achievements Achievements { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDelete { get; set; }
         public DateTime? Date {  get; set; }
     }
 }
