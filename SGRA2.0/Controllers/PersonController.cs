@@ -16,11 +16,15 @@ namespace SGRA2._0.Controllers
         {
             _personService = personService;
         }
+
+        //GET api/<Person>
         [HttpGet]
         public async Task<ActionResult<List<Person>>>GetAllPerson()
         {
             return Ok(await _personService.GetAll());
         }
+
+        //GET api/<Person>/
         [HttpGet("{IdPerson}")]
         public async Task<ActionResult<Person>>GetPerson(int IdPerson)
         {
@@ -31,12 +35,50 @@ namespace SGRA2._0.Controllers
             }
             return Ok(Person);
         }
+
+        //POST api/<Person>
         [HttpPost]
-        public async Task<ActionResult<Person>>CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int Document)
+        public async Task<ActionResult<Person>>PostPerson(int IdPerson, string Name, string Lastname, string Email, int IdDocumentType, int Document)
         {
-            var Person = await _personService.CreatePerson(Name, Lastname, Email, IdDocumentType, Document);
-           
-            return Ok(Person);
+            var personToPut = await _personService.CreatePerson(Name, Lastname, Email, IdDocumentType, Document);
+            if (personToPut != null) 
+            {
+                return Ok(personToPut);
+            }
+            else
+            {
+                return BadRequest("Error when inserting into the database.");
+            }
+        }
+
+        //PUT api/<Person>
+        [HttpPut("Update/{IdPerson}")]
+        public async Task<ActionResult<Person>> PutPerson(int IdPerson, string Name, string Lastname, string Email, int IdDocumentType, int Document)
+        {
+            var personToPut = _personService.UpdatePerson(IdPerson, Name, Lastname, Email, IdDocumentType, Document);
+            if (personToPut != null) 
+            {
+                return Ok(personToPut);
+            }
+            else
+            {
+                return BadRequest("Error updating the database. ");
+            }
+        }
+
+        //DELETE api/<Person>
+        [HttpPut("Delete/{IdPerson}")]
+        public async Task<ActionResult<Person>> DeletePerson(int IdPerson)
+        {
+            var personToDelete = await _personService.DeletePerson(IdPerson);  
+            if (personToDelete != null) 
+            {
+                return Ok(personToDelete);
+            }
+            else
+            {
+                return BadRequest("Error updating the database. ");
+            }
         }
 
     }

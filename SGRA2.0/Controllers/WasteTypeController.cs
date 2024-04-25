@@ -33,7 +33,7 @@ namespace SGRA2._0.Controllers
             var wasteType = await _wasteTypeService.GetWasteType(IdWasteType);  
             if(wasteType == null) 
             {
-                return BadRequest("Waste type noy found. ");
+                return BadRequest("Waste type not found. ");
             }
             return Ok(wasteType);
         }

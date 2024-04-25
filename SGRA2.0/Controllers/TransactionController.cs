@@ -56,7 +56,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdTransaction}")]
         public async Task<ActionResult<Transaction>> PutTransaction(int IdTransaction, int IdSuppliers, int DeliveredQuantity, DateTime DeliveredDate, string Price, string Quality)
         {
-            var transactionToPut = _transactionService.CreateTransaction(IdSuppliers, DeliveredQuantity, DeliveredDate, Price, Quality);
+            var transactionToPut = _transactionService.UpdateTransaction(IdTransaction, IdSuppliers, DeliveredQuantity, DeliveredDate, Price, Quality);
             if(transactionToPut != null) 
             {
                 return Ok(transactionToPut);

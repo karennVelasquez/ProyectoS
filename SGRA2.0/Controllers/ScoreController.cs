@@ -58,7 +58,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdScore}")]
         public async Task<ActionResult<Score>> PutScore(int IdScore, int IdUser, int IdGames, int NumScore)
         {
-            var scoreToPut = _scoreService.UpdateScore(IdUser, IdGames, NumScore);
+            var scoreToPut = _scoreService.UpdateScore(IdScore, IdUser, IdGames, NumScore);
             if(scoreToPut != null) 
             {
                 return Ok(scoreToPut);

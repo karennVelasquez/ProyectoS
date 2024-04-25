@@ -53,6 +53,22 @@ namespace SGRA2._0.Controllers
             }
         }
 
+        //PUT api/<Suppliers>
+        [HttpPut("Update/{IdSuppliers}")]
+        public async Task<ActionResult<Suppliers>> PutSuppliers(int IdSuppliers, int IdPerson, int IdWasteType)
+        {
+            var SuppliersToPut = _suppliersService.UpdateSuppliers(IdPerson, IdWasteType); 
+            if(SuppliersToPut != null) 
+            {
+                return Ok(SuppliersToPut);
+            }
+            else
+            {
+                return BadRequest("Error updating the database. ");
+            }
+        }
+           
+
         //DELETE api/<Suppliers>
         [HttpPut("Delete/{IdSuppliers}")]
         public async Task<ActionResult<Suppliers>> DeleteSuppliers(int IdSuppliers)

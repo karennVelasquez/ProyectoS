@@ -57,7 +57,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdTime}")]
         public async Task<ActionResult<Time>> PutTime(int IdTime, int IdWaste, int Processduration, int IdProcessStage)
         {
-            var timeToPut = _timeService.UpdateTime(IdWaste, Processduration, IdProcessStage);
+            var timeToPut = _timeService.UpdateTime(IdTime, IdWaste, Processduration, IdProcessStage);
             if(timeToPut != null)
             {
                 return Ok(timeToPut);   
