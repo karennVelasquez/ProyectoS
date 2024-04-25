@@ -14,8 +14,8 @@ namespace SGRA2._0.Service
     }
     public class AchievementsGamesService : IAchievementsGamesService
     {
-        public readonly AchievementsGamesRespositories _achievementsGamesRespositories;
-        public AchievementsGamesService(AchievementsGamesRespositories achievementsGamesRespositories)
+        public readonly IAchievementsGamesRespositories _achievementsGamesRespositories;
+        public AchievementsGamesService(IAchievementsGamesRespositories achievementsGamesRespositories)
         {
             _achievementsGamesRespositories = achievementsGamesRespositories;
         }

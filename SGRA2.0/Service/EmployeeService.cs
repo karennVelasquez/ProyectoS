@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class EmployeeService : IEmployeeService
     {
-        public readonly EmployeeRepositories _employeeRepositories;
-        public EmployeeService(EmployeeRepositories employeeRepositories)
+        public readonly IEmployeeRepositories _employeeRepositories;
+        public EmployeeService(IEmployeeRepositories employeeRepositories)
         {
             _employeeRepositories = employeeRepositories;
         }

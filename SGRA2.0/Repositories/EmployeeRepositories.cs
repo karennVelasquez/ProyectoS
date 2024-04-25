@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SGRA2._0.Repositories
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepositories
     {
         Task<List<Employee>> GetAll();
         Task<Employee> GetEmployee(int id);
@@ -13,7 +13,7 @@ namespace SGRA2._0.Repositories
         Task<Employee> UpdateEmployee(Employee employee);
         Task<Employee> DeleteEmployee(Employee employee);
     }
-    public class EmployeeRepositories : IEmployeeRepository
+    public class EmployeeRepositories : IEmployeeRepositories
     {
         private readonly PersonDBContext _db;
         public EmployeeRepositories(PersonDBContext db)

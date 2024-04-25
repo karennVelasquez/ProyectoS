@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class DocumentTypeService : IDocumentTypeService
     {
-        public readonly DocumentTypeRepositories _documentTypeRepositories;
-        public DocumentTypeService(DocumentTypeRepositories documentTypeRepositories)
+        public readonly IDocumentTypeRepositories _documentTypeRepositories;
+        public DocumentTypeService(IDocumentTypeRepositories documentTypeRepositories)
         {
             _documentTypeRepositories = documentTypeRepositories;
         }

@@ -12,8 +12,8 @@ namespace SGRA2._0.Service
     }
     public class ChemicalCompositionService : IChemicalCompositionService
     {
-        public readonly ChemicalCompositionRepositories _chemicalCompositionRepositories;
-        public ChemicalCompositionService(ChemicalCompositionRepositories chemicalCompositionRepositories)
+        public readonly IChemicalCompositionRepositories _chemicalCompositionRepositories;
+        public ChemicalCompositionService(IChemicalCompositionRepositories chemicalCompositionRepositories)
         {
             _chemicalCompositionRepositories = chemicalCompositionRepositories;
         }

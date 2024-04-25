@@ -13,8 +13,8 @@ namespace SGRA2._0.Service
     }
     public class ComposterService : IComposterService
     {
-        public readonly ComposterRepositories _composterRepositories;
-        public ComposterService(ComposterRepositories composterRepositories)
+        public readonly IComposterRepositories _composterRepositories;
+        public ComposterService(IComposterRepositories composterRepositories)
         {
             _composterRepositories = composterRepositories;
         }
@@ -34,7 +34,7 @@ namespace SGRA2._0.Service
                 throw new Exception($"El compostador con el Id {IdComposter} no existe");
             }
 
-            composterToDelete.IsDeleted = true;
+            composterToDelete.IsDelete = true;
             composterToDelete.Date = DateTime.Now;
 
             return await _composterRepositories.DeleteComposter(composterToDelete);
