@@ -8,7 +8,7 @@ namespace SGRA2._0.Model
         //EtapaProceso
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdProcessStage { get; set; }
-        public required string Stage { get; set; }
+        public string Stage { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
     }
