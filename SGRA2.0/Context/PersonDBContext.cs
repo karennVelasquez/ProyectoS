@@ -84,6 +84,9 @@ namespace SGRA2._0.Context
             modelBuilder.Entity<Sale>()
                 .HasKey (e => e.IdSale);
 
+            modelBuilder.Entity<Score>()
+                .HasKey (e => e.IdScore);
+
             modelBuilder.Entity<Suppliers>()
                 .HasKey (e =>e.IdSuppliers);    
 

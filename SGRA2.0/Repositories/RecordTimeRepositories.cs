@@ -12,7 +12,7 @@ namespace SGRA2._0.Repositories
         Task<RecordTime> CreateRecordTime(int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected);
         Task<RecordTime> UpdateRecordTime(RecordTime recordTime);
         Task<RecordTime> DeleteRecordTime(RecordTime recordTime);
-        public class RecordTimeRepositories
+        public class RecordTimeRepositories : IRecordTimeRepositories   
         {
             private readonly PersonDBContext _db;
             public RecordTimeRepositories(PersonDBContext db)
