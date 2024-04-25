@@ -20,14 +20,14 @@ namespace SGRA2._0.Controllers
             _finalCompostService = finalCompostService;
         }
 
-        //GET api/<ScoreController>
+        //GET api/<FinalCompostController>
         [HttpGet]
         public async Task<ActionResult<List<FinalCompost>>> GetAllFinalCompost()
         {
             return Ok(await _finalCompostService.GetAll());
         }
 
-        //GET api/<ScoreController>/
+        //GET api/<FinalCompostController>/
         [HttpGet("{IdFinalCompost}")]
         public async Task<ActionResult<Score>> GetFinalCompost(int IdFinalCompost)
         {
@@ -39,7 +39,7 @@ namespace SGRA2._0.Controllers
             return Ok(finalCompost);
         }
 
-        //POST api/<Score>
+        //POST api/<FinalCompostController>
         [HttpPost("{n}")]
         public async Task<ActionResult<Score>> PostFinalCompost(int IdFinalCompost, int IdWaste, string HumidityLevel, string FinalPh, string Nutrients)
         {
@@ -54,7 +54,7 @@ namespace SGRA2._0.Controllers
             }
         }
 
-        //PUT api/<Score>
+        //PUT api/<FinalCompostController>
         [HttpPut("Update/{IdFinalCompost}")]
         public async Task<ActionResult<FinalCompost>> PutFinalCompost(int IdFinalCompost, int IdWaste, string HumidityLevel, string FinalPh, string Nutrients)
         {
@@ -68,7 +68,7 @@ namespace SGRA2._0.Controllers
                 return BadRequest("Error updating the database. ");
             }
         }
-        //DELETE api/<Score>
+        //DELETE api/<FinalCompostControllerScore>
         [HttpPut("Delete/{IdFinalCompost}")]
         public async Task<ActionResult<FinalCompost>> DeleteFinalCompost(int IdFinalCompost)
         {

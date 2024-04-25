@@ -15,14 +15,14 @@ namespace SGRA2._0.Controllers
             _gamesService = gamesService;
         }
 
-        //GET api/<WasteTypeController>
+        //GET api/<GamesController>
         [HttpGet]
         public async Task<ActionResult<List<Games>>> GetAllGames()
         {
             return Ok(await _gamesService.GetAll());
         }
 
-        //GET api/<WasteTypeController>/
+        //GET api/<GamesController>/
         [HttpGet("{IdGames}")]
         public async Task<ActionResult<Games>> GetGames(int IdGames)
         {
@@ -34,7 +34,7 @@ namespace SGRA2._0.Controllers
             return Ok(games);
         }
 
-        //POST api/<WasteTypeController>
+        //POST api/<GamesController>
         [HttpPost("{n}")]
         public async Task<ActionResult<Games>> PostGame(int IdGames, int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate)
         {
@@ -49,7 +49,7 @@ namespace SGRA2._0.Controllers
             }
         }
 
-        //PUT api/<WasteTypeController>
+        //PUT api/<GamesController>
         [HttpPut("Update/{IdGames}")]
         public async Task<ActionResult<Games>> PutGame(int IdGames, int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate)
         {
@@ -64,7 +64,7 @@ namespace SGRA2._0.Controllers
             }
         }
 
-        //DELETE api/<WasteTypeController>
+        //DELETE api/<GamesController>
         [HttpPut("Delete/{IdGames}")]
         public async Task<ActionResult<Games>> DeleteGames(int IdGames)
         {

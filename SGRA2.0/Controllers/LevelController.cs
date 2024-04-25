@@ -7,22 +7,22 @@ namespace SGRA2._0.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LevelControllers : ControllerBase
+    public class LevelController : ControllerBase
     {
         private readonly ILevelService _levelService;
-        public LevelControllers(ILevelService levelService)
+        public LevelController(ILevelService levelService)
         {
             _levelService = levelService;
         }
 
-        //GET api/<WasteTypeController>
+        //GET api/<LevelController>
         [HttpGet]
         public async Task<ActionResult<List<Level>>> GetAllLevel()
         {
             return Ok(await _levelService.GetAll());
         }
 
-        //GET api/<WasteTypeController>/
+        //GET api/<LevelController>
         [HttpGet("{IdLevel}")]
         public async Task<ActionResult<Level>> GetLevel(int IdLevel)
         {
@@ -34,7 +34,7 @@ namespace SGRA2._0.Controllers
             return Ok(level);
         }
 
-        //POST api/<WasteTypeController>
+        //POST api/<LevelController>
         [HttpPost("{n}")]
         public async Task<ActionResult<Level>> PostLevel(int IdLevel, int NumLevel)
         {
@@ -49,7 +49,7 @@ namespace SGRA2._0.Controllers
             }
         }
 
-        //PUT api/<WasteTypeController>
+        //PUT api/<LevelController>
         [HttpPut("Update/{IdLevel}")]
         public async Task<ActionResult<Level>> PutLevel(int IdLevel, int NumLevel)
         {
@@ -64,7 +64,7 @@ namespace SGRA2._0.Controllers
             }
         }
 
-        //DELETE api/<WasteTypeController>
+        //DELETE api/<LevelController>
         [HttpPut("Delete/{IdLevel}")]
         public async Task<ActionResult<Level>> DeleteLevel(int IdLevel)
         {

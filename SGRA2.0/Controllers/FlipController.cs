@@ -20,14 +20,14 @@ namespace SGRA2._0.Controllers
             _flipService = flipService;
         }
 
-        //GET api/<ScoreController>
+        //GET api/<FlipController>
         [HttpGet]
         public async Task<ActionResult<List<Flip>>> GetAllFlip()
         {
             return Ok(await _flipService.GetAll());
         }
 
-        //GET api/<ScoreController>/
+        //GET api/<FlipController>/
         [HttpGet("{IdFlip}")]
         public async Task<ActionResult<Flip>> GetFlip(int IdFlip)
         {
@@ -39,7 +39,7 @@ namespace SGRA2._0.Controllers
             return Ok(flip);
         }
 
-        //POST api/<Score>
+        //POST api/<FlipController>
         [HttpPost("{n}")]
         public async Task<ActionResult<Flip>> PostFlip(int IdFlip, int IdWaste, int Flipfrequency, string UniformedDescription)
         {
@@ -54,7 +54,7 @@ namespace SGRA2._0.Controllers
             }
         }
 
-        //PUT api/<Score>
+        //PUT api/<FlipController>
         [HttpPut("Update/{IdFlip}")]
         public async Task<ActionResult<FinalCompost>> PutFlip(int IdFlip, int IdWaste, int Flipfrequency, string UniformedDescription)
         {
@@ -68,7 +68,7 @@ namespace SGRA2._0.Controllers
                 return BadRequest("Error updating the database. ");
             }
         }
-        //DELETE api/<Score>
+        //DELETE api/<FlipController>
         [HttpPut("Delete/{IdFlip}")]
         public async Task<ActionResult<Flip>> DeleteFlip(int IdFlip)
         {
