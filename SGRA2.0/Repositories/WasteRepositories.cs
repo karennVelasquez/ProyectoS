@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     public interface IWasteRepositories
     {
         Task<List<Waste>> GetAll();
-        Task<Waste> GetWaste(int IdWaste);
+        Task<Waste> GetWaste(int id);
         Task<Waste> CreateWaste(int IdWasteType, string Humidity);
         Task<Waste> UpdateWaste(Waste waste);
         Task<Waste> DeleteWaste(Waste waste);

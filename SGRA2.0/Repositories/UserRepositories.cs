@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IUserRepositories
     {
         Task<List<User>> GetAll();
-        Task<User> GetUser(int IdUser);
+        Task<User> GetUser(int id);
         Task<User> CreateUser(string UserName, string Password);
         Task<User> UpdateUser(User user);
         Task<User> DeleteUser(User user);

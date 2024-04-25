@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ITransactionRepositories
     {
         Task<List<Transaction>> GetAll();
-        Task<Transaction> GetTransaction(int IdTransaction);
+        Task<Transaction> GetTransaction(int id);
         Task<Transaction> CreateTransaction(int IdSuppliers, int DeliveredQuantity, DateTime DeliveredDate, string Price, string Quality);
         Task<Transaction> UpdateTransaction(Transaction transaction);
         Task<Transaction> DeleteTransaction(Transaction transaction);

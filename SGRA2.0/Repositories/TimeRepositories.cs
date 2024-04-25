@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface ITimeRepositories
     {
         Task<List<Time>> GetAll();
-        Task<Time> GetTime(int IdTime);
+        Task<Time> GetTime(int id);
         Task<Time> CreateTime(int IdWaste, int Processduration, int IdProcessStage);
         Task<Time> UpdateTime(Time time);
         Task<Time> DeleteTime(Time time);

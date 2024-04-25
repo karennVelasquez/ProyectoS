@@ -1,13 +1,11 @@
 using SGRA2._0.Model;
 using SGRA2._0.Service;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Threading.ExecutionContext;
+using Microsoft.AspNetCore.Http;
 using static Azure.Core.HttpHeader;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System.Runtime.CompilerServices;
 
 namespace SGRA2._0.Controllers
 {
@@ -43,7 +41,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<CollectWasteController>
         [HttpPost("{n}")]
-        public async Task<ActionResult<CollectWaste>> PostCollectWaste(int IdSuppliers,int IdComposter, DateTime CollectionDate, int Amount)
+        public async Task<ActionResult<CollectWaste>> PostCollectWaste(int IdCollectWaste, int IdSuppliers,int IdComposter, DateTime CollectionDate, int Amount)
         {
             var CollectWasteToPut = _collectWasteService.CreateCollectWaste(IdSuppliers, IdComposter, CollectionDate, Amount);  
             if(CollectWasteToPut != null)

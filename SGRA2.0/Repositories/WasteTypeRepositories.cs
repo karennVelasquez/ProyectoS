@@ -8,7 +8,7 @@ namespace SGRA2._0.Repositories
     public interface IWasteTypeRepositories
     {
         Task<List<WasteType>> GetAll();
-        Task<WasteType> GetWasteType(int IdWasteType);
+        Task<WasteType> GetWasteType(int id);
         Task<WasteType> CreateWasteType(string Waste_Type, string Description, string Descomposition);
         Task<WasteType> UpdateWasteType(WasteType wasteType);
         Task<WasteType> DeleteWasteType(WasteType wasteType);
