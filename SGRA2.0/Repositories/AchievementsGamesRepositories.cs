@@ -2,6 +2,7 @@
 using SGRA2._0.Context;
 using SGRA2._0.Model;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices.Marshalling;
 
 namespace SGRA2._0.Repositories
 {
@@ -19,13 +20,14 @@ namespace SGRA2._0.Repositories
             {
                 _db = db;
             }
-            public async Task<AchievementsGames> CreateAchievementsGames(int IdGames, int IdAchievements)
+            public async Task<AchievementsGames> CreateAchievementsGames(int idGames, int idAchievements)
             {
-                AchievementsGames? achievementsGames = _db.achievementsGames.FirstOrDefault(ut => ut.IdAchievements == IdAchievements);
+                Games? games = _db.games.FirstOrDefault(ut => ut.IdGames == idGames);
+                Achievements? achievements = _db.achievements.FirstOrDefault(ut => ut.IdAchievements == idAchievements);
                 AchievementsGames newAchievementsGames = new AchievementsGames
                 {
-                    IdGames = IdGames,
-                    IdAchievements = IdAchievements,
+                    IdGames = idGames,
+                    IdAchievements = idAchievements,
                     IsDelete = false,
                     Date = null
                 };

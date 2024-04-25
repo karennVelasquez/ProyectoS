@@ -7,7 +7,7 @@ namespace SGRA2._0.Service
     {
         Task<List<Achievements>> GetAll();
         Task<Achievements> GetAchievements(int IdAchievements);
-        Task<Achievements> CreateAchievements(int IdAchievements,string Achievement);
+        Task<Achievements> CreateAchievements(string Achievement);
         Task<Achievements> UpdateAchievements(int IdAchievements, string? Achievement = null);
         Task<Achievements> DeleteAchievements(int IdAchievements);
     }
@@ -18,9 +18,9 @@ namespace SGRA2._0.Service
         {
             _achievementsRepositories = achievementsRepositories;
         }
-        public async Task<Achievements> CreateAchievements(int IdAchievements,string Achievement)
+        public async Task<Achievements> CreateAchievements(string Achievement)
         {
-            return await _achievementsRepositories.CreateAchievements(IdAchievements,Achievement);
+            return await _achievementsRepositories.CreateAchievements(Achievement);
             //throw new NotImplementedException();
         }
 

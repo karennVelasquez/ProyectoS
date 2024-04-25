@@ -22,7 +22,6 @@ namespace SGRA2._0.Repositories
         }
         public async Task<DocumentType> CreateDocumentType(string Document)
         {
-            DocumentType? documentType = _db.documentTypes.FirstOrDefault(ut => ut.Document == Document);
             DocumentType newDocumentType = new DocumentType
             {
                 Document = Document,

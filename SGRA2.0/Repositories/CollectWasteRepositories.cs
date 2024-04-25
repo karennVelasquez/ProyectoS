@@ -21,13 +21,14 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<CollectWaste> CreateCollectWaste(int IdSuppliers, int IdComposter, DateTime CollectionDate, int Amount)
+        public async Task<CollectWaste> CreateCollectWaste(int idSuppliers, int idComposter, DateTime CollectionDate, int Amount)
         {
-            CollectWaste? collectWaste = _db.collectWastes.FirstOrDefault(ut => ut.IdSuppliers == IdSuppliers);
+            Suppliers? suppliers = _db.suppliers.FirstOrDefault(ut => ut.IdSuppliers == idSuppliers);
+            Composter? composter = _db.composters.FirstOrDefault(ut => ut.IdComposter == idComposter);
             CollectWaste newCollectWaste = new CollectWaste
             {
-                IdSuppliers = IdSuppliers,
-                IdComposter = IdComposter,
+                IdSuppliers = idSuppliers,
+                IdComposter = idComposter,
                 CollectionDate = CollectionDate,
                 Amount = Amount,
                 IsDelete = false,

@@ -22,12 +22,12 @@ namespace SGRA2._0.Repositories
             _db = db;
 
         }
-        public async Task<Customer> CreateCustomer(int IdPerson)
+        public async Task<Customer> CreateCustomer(int idPerson)
         {
-            Customer? customer = _db.customers.FirstOrDefault(ut => ut.IdPerson == IdPerson);
+            Person? person = _db.persons.FirstOrDefault(ut => ut.IdPerson == idPerson);
             Customer newCustomer = new Customer
             {
-                IdPerson = IdPerson, 
+                IdPerson = idPerson, 
                 IsDelete = false,
                 Date = null
             };

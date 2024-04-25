@@ -23,7 +23,6 @@ namespace SGRA2._0.Repositories
         }
         public async Task<Composter> CreateComposter(string Size, string Material, string DrainageSystem)
         {
-            Composter? composter = _db.composters.FirstOrDefault(ut => ut.Size == Size);
             Composter newCompostador = new Composter
             {
                 Size = Size,
