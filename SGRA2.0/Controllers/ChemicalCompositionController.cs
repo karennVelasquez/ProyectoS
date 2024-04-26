@@ -31,7 +31,7 @@ namespace SGRA2._0.Controllers
         }
         
         //GET api/<ChemicalcompositionController>
-        [HttpGet("{IdChemicalComposition")]
+        [HttpGet("{IdChemicalComposition}")]
         public async Task<ActionResult<ChemicalComposition>> GetChemicalComposition(int IdChemicalComposition)
         {
             var chemicalComposition = await _chemicalCompositionService.GetChemicalComposition(IdChemicalComposition);
