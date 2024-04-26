@@ -8,7 +8,7 @@ using static System.Threading.ExecutionContext;
 using static Azure.Core.HttpHeader;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Runtime.CompilerServices;
-
+//pruebaaaaaaa
 namespace SGRA2._0.Controllers
 {
     [Route("api/[controller]")]
