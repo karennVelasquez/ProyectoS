@@ -35,10 +35,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<RecordTimeController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<RecordTime>> PostRecordTime(int IdRecordTime, int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected)
         {
-            var recordTimeToPut = _recordTimeService.CreateRecordTime(IdLevel, IdWaste, Collecttime, AmountCollected);
+            var recordTimeToPut = await _recordTimeService.CreateRecordTime(IdLevel, IdWaste, Collecttime, AmountCollected);
             if (recordTimeToPut != null)
             {
                 return Ok(recordTimeToPut);
@@ -53,7 +53,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdRecordTime}")]
         public async Task<ActionResult<RecordTime>> PutRecordTime(int IdRecordTime, int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected)
         {
-            var recordTimeToPut = _recordTimeService.UpdateRecordTime(IdRecordTime, IdLevel, IdWaste, Collecttime, AmountCollected);
+            var recordTimeToPut = await _recordTimeService.UpdateRecordTime(IdRecordTime, IdLevel, IdWaste, Collecttime, AmountCollected);
             if (recordTimeToPut != null)
             {
                 return Ok(recordTimeToPut);

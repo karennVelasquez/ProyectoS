@@ -14,9 +14,9 @@ namespace SGRA2._0.Service
     public class TemperatureService : ITemperatureService
     {
         public readonly ITemperatureRepositories _temperatureRepositories;
-        public TemperatureService(ITemperatureRepositories _temperatureRepositories)
+        public TemperatureService(ITemperatureRepositories temperatureRepositories)
         {
-            _temperatureRepositories = _temperatureRepositories;
+            _temperatureRepositories = temperatureRepositories;
         }
         public async Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature, string Range)
         {

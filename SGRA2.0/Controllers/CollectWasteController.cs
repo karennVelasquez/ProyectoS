@@ -40,10 +40,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<CollectWasteController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<CollectWaste>> PostCollectWaste(int IdCollectWaste, int IdSuppliers,int IdComposter, DateTime CollectionDate, int Amount)
         {
-            var CollectWasteToPut = _collectWasteService.CreateCollectWaste(IdSuppliers, IdComposter, CollectionDate, Amount);  
+            var CollectWasteToPut = await _collectWasteService.CreateCollectWaste(IdSuppliers, IdComposter, CollectionDate, Amount);  
             if(CollectWasteToPut != null)
             {
                 return Ok(CollectWasteToPut);
@@ -58,7 +58,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdCollectWaste}")]
         public async Task<ActionResult<CollectWaste>> PutCollectWaste(int IdCollectWaste,int IdSuppliers,int IdComposter, DateTime CollectionDate, int Amount)
         {
-            var CollectWasteToPut = _collectWasteService.UpdateCollectWaste(IdCollectWaste, IdSuppliers, IdComposter, CollectionDate, Amount);
+            var CollectWasteToPut = await _collectWasteService.UpdateCollectWaste(IdCollectWaste, IdSuppliers, IdComposter, CollectionDate, Amount);
             if(CollectWasteToPut != null)
             {
                 return Ok(CollectWasteToPut);

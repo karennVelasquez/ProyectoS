@@ -35,10 +35,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<LevelController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Level>> PostLevel(int IdLevel, int NumLevel)
         {
-            var levelToPut = _levelService.CreateLevel( NumLevel);
+            var levelToPut = await _levelService.CreateLevel( NumLevel);
             if (levelToPut != null)
             {
                 return Ok(levelToPut);
@@ -53,7 +53,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdLevel}")]
         public async Task<ActionResult<Level>> PutLevel(int IdLevel, int NumLevel)
         {
-            var levelToPut = _levelService.UpdateLevel(IdLevel, NumLevel);
+            var levelToPut = await _levelService.UpdateLevel(IdLevel, NumLevel);
             if (levelToPut != null)
             {
                 return Ok(levelToPut);

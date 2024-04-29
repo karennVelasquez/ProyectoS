@@ -42,10 +42,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<AchievementsController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<AchievementsGames>> PostAchievementGames(int IdAchievementsG,int IdGames,int IdAchievements)
         {
-            var achievementsGamesToPut = _achievementsGamesService.CreateAchievementsGames(IdGames,IdAchievements);  
+            var achievementsGamesToPut = await _achievementsGamesService.CreateAchievementsGames(IdGames,IdAchievements);  
             if(achievementsGamesToPut != null)
             {
                 return Ok(achievementsGamesToPut);
@@ -57,10 +57,10 @@ namespace SGRA2._0.Controllers
         }
 
         //PUT api/<AchievementsController>
-        [HttpPut("Update/{IdAchievements}")]
+        [HttpPut("Update/{IdAchievementsG}")]
         public async Task<ActionResult<AchievementsGames>> PutAchievementGames(int IdAchievementsG,int IdGames,int IdAchievements)
         {
-            var achievementsGamesToPut = _achievementsGamesService.UpdateAchievementsGames(IdAchievementsG,IdGames,IdAchievements);
+            var achievementsGamesToPut = await _achievementsGamesService.UpdateAchievementsGames(IdAchievementsG,IdGames,IdAchievements);
             if(achievementsGamesToPut != null)
             {
                 return Ok(achievementsGamesToPut);
@@ -72,7 +72,7 @@ namespace SGRA2._0.Controllers
         }
 
         //DELETE api/<AchievementsController>
-        [HttpPut("Delete/{IdAchievements}")]
+        [HttpPut("Delete/{IdAchievementsG}")]
         public async Task<ActionResult<AchievementsGames>> DeleteAchievementGames(int IdAchievementsG)
         {
             var achievementsGamesToDelete = await _achievementsGamesService.DeleteAchievementsGames(IdAchievementsG);   

@@ -17,6 +17,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*builder.Services.ConfigureSwaggerGen(setup =>
+{
+    setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "AgriculturalWasteManagementSystems",
+        Version = "v1"
+    });
+});*/
 
 builder.Services.AddScoped<IAchievementsGamesRespositories, AchievementsGamesRespositories>();
 builder.Services.AddScoped<IAchievementsGamesService, AchievementsGamesService>();
@@ -93,9 +101,10 @@ builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseSwagger();
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+    //app.UseSwagger();
     app.UseSwaggerUI();
 }
 

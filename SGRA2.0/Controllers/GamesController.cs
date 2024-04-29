@@ -35,10 +35,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<GamesController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Games>> PostGame(int IdGames, int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate)
         {
-            var gamesToPut = _gamesService.CreateGames(IdUser, IdLevel, StartDate, FinalDate);
+            var gamesToPut =  await _gamesService.CreateGames(IdUser, IdLevel, StartDate, FinalDate);
             if (gamesToPut != null)
             {
                 return Ok(gamesToPut);
@@ -53,7 +53,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdGames}")]
         public async Task<ActionResult<Games>> PutGame(int IdGames, int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate)
         {
-            var gamesToPut = _gamesService.UpdateGames(IdGames, IdUser, IdLevel, StartDate, FinalDate);
+            var gamesToPut = await _gamesService.UpdateGames(IdGames, IdUser, IdLevel, StartDate, FinalDate);
             if (gamesToPut != null)
             {
                 return Ok(gamesToPut);

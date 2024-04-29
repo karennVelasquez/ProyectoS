@@ -40,10 +40,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<FlipController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Flip>> PostFlip(int IdFlip, int IdWaste, int Flipfrequency, string UniformedDescription)
         {
-            var flipToPut = _flipService.CreateFlip(IdWaste, Flipfrequency, UniformedDescription);
+            var flipToPut = await _flipService.CreateFlip(IdWaste, Flipfrequency, UniformedDescription);
             if (flipToPut != null)
             {
                 return Ok(flipToPut);
@@ -58,7 +58,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdFlip}")]
         public async Task<ActionResult<FinalCompost>> PutFlip(int IdFlip, int IdWaste, int Flipfrequency, string UniformedDescription)
         {
-            var flipToPut = _flipService.UpdateFlip(IdFlip, IdWaste, Flipfrequency, UniformedDescription);
+            var flipToPut = await _flipService.UpdateFlip(IdFlip, IdWaste, Flipfrequency, UniformedDescription);
             if (flipToPut != null)
             {
                 return Ok(flipToPut);

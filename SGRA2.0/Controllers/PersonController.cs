@@ -39,10 +39,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<PersonController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Person>> PostPerson(int IdPerson, string Name, string Lastname, string Email, int IdDocumentType, int Document)
         {
-            var personToPut = _personService.CreatePerson( Name, Lastname, Email, IdDocumentType, Document);
+            var personToPut = await _personService.CreatePerson( Name, Lastname, Email, IdDocumentType, Document);
             if (personToPut != null)
             {
                 return Ok(personToPut);
@@ -57,7 +57,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdPerson}")]
         public async Task<ActionResult<Person>> PutPerson(int IdPerson, string Name, string Lastname, string Email, int IdDocumentType, int Document)
         {
-            var personToPut = _personService.UpdatePerson(IdPerson, Name, Lastname, Email, IdDocumentType, Document);
+            var personToPut = await _personService.UpdatePerson(IdPerson, Name, Lastname, Email, IdDocumentType, Document);
             if (personToPut != null)
             {
                 return Ok(personToPut);

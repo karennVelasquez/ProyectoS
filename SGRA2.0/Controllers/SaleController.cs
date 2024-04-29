@@ -35,10 +35,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<SaleController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Sale>> PostSale(int IdSale, int IdCustomer, DateTime SaleDate)
         {
-            var saleToPut = _saleService.CreateSale( IdCustomer, SaleDate);
+            var saleToPut = await _saleService.CreateSale( IdCustomer, SaleDate);
             if (saleToPut != null)
             {
                 return Ok(saleToPut);
@@ -53,7 +53,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdSale}")]
         public async Task<ActionResult<Sale>> PutSale(int IdSale, int IdCustomer, DateTime SaleDate)
         {
-            var saleToPut = _saleService.UpdateSale(IdSale, IdCustomer, SaleDate);
+            var saleToPut = await _saleService.UpdateSale(IdSale, IdCustomer, SaleDate);
             if (saleToPut != null)
             {
                 return Ok(saleToPut);

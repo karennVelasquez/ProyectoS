@@ -39,10 +39,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<Suppliers>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Suppliers>> PostSuppliers(int IdSuppliers, int IdPerson, int IdWasteType)
         {
-            var suppliersToPut = _suppliersService.CreateSuppliers(IdPerson, IdWasteType);
+            var suppliersToPut = await _suppliersService.CreateSuppliers(IdPerson, IdWasteType);
             if(suppliersToPut != null)
             {
                 return Ok(suppliersToPut);
@@ -57,7 +57,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdSuppliers}")]
         public async Task<ActionResult<Suppliers>> PutSuppliers(int IdSuppliers, int IdPerson, int IdWasteType)
         {
-            var SuppliersToPut = _suppliersService.UpdateSuppliers(IdPerson, IdWasteType); 
+            var SuppliersToPut = await _suppliersService.UpdateSuppliers(IdSuppliers,IdPerson, IdWasteType); 
             if(SuppliersToPut != null) 
             {
                 return Ok(SuppliersToPut);

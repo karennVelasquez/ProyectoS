@@ -43,10 +43,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<ChemicalcompositionController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<ChemicalComposition>> PostChemicalComposition(int IdWaste,string ChemicalComposition)
         {
-            var chemicalCompositionToPut = _chemicalCompositionService.CreateChemicalComposition(IdWaste, ChemicalComposition);  
+            var chemicalCompositionToPut = await _chemicalCompositionService.CreateChemicalComposition(IdWaste, ChemicalComposition);  
             if(chemicalCompositionToPut != null)
             {
                 return Ok(chemicalCompositionToPut);
@@ -61,7 +61,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdChemicalComposition}")]
         public async Task<ActionResult<ChemicalComposition>> PutChemicalComposition(int IdChemicalComposition,int IdWaste,string Chemical_Composition)
         {
-            var chemicalCompositionToPut = _chemicalCompositionService.UpdateChemicalComposition(IdChemicalComposition,IdWaste, Chemical_Composition);
+            var chemicalCompositionToPut = await _chemicalCompositionService.UpdateChemicalComposition(IdChemicalComposition,IdWaste, Chemical_Composition);
             if(chemicalCompositionToPut != null)
             {
                 return Ok(chemicalCompositionToPut);

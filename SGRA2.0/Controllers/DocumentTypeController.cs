@@ -42,10 +42,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<DocumentTypesController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<DocumentType>> PostDocumentType(string Document)
         {
-            var DocumentTypesToPut = _documentTypeService.CreateDocumentType(Document);  
+            var DocumentTypesToPut = await _documentTypeService.CreateDocumentType(Document);  
             if(DocumentTypesToPut != null)
             {
                 return Ok(DocumentTypesToPut);
@@ -57,10 +57,10 @@ namespace SGRA2._0.Controllers
         }
 
         //PUT api/<DocumentTypesController>
-        [HttpPut("Update/{IdDocumentTypes}")]
+        [HttpPut("Update/{IdDocumentType}")]
         public async Task<ActionResult<DocumentType>> PutDocumentType(int IdDocumentType, string Document)
         {
-            var DocumentTypesToPut = _documentTypeService.UpdateDocumentType(IdDocumentType, Document);
+            var DocumentTypesToPut = await _documentTypeService.UpdateDocumentType(IdDocumentType, Document);
             if(DocumentTypesToPut != null)
             {
                 return Ok(DocumentTypesToPut);

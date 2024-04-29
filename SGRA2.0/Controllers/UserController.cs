@@ -39,10 +39,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<UserController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<User>> PostUser(int IdUser, string UserName, string Password)
         {
-            var userToPut = _userService.CreateUser(UserName, Password);
+            var userToPut = await _userService.CreateUser(UserName, Password);
             if(userToPut != null) 
             {
                 return Ok(userToPut);
@@ -57,7 +57,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdUser}")]
         public async Task<ActionResult<User>> PutUser(int IdUser, string UserName, string Password)
         {
-            var userToPut = _userService.UpdateUser(IdUser, UserName, Password);    
+            var userToPut = await _userService.UpdateUser(IdUser, UserName, Password);    
             if( userToPut != null )
             {
                 return Ok(userToPut);
@@ -69,7 +69,7 @@ namespace SGRA2._0.Controllers
         }
 
         //DELETE api/<UserController>
-        [HttpPut("/Delete/{IdUser}")]
+        [HttpPut("Delete/{IdUser}")]
         public async Task<ActionResult<User>> DeleteUser(int IdUser)
         {
             var userToDelete = await _userService.DeleteUser(IdUser);   

@@ -42,10 +42,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<EmployeeController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Employee>> PostEmployee(int IdPerson, string Position)
         {
-            var EmployeeToPut = _employeeService.CreateEmployee(IdPerson, Position);  
+            var EmployeeToPut = await _employeeService.CreateEmployee(IdPerson, Position);  
             if(EmployeeToPut != null)
             {
                 return Ok(EmployeeToPut);
@@ -60,7 +60,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdEmployee}")]
         public async Task<ActionResult<Employee>> PutEmployee(int IdEmployee, int IdPerson, string Position)
         {
-            var EmployeeToPut = _employeeService.UpdateEmployee(IdEmployee, IdPerson, Position);
+            var EmployeeToPut = await _employeeService.UpdateEmployee(IdEmployee, IdPerson, Position);
             if(EmployeeToPut != null)
             {
                 return Ok(EmployeeToPut);

@@ -38,10 +38,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<TransactionController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Transaction>> PostTransaction(int IdTransaction, int IdSuppliers, int DeliveredQuantity, DateTime DeliveredDate, string Price, string Quality)
         {
-            var transactionToPut = _transactionService.CreateTransaction(IdSuppliers, DeliveredQuantity, DeliveredDate, Price, Quality);
+            var transactionToPut = await _transactionService.CreateTransaction(IdSuppliers, DeliveredQuantity, DeliveredDate, Price, Quality);
             if(transactionToPut != null) 
             {
                 return Ok(transactionToPut);
@@ -56,7 +56,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdTransaction}")]
         public async Task<ActionResult<Transaction>> PutTransaction(int IdTransaction, int IdSuppliers, int DeliveredQuantity, DateTime DeliveredDate, string Price, string Quality)
         {
-            var transactionToPut = _transactionService.UpdateTransaction(IdTransaction, IdSuppliers, DeliveredQuantity, DeliveredDate, Price, Quality);
+            var transactionToPut = await _transactionService.UpdateTransaction(IdTransaction, IdSuppliers, DeliveredQuantity, DeliveredDate, Price, Quality);
             if(transactionToPut != null) 
             {
                 return Ok(transactionToPut);

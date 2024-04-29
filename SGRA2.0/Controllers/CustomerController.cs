@@ -42,10 +42,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<CustomerController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Customer>> PostCustomer(int IdPerson)
         {
-            var CustomerToPut = _customerService.CreateCustomer(IdPerson);  
+            var CustomerToPut = await _customerService.CreateCustomer(IdPerson);  
             if(CustomerToPut != null)
             {
                 return Ok(CustomerToPut);
@@ -60,7 +60,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdCustomer}")]
         public async Task<ActionResult<Customer>> PutCustomer(int IdCustomer, int IdPerson)
         {
-            var CustomerToPut = _customerService.UpdateCustomer(IdCustomer,IdPerson);
+            var CustomerToPut = await _customerService.UpdateCustomer(IdCustomer,IdPerson);
             if(CustomerToPut != null)
             {
                 return Ok(CustomerToPut);

@@ -39,10 +39,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<TimeController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Time>> PostTime(int IdTime, int IdWaste, int Processduration, int IdProcessStage)
         {
-            var timeToPut = _timeService.CreateTime(IdWaste, Processduration, IdProcessStage);  
+            var timeToPut = await _timeService.CreateTime(IdWaste, Processduration, IdProcessStage);  
             if(timeToPut != null)
             {
                 return Ok(timeToPut);
@@ -57,7 +57,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdTime}")]
         public async Task<ActionResult<Time>> PutTime(int IdTime, int IdWaste, int Processduration, int IdProcessStage)
         {
-            var timeToPut = _timeService.UpdateTime(IdTime, IdWaste, Processduration, IdProcessStage);
+            var timeToPut = await _timeService.UpdateTime(IdTime, IdWaste, Processduration, IdProcessStage);
             if(timeToPut != null)
             {
                 return Ok(timeToPut);   
@@ -69,7 +69,7 @@ namespace SGRA2._0.Controllers
         }
 
         //DELETE api/<TimeController>
-        [HttpPut("/Delete/{IdTime}")]
+        [HttpPut("Delete/{IdTime}")]
         public async Task<ActionResult<Time>> DeleteTime(int IdTime)
         {
             var timeToDelete = await _timeService.DeleteTime(IdTime);

@@ -35,10 +35,10 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<ProcessStageController>
-        [HttpPost("{n}")]
+        [HttpPost("Create/")]
         public async Task<ActionResult<ProcessStage>> PostProcessStage(int IdProcessStage, string Stage)
         {
-            var processStageToPut = _processStageService.CreateProcessStage(Stage);
+            var processStageToPut = await _processStageService.CreateProcessStage(Stage);
             if (processStageToPut != null)
             {
                 return Ok(processStageToPut);
@@ -53,7 +53,7 @@ namespace SGRA2._0.Controllers
         [HttpPut("Update/{IdProcessStage}")]
         public async Task<ActionResult<ProcessStage>> PutProcessStage(int IdProcessStage, string Stage)
         {
-            var processStageToPut = _processStageService.UpdateProcessStage(IdProcessStage, Stage);
+            var processStageToPut = await _processStageService.UpdateProcessStage(IdProcessStage, Stage);
             if (processStageToPut != null)
             {
                 return Ok(processStageToPut);
