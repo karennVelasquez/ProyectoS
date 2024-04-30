@@ -40,6 +40,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<PersonController>
         [HttpPost("Create/")]
+      
         public async Task<ActionResult<Person>> PostPerson(int IdPerson, string Name, string Lastname, string Email, int IdDocumentType, int Document)
         {
             var personToPut = await _personService.CreatePerson( Name, Lastname, Email, IdDocumentType, Document);
