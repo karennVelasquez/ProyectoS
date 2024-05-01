@@ -8,7 +8,7 @@ using static SGRA2._0.Repositories.IRecordTimeRepositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var conString = builder.Configuration.GetConnectionString("connection");
+var conString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<PersonDBContext>(options => options.UseSqlServer(conString));
 
 
@@ -101,12 +101,16 @@ builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
+
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     //app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
