@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGRA2.0", "SGRA2.0\SGRA2.0.csproj", "{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Front", "Front\Front.csproj", "{38BA663E-6FBE-4CD4-B3F4-2E70DCD34061}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEBC64CA-AA97-4627-8C09-5BB03AE53B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38BA663E-6FBE-4CD4-B3F4-2E70DCD34061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38BA663E-6FBE-4CD4-B3F4-2E70DCD34061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38BA663E-6FBE-4CD4-B3F4-2E70DCD34061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38BA663E-6FBE-4CD4-B3F4-2E70DCD34061}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
