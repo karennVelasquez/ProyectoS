@@ -96,7 +96,21 @@ builder.Services.AddScoped<IWasteRepositories,  WasteRepositories>();
 builder.Services.AddScoped<IWasteService,  WasteService>();
 
 builder.Services.AddScoped<IWasteTypeRepositories,  WasteTypeRepositories>(); 
-builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>(); 
+builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>();
+
+//Configuracion CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins(
+                "http://localhost:3000/"
+                )
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        });
+});
 
 var app = builder.Build();
 
@@ -114,8 +128,10 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//
+app.UseCors();
 
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
