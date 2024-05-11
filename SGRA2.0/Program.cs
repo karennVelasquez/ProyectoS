@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 var conString = builder.Configuration.GetConnectionString("Connection");
@@ -18,13 +19,19 @@ builder.Services.AddDbContext<PersonDBContext>(options => options.UseSqlServer(c
 // Agrega la configuración CORS aquí
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin",
-        builder =>
+    options.AddPolicy(name:
+    MyAllowSpecificOrigins,
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin();
+                        policy.AllowAnyHeader();
+                    });
+     /*   builder =>
         {
-            builder.WithOrigins("http://localhost:3000/") // Aquí debes especificar los orígenes permitidos
+            builder.WithOrigins("http://sistemagestionresiduosagricolas.somee.com/") // Aquí debes especificar los orígenes permitidos
                    .AllowAnyHeader()
                    .AllowAnyMethod();
-        });
+        });*/
 });
 
 
@@ -122,7 +129,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 // Agrega el middleware de CORS al pipeline de solicitud HTTP
-app.UseCors("AllowSpecificOrigin");
+app.UseCors("MyAllowSpecificOrigins");
 
 app.UseAuthorization();
 app.MapControllers();
