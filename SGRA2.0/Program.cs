@@ -4,6 +4,10 @@ using SGRA2._0.Repositories;
 using SGRA2._0.Service;
 using static SGRA2._0.Repositories.IAchievementsGamesRespositories;
 using static SGRA2._0.Repositories.IRecordTimeRepositories;
+//
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,20 +15,23 @@ var builder = WebApplication.CreateBuilder(args);
 var conString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<PersonDBContext>(options => options.UseSqlServer(conString));
 
+// Agrega la configuración CORS aquí
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000/") // Aquí debes especificar los orígenes permitidos
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-/*builder.Services.ConfigureSwaggerGen(setup =>
-{
-    setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
-        Title = "AgriculturalWasteManagementSystems",
-        Version = "v1"
-    });
-});*/
 
 builder.Services.AddScoped<IAchievementsGamesRespositories, AchievementsGamesRespositories>();
 builder.Services.AddScoped<IAchievementsGamesService, AchievementsGamesService>();
@@ -98,19 +105,6 @@ builder.Services.AddScoped<IWasteService,  WasteService>();
 builder.Services.AddScoped<IWasteTypeRepositories,  WasteTypeRepositories>(); 
 builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>();
 
-//Configuracion CORS
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(
-        builder =>
-        {
-            builder.WithOrigins(
-                "http://localhost:3000/"
-                )
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-        });
-});
 
 var app = builder.Build();
 
@@ -127,9 +121,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-
-//
-app.UseCors();
+// Agrega el middleware de CORS al pipeline de solicitud HTTP
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthorization();
 app.MapControllers();
