@@ -2,11 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using SGRA2._0.Context;
 using SGRA2._0.Repositories;
 using SGRA2._0.Service;
-using static SGRA2._0.Repositories.IAchievementsGamesRespositories;
-using static SGRA2._0.Repositories.IRecordTimeRepositories;
-//
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using static SGRA2._0.Repositories.IRecordTimeRepositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,8 +38,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IAchievementsGamesRespositories, AchievementsGamesRespositories>();
-builder.Services.AddScoped<IAchievementsGamesService, AchievementsGamesService>();
+//builder.Services.AddScoped<IAchievementsGamesRespositories, AchievementsGamesRespositories>();
+//builder.Services.AddScoped<IAchievementsGamesService, AchievementsGamesService>();
 
 builder.Services.AddScoped<IAchievementsRepositories,  AchievementsRepositories>();
 builder.Services.AddScoped<IAchievementsService,  AchievementsService>();   
@@ -88,8 +86,8 @@ builder.Services.AddScoped<IRecordTimeService,  RecordTimeService>();
 builder.Services.AddScoped<ISaleRepositories,  SaleRepositories>(); 
 builder.Services.AddScoped<ISaleService, SaleService>();
 
-builder.Services.AddScoped<IScoreRepositories, ScoreRepositories>();
-builder.Services.AddScoped<IScoreService,  ScoreService>();
+//builder.Services.AddScoped<IScoreRepositories, ScoreRepositories>();
+//builder.Services.AddScoped<IScoreService,  ScoreService>();
 
 builder.Services.AddScoped<ISuppliersRepositories, SuppliersRepositories>();
 builder.Services.AddScoped<ISuppliersService,  SuppliersService>(); 

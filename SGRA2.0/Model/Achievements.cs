@@ -7,7 +7,10 @@ namespace SGRA2._0.Model
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdAchievements { get; set; }
-        public string Achievement { get; set; }
+        public int IdUser { get; set; }
+        public User User { get; set; }
+        public int IdGames { get; set; }
+        public Games Games { get; set; }
         public bool IsDelete {  get; set; }
         public DateTime? Date {  get; set; }
     }

@@ -7,8 +7,8 @@ namespace SGRA2._0.Service
     {
         Task<List<Games>> GetAll();
         Task<Games> GetGames(int IdGames);
-        Task<Games> CreateGames(int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate);
-        Task<Games> UpdateGames(int IdGames, int? IdUser = null, int? IdLevel = null, DateTime? StartDate = null, DateTime? FinalDate = null);
+        Task<Games> CreateGames(int IdUser);
+        Task<Games> UpdateGames(int IdGames, int? IdLevel = null);
         Task<Games> DeleteGames(int IdGames);
     }
     public class GamesService : IGamesService
@@ -18,9 +18,9 @@ namespace SGRA2._0.Service
         {
             _gamesRepositories = gamesRepositories;
         }
-        public async Task<Games> CreateGames(int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate)
+        public async Task<Games> CreateGames(int IdLevel)
         {
-            return await _gamesRepositories.CreateGames(IdUser, IdLevel, StartDate, FinalDate);
+            return await _gamesRepositories.CreateGames( IdLevel);
             //throw new NotImplementedException();
         }
 
@@ -51,26 +51,15 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<Games> UpdateGames(int IdPersona, int? IdUser = null, int? IdLevel = null, DateTime? StartDate = null, DateTime? FinalDate = null)
+        public async Task<Games> UpdateGames(int IdGames, int? IdLevel = null)
         {
-            Games newgames = await _gamesRepositories.GetGames(IdPersona);
+            Games newgames = await _gamesRepositories.GetGames(IdGames);
             if (newgames != null)
             {
-                if (IdUser != null)
-                {
-                    newgames.IdUser = (int)IdUser;
-                }
+                
                 if (IdLevel != null)
                 {
                     newgames.IdLevel = (int)IdLevel;
-                }
-                if (StartDate != null)
-                {
-                    newgames.StartDate = (DateTime)StartDate;
-                }
-                if (FinalDate != null)
-                {
-                    newgames.FinalDate = (DateTime)FinalDate;
                 }
                 return await _gamesRepositories.UpdateGames(newgames);
             }

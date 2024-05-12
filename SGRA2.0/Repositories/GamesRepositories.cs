@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<Games>> GetAll();
         Task<Games> GetGames(int id);
-        Task<Games> CreateGames(int IdUser, int IdLevel, DateTime StartDate, DateTime FinalDate);
+        Task<Games> CreateGames( int IdLevel);
         Task<Games> UpdateGames(Games games);
         Task<Games> DeleteGames(Games games);
     }
@@ -20,16 +20,13 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Games> CreateGames(int idUser, int idLevel, DateTime StartDate, DateTime FinalDate)
+        public async Task<Games> CreateGames( int idLevel)
         {
-            User? user = _db.users.FirstOrDefault(ut => ut.IdUser == idUser);
             Level? level = _db.levels.FirstOrDefault(ut => ut.IdLevel == idLevel);
             Games newPartidas = new Games
             {
-                IdUser = idUser,
+                
                 IdLevel = idLevel,
-                StartDate = StartDate,
-                FinalDate = FinalDate,
                 IsDelete = false,
                 Date = null
             };
@@ -57,11 +54,8 @@ namespace SGRA2._0.Repositories
             Games GamesUpdate = await _db.games.FindAsync(games.IdGames);
             if (GamesUpdate != null)
             {
-                GamesUpdate.IdUser = games.IdUser;
+                
                 GamesUpdate.IdLevel = games.IdLevel;
-                GamesUpdate.StartDate = games.StartDate;
-                GamesUpdate.FinalDate = games.FinalDate;
-
                 await _db.SaveChangesAsync();
             }
 

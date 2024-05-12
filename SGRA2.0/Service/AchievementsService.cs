@@ -7,8 +7,8 @@ namespace SGRA2._0.Service
     {
         Task<List<Achievements>> GetAll();
         Task<Achievements> GetAchievements(int IdAchievements);
-        Task<Achievements> CreateAchievements(string Achievement);
-        Task<Achievements> UpdateAchievements(int IdAchievements, string? Achievement = null);
+        Task<Achievements> CreateAchievements(int IdUser, int IdGames);
+        Task<Achievements> UpdateAchievements(int IdAchievements, int? IdUser = null, int? IdGames = null) ;
         Task<Achievements> DeleteAchievements(int IdAchievements);
     }
     public class AchievementsService : IAchievementsService
@@ -18,9 +18,9 @@ namespace SGRA2._0.Service
         {
             _achievementsRepositories = achievementsRepositories;
         }
-        public async Task<Achievements> CreateAchievements(string Achievement)
+        public async Task<Achievements> CreateAchievements(int IdUser, int IdGames)
         {
-            return await _achievementsRepositories.CreateAchievements(Achievement);
+            return await _achievementsRepositories.CreateAchievements(IdUser, IdGames);
             //throw new NotImplementedException();
         }
 
@@ -30,7 +30,7 @@ namespace SGRA2._0.Service
             Achievements achievementsToDelete = await _achievementsRepositories.GetAchievements(IdAchievements);
             if (achievementsToDelete == null)
             {
-                throw new Exception($"El volteo con el Id {IdAchievements} no existe");
+                throw new Exception($"Los logros con el Id {IdAchievements} no existe");
             }
 
             achievementsToDelete.IsDelete = true;
@@ -52,14 +52,18 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<Achievements> UpdateAchievements(int IdAchievements, string? Achievement = null)
+        public async Task<Achievements> UpdateAchievements(int IdAchievements, int? IdUser = null, int? IdGames = null)
         {
             Achievements newachievements = await _achievementsRepositories.GetAchievements(IdAchievements);
             if (newachievements != null)
             {
-                if (Achievement != null)
+                if (IdUser != null)
                 {
-                    newachievements.Achievement = Achievement;
+                    newachievements.IdUser = (int) IdUser;
+                }
+                if (IdGames != null) 
+                {
+                    newachievements.IdGames = (int)IdGames;
                 }
                 return await _achievementsRepositories.UpdateAchievements(newachievements);
             }

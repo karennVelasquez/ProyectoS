@@ -12,21 +12,6 @@ namespace SGRA2._0.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "achievements",
-                columns: table => new
-                {
-                    IdAchievements = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Achievement = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_achievements", x => x.IdAchievements);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "composters",
                 columns: table => new
                 {
@@ -152,10 +137,7 @@ namespace SGRA2._0.Migrations
                 {
                     IdGames = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdUser = table.Column<int>(type: "int", nullable: false),
                     IdLevel = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FinalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -167,12 +149,6 @@ namespace SGRA2._0.Migrations
                         column: x => x.IdLevel,
                         principalTable: "levels",
                         principalColumn: "IdLevel",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_games_users_IdUser",
-                        column: x => x.IdUser,
-                        principalTable: "users",
-                        principalColumn: "IdUser",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -270,56 +246,27 @@ namespace SGRA2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "achievementsGames",
+                name: "achievements",
                 columns: table => new
                 {
-                    IdAchievementsG = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdGames = table.Column<int>(type: "int", nullable: false),
-                    IdAchievements = table.Column<int>(type: "int", nullable: false),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_achievementsGames", x => x.IdAchievementsG);
-                    table.ForeignKey(
-                        name: "FK_achievementsGames_achievements_IdAchievements",
-                        column: x => x.IdAchievements,
-                        principalTable: "achievements",
-                        principalColumn: "IdAchievements",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_achievementsGames_games_IdGames",
-                        column: x => x.IdGames,
-                        principalTable: "games",
-                        principalColumn: "IdGames",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "scores",
-                columns: table => new
-                {
-                    IdScore = table.Column<int>(type: "int", nullable: false)
+                    IdAchievements = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdUser = table.Column<int>(type: "int", nullable: false),
                     IdGames = table.Column<int>(type: "int", nullable: false),
-                    NumScore = table.Column<int>(type: "int", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_scores", x => x.IdScore);
+                    table.PrimaryKey("PK_achievements", x => x.IdAchievements);
                     table.ForeignKey(
-                        name: "FK_scores_games_IdGames",
+                        name: "FK_achievements_games_IdGames",
                         column: x => x.IdGames,
                         principalTable: "games",
                         principalColumn: "IdGames",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_scores_users_IdUser",
+                        name: "FK_achievements_users_IdUser",
                         column: x => x.IdUser,
                         principalTable: "users",
                         principalColumn: "IdUser",
@@ -555,14 +502,14 @@ namespace SGRA2._0.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_achievementsGames_IdAchievements",
-                table: "achievementsGames",
-                column: "IdAchievements");
+                name: "IX_achievements_IdGames",
+                table: "achievements",
+                column: "IdGames");
 
             migrationBuilder.CreateIndex(
-                name: "IX_achievementsGames_IdGames",
-                table: "achievementsGames",
-                column: "IdGames");
+                name: "IX_achievements_IdUser",
+                table: "achievements",
+                column: "IdUser");
 
             migrationBuilder.CreateIndex(
                 name: "IX_chemicalCompositions_IdWaste",
@@ -605,11 +552,6 @@ namespace SGRA2._0.Migrations
                 column: "IdLevel");
 
             migrationBuilder.CreateIndex(
-                name: "IX_games_IdUser",
-                table: "games",
-                column: "IdUser");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_persons_IdDocumentType",
                 table: "persons",
                 column: "IdDocumentType");
@@ -628,16 +570,6 @@ namespace SGRA2._0.Migrations
                 name: "IX_sales_IdCustomer",
                 table: "sales",
                 column: "IdCustomer");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_scores_IdGames",
-                table: "scores",
-                column: "IdGames");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_scores_IdUser",
-                table: "scores",
-                column: "IdUser");
 
             migrationBuilder.CreateIndex(
                 name: "IX_suppliers_IdPerson",
@@ -679,7 +611,7 @@ namespace SGRA2._0.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "achievementsGames");
+                name: "achievements");
 
             migrationBuilder.DropTable(
                 name: "chemicalCompositions");
@@ -703,9 +635,6 @@ namespace SGRA2._0.Migrations
                 name: "sales");
 
             migrationBuilder.DropTable(
-                name: "scores");
-
-            migrationBuilder.DropTable(
                 name: "temperatures");
 
             migrationBuilder.DropTable(
@@ -715,16 +644,16 @@ namespace SGRA2._0.Migrations
                 name: "transactions");
 
             migrationBuilder.DropTable(
-                name: "achievements");
+                name: "games");
+
+            migrationBuilder.DropTable(
+                name: "users");
 
             migrationBuilder.DropTable(
                 name: "composters");
 
             migrationBuilder.DropTable(
                 name: "customers");
-
-            migrationBuilder.DropTable(
-                name: "games");
 
             migrationBuilder.DropTable(
                 name: "processStages");
@@ -737,9 +666,6 @@ namespace SGRA2._0.Migrations
 
             migrationBuilder.DropTable(
                 name: "levels");
-
-            migrationBuilder.DropTable(
-                name: "users");
 
             migrationBuilder.DropTable(
                 name: "persons");

@@ -30,48 +30,25 @@ namespace SGRA2._0.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAchievements"));
 
-                    b.Property<string>("Achievement")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("IdGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdAchievements");
 
-                    b.ToTable("achievements");
-                });
-
-            modelBuilder.Entity("SGRA2._0.Model.AchievementsGames", b =>
-                {
-                    b.Property<int>("IdAchievementsG")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAchievementsG"));
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdAchievements")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdGames")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.HasKey("IdAchievementsG");
-
-                    b.HasIndex("IdAchievements");
-
                     b.HasIndex("IdGames");
 
-                    b.ToTable("achievementsGames");
+                    b.HasIndex("IdUser");
+
+                    b.ToTable("achievements");
                 });
 
             modelBuilder.Entity("SGRA2._0.Model.ChemicalComposition", b =>
@@ -321,26 +298,15 @@ namespace SGRA2._0.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FinalDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("IdLevel")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUser")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("IdGames");
 
                     b.HasIndex("IdLevel");
-
-                    b.HasIndex("IdUser");
 
                     b.ToTable("games");
                 });
@@ -489,38 +455,6 @@ namespace SGRA2._0.Migrations
                     b.HasIndex("IdCustomer");
 
                     b.ToTable("sales");
-                });
-
-            modelBuilder.Entity("SGRA2._0.Model.Score", b =>
-                {
-                    b.Property<int>("IdScore")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdScore"));
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdGames")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUser")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("NumScore")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdScore");
-
-                    b.HasIndex("IdGames");
-
-                    b.HasIndex("IdUser");
-
-                    b.ToTable("scores");
                 });
 
             modelBuilder.Entity("SGRA2._0.Model.Suppliers", b =>
@@ -740,23 +674,23 @@ namespace SGRA2._0.Migrations
                     b.ToTable("wasteTypes");
                 });
 
-            modelBuilder.Entity("SGRA2._0.Model.AchievementsGames", b =>
+            modelBuilder.Entity("SGRA2._0.Model.Achievements", b =>
                 {
-                    b.HasOne("SGRA2._0.Model.Achievements", "Achievements")
-                        .WithMany()
-                        .HasForeignKey("IdAchievements")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("SGRA2._0.Model.Games", "Games")
                         .WithMany()
                         .HasForeignKey("IdGames")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Achievements");
+                    b.HasOne("SGRA2._0.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Games");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SGRA2._0.Model.ChemicalComposition", b =>
@@ -841,15 +775,7 @@ namespace SGRA2._0.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SGRA2._0.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("IdUser")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Level");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SGRA2._0.Model.Person", b =>
@@ -891,25 +817,6 @@ namespace SGRA2._0.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("SGRA2._0.Model.Score", b =>
-                {
-                    b.HasOne("SGRA2._0.Model.Games", "Games")
-                        .WithMany()
-                        .HasForeignKey("IdGames")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SGRA2._0.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("IdUser")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Games");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SGRA2._0.Model.Suppliers", b =>

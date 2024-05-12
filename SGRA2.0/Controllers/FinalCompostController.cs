@@ -29,7 +29,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<FinalCompostController>/
         [HttpGet("{IdFinalCompost}")]
-        public async Task<ActionResult<Score>> GetFinalCompost(int IdFinalCompost)
+        public async Task<ActionResult<FinalCompost>> GetFinalCompost(int IdFinalCompost)
         {
             var finalCompost = await _finalCompostService.GetFinalCompost(IdFinalCompost);
             if (finalCompost == null)
@@ -41,7 +41,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<FinalCompostController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<Score>> PostFinalCompost(int IdFinalCompost, int IdWaste, string HumidityLevel, string FinalPh, string Nutrients)
+        public async Task<ActionResult<FinalCompost>> PostFinalCompost(int IdFinalCompost, int IdWaste, string HumidityLevel, string FinalPh, string Nutrients)
         {
             var finalCompostToPut = await _finalCompostService.CreateFinalCompost(IdWaste, HumidityLevel, FinalPh, Nutrients);
             if (finalCompostToPut != null)

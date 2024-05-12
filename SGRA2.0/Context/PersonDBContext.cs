@@ -29,8 +29,8 @@ namespace SGRA2._0.Context
         public DbSet<Level> levels {  get; set; }    
         public DbSet<Achievements> achievements {  get; set; } 
         public DbSet<Games> games {  get; set; } 
-        public DbSet<AchievementsGames> achievementsGames {  get; set; }     
-        public DbSet<Score> scores {  get; set; } 
+     //   public DbSet<AchievementsGames> achievementsGames {  get; set; }     
+     //   public DbSet<Score> scores {  get; set; } 
         public DbSet<User> users {  get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,8 +39,8 @@ namespace SGRA2._0.Context
             modelBuilder.Entity<Achievements>()
                 .HasKey(e => e.IdAchievements);
 
-            modelBuilder.Entity<AchievementsGames>()
-                .HasKey(e => e.IdAchievementsG);
+         //   modelBuilder.Entity<AchievementsGames>()
+         //       .HasKey(e => e.IdAchievementsG);
 
             modelBuilder.Entity<ChemicalComposition>()
                 .HasKey(e => e.IdChemicalComposition);
@@ -84,8 +84,8 @@ namespace SGRA2._0.Context
             modelBuilder.Entity<Sale>()
                 .HasKey (e => e.IdSale);
 
-            modelBuilder.Entity<Score>()
-                .HasKey (e => e.IdScore);
+        //    modelBuilder.Entity<Score>()
+        //        .HasKey (e => e.IdScore);
 
             modelBuilder.Entity<Suppliers>()
                 .HasKey (e =>e.IdSuppliers);    
@@ -135,12 +135,12 @@ namespace SGRA2._0.Context
                 .HasOne(e => e.WasteType).WithMany()
                 .HasForeignKey(e => e.IdWasteType);
 
-            modelBuilder.Entity<Score>()
-                .HasOne(e => e.User).WithMany() 
-                .HasForeignKey(e => e.IdUser);
-            modelBuilder.Entity<Score>()
-                .HasOne(e => e.Games).WithMany()
-                .HasForeignKey(e => e.IdGames);
+        //    modelBuilder.Entity<Score>()
+        //        .HasOne(e => e.User).WithMany() 
+        //        .HasForeignKey(e => e.IdUser);
+        //    modelBuilder.Entity<Score>()
+        //        .HasOne(e => e.Games).WithMany()
+        //        .HasForeignKey(e => e.IdGames);
             
             modelBuilder.Entity<Sale>()
                 .HasOne(e => e.Customer).WithMany()
@@ -157,9 +157,6 @@ namespace SGRA2._0.Context
                 .HasOne(e => e.DocumentType).WithMany()
                 .HasForeignKey(e => e.IdDocumentType);
 
-            modelBuilder.Entity<Games>()
-                .HasOne(e => e.User).WithMany()
-                .HasForeignKey(e =>e.IdUser);
             modelBuilder.Entity<Games>()
                 .HasOne(e => e.Level).WithMany()
                 .HasForeignKey(e => e.IdLevel);
@@ -190,13 +187,20 @@ namespace SGRA2._0.Context
             modelBuilder.Entity<ChemicalComposition>()
                 .HasOne(e => e.Waste).WithMany()
                 .HasForeignKey(e => e.IdWaste);
+            
+            modelBuilder.Entity<Achievements>()
+                .HasOne(e => e.User).WithMany()
+                .HasForeignKey(e => e.IdUser);
+            modelBuilder.Entity<Achievements>()
+                .HasOne(e =>e.Games).WithMany()
+                .HasForeignKey(e =>e.IdGames);  
 
-            modelBuilder.Entity<AchievementsGames>()
-                .HasOne(e => e.Games).WithMany()
-                .HasForeignKey(e => e.IdGames);
-            modelBuilder.Entity<AchievementsGames>()
-                .HasOne(e => e.Achievements).WithMany()
-                .HasForeignKey(e => e.IdAchievements);
+            //    modelBuilder.Entity<AchievementsGames>()
+            //        .HasOne(e => e.Games).WithMany()
+            //        .HasForeignKey(e => e.IdGames);
+            //    modelBuilder.Entity<AchievementsGames>()
+            //        .HasOne(e => e.Achievements).WithMany()
+            //        .HasForeignKey(e => e.IdAchievements);
 
 
 
