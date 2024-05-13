@@ -40,9 +40,9 @@ namespace SGRA2._0.Controllers
 
         //POST api/<UserController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<User>> PostUser(int IdUser, string UserName, string Password)
+        public async Task<ActionResult<User>> PostUser(int IdUser, string UserName, string Email, string Password)
         {
-            var userToPut = await _userService.CreateUser(UserName, Password);
+            var userToPut = await _userService.CreateUser(UserName, Email, Password);
             if(userToPut != null) 
             {
                 return Ok(userToPut);

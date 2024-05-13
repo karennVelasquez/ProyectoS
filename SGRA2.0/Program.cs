@@ -8,29 +8,29 @@ using static SGRA2._0.Repositories.IRecordTimeRepositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+//var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 var conString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<PersonDBContext>(options => options.UseSqlServer(conString));
 
 // Agrega la configuración CORS aquí
-builder.Services.AddCors(options =>
+/*builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name:
-    MyAllowSpecificOrigins,
-                    policy =>
+    options.AddDefaultPolicy( 
+
+                  //  policy =>
                     {
                         policy.AllowAnyOrigin();
                         policy.AllowAnyHeader();
-                    });
-     /*   builder =>
+                    });//
+        policy =>
         {
-            builder.WithOrigins("http://sistemagestionresiduosagricolas.somee.com/") // Aquí debes especificar los orígenes permitidos
+            policy.WithOrigins("http://localhost/") // Aquí debes especificar los orígenes permitidos
                    .AllowAnyHeader()
                    .AllowAnyMethod();
-        });*/
-});
+        });
+});*/
 
 
 builder.Services.AddControllers();
@@ -110,6 +110,15 @@ builder.Services.AddScoped<IWasteService,  WasteService>();
 builder.Services.AddScoped<IWasteTypeRepositories,  WasteTypeRepositories>(); 
 builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("NuevaPolitica", app =>
+    {
+        app.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -127,7 +136,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 // Agrega el middleware de CORS al pipeline de solicitud HTTP
-app.UseCors("MyAllowSpecificOrigins");
+app.UseCors("NuevaPolitica");
 
 app.UseAuthorization();
 app.MapControllers();

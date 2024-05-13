@@ -7,8 +7,8 @@ namespace SGRA2._0.Service
     {
         Task<List<User>> GetAll();
         Task<User> GetUser(int IdUser);
-        Task<User> CreateUser(string UserName, string Password);
-        Task<User> UpdateUser(int IdUser, string? UserName = null, string? Password = null);
+        Task<User> CreateUser(string UserName, string Email, string Password);
+        Task<User> UpdateUser(int IdUser, string? UserName = null, string? Email=null, string? Password = null);
         Task<User> DeleteUser(int IdUser);
     }
     public class UserService : IUserService
@@ -18,9 +18,9 @@ namespace SGRA2._0.Service
         {
             _userRepositories = userRepositories;
         }
-        public async Task<User> CreateUser(string UserName, string Password)
+        public async Task<User> CreateUser(string UserName, string Email, string Password)
         {
-            return await _userRepositories.CreateUser(UserName, Password);
+            return await _userRepositories.CreateUser(UserName, Email, Password);
             //throw new NotImplementedException();
         }
 
@@ -50,7 +50,7 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<User> UpdateUser(int IdUser, string? UserName = null, string? Password = null)
+        public async Task<User> UpdateUser(int IdUser, string? UserName = null, string? Email = null, string? Password = null)
         {
             User newuser = await _userRepositories.GetUser(IdUser);
             if (newuser != null)
@@ -58,6 +58,10 @@ namespace SGRA2._0.Service
                 if (UserName != null)
                 {
                     newuser.UserName = UserName;
+                }
+                if (Email != null)
+                {
+                    newuser.Email = Email;
                 }
                 if (Password != null)
                 {

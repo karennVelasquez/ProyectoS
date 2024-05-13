@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<User>> GetAll();
         Task<User> GetUser(int id);
-        Task<User> CreateUser(string UserName, string Password);
+        Task<User> CreateUser(string UserName, string Email, string Password);
         Task<User> UpdateUser(User user);
         Task<User> DeleteUser(User user);
     }
@@ -20,12 +20,13 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<User> CreateUser(string UserName, string Password)
+        public async Task<User> CreateUser(string UserName, string Email, string Password)
         {
             User newUser = new User
             {
                 UserName = UserName,
                 Password = Password,
+                Email = Email,
                 IsDelete = false,
                 Date = null
             };
@@ -53,6 +54,7 @@ namespace SGRA2._0.Repositories
             User UserUpdate = await _db.users.FindAsync(user.IdUser);
             {
                 UserUpdate.UserName = user.UserName;
+                UserUpdate.Email = user.Email;
                 UserUpdate.Password = user.Password;
 
                 await _db.SaveChangesAsync();
