@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SGRA2._0.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Cambio : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,6 @@ namespace SGRA2._0.Migrations
                 {
                     IdComposter = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Size = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Material = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DrainageSystem = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
@@ -80,6 +79,7 @@ namespace SGRA2._0.Migrations
                     IdUser = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -153,13 +153,34 @@ namespace SGRA2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "recordTimes",
+                columns: table => new
+                {
+                    IdRecordTime = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdLevel = table.Column<int>(type: "int", nullable: false),
+                    Collecttime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_recordTimes", x => x.IdRecordTime);
+                    table.ForeignKey(
+                        name: "FK_recordTimes_levels_IdLevel",
+                        column: x => x.IdLevel,
+                        principalTable: "levels",
+                        principalColumn: "IdLevel",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "wastes",
                 columns: table => new
                 {
                     IdWaste = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdWasteType = table.Column<int>(type: "int", nullable: false),
-                    Humidity = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -327,7 +348,6 @@ namespace SGRA2._0.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdWaste = table.Column<int>(type: "int", nullable: false),
                     Flipfrequency = table.Column<int>(type: "int", nullable: false),
-                    UniformedDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -343,36 +363,6 @@ namespace SGRA2._0.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "recordTimes",
-                columns: table => new
-                {
-                    IdRecordTime = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdLevel = table.Column<int>(type: "int", nullable: false),
-                    IdWaste = table.Column<int>(type: "int", nullable: false),
-                    Collecttime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AmountCollected = table.Column<int>(type: "int", nullable: false),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_recordTimes", x => x.IdRecordTime);
-                    table.ForeignKey(
-                        name: "FK_recordTimes_levels_IdLevel",
-                        column: x => x.IdLevel,
-                        principalTable: "levels",
-                        principalColumn: "IdLevel",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_recordTimes_wastes_IdWaste",
-                        column: x => x.IdWaste,
-                        principalTable: "wastes",
-                        principalColumn: "IdWaste",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "temperatures",
                 columns: table => new
                 {
@@ -380,7 +370,6 @@ namespace SGRA2._0.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdWaste = table.Column<int>(type: "int", nullable: false),
                     Decompositiontemperature = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Range = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -560,11 +549,6 @@ namespace SGRA2._0.Migrations
                 name: "IX_recordTimes_IdLevel",
                 table: "recordTimes",
                 column: "IdLevel");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_recordTimes_IdWaste",
-                table: "recordTimes",
-                column: "IdWaste");
 
             migrationBuilder.CreateIndex(
                 name: "IX_sales_IdCustomer",

@@ -7,8 +7,8 @@ namespace SGRA2._0.Service
     {
         Task<List<Composter>> GetAll();
         Task<Composter> GetComposter(int IdComposter);
-        Task<Composter> CreateComposter(string Size, string Material, string DrainageSystem);
-        Task<Composter> UpdateComposter(int IdComposter, string? Size = null, string? Material = null, string? DrainageSystem = null);
+        Task<Composter> CreateComposter( string Material, string DrainageSystem);
+        Task<Composter> UpdateComposter(int IdComposter, string? Material = null, string? DrainageSystem = null);
         Task<Composter> DeleteComposter(int IdComposter);
     }
     public class ComposterService : IComposterService
@@ -19,9 +19,9 @@ namespace SGRA2._0.Service
             _composterRepositories = composterRepositories;
         }
 
-        public async Task<Composter> CreateComposter(string Size, string Material, string DrainageSystem)
+        public async Task<Composter> CreateComposter(string Material, string DrainageSystem)
         {
-            return await _composterRepositories.CreateComposter(Size, Material, DrainageSystem);
+            return await _composterRepositories.CreateComposter(Material, DrainageSystem);
             //throw new NotImplementedException();
         }
 
@@ -53,15 +53,12 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<Composter> UpdateComposter(int IdComposter, string? Size = null, string? Material = null, string? DrainageSystem = null)
+        public async Task<Composter> UpdateComposter(int IdComposter, string? Material = null, string? DrainageSystem = null)
         {
             Composter newcomposter = await _composterRepositories.GetComposter(IdComposter);
             if (newcomposter != null)
             {
-                if (Size != null)
-                {
-                    newcomposter.Size = Size;
-                }
+                
                 if (Material != null)
                 {
                     newcomposter.Material = Material;

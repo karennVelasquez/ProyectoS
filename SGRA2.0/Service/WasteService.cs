@@ -7,8 +7,8 @@ namespace SGRA2._0.Service
     {
         Task<List<Waste>> GetAll();
         Task<Waste> GetWaste(int IdWaste);
-        Task<Waste> CreateWaste(int IdWasteType, string Humidity);
-        Task<Waste> UpdateWaste(int IdWaste, int? IdWasteType = null, string? Humidity = null);
+        Task<Waste> CreateWaste(int IdWasteType);
+        Task<Waste> UpdateWaste(int IdWaste, int? IdWasteType = null);
         Task<Waste> DeleteWaste(int IdWaste);
     }
     public class WasteService : IWasteService
@@ -18,9 +18,9 @@ namespace SGRA2._0.Service
         {
             _wasteRepositories = wasteRepositories;
         }
-        public async Task<Waste> CreateWaste(int IdWasteType, string Humidity)
+        public async Task<Waste> CreateWaste(int IdWasteType)
         {
-            return await _wasteRepositories.CreateWaste(IdWasteType, Humidity);
+            return await _wasteRepositories.CreateWaste(IdWasteType);
             //throw new NotImplementedException();
         }
 
@@ -50,7 +50,7 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<Waste> UpdateWaste(int IdWaste, int? IdWasteType = null, string? Humidity = null)
+        public async Task<Waste> UpdateWaste(int IdWaste, int? IdWasteType = null)
         {
             Waste newwaste = await _wasteRepositories.GetWaste(IdWaste);
             if (newwaste != null)
@@ -59,10 +59,7 @@ namespace SGRA2._0.Service
                 {
                     newwaste.IdWasteType = (int)IdWasteType;
                 }
-                if (Humidity != null)
-                {
-                    newwaste.Humidity = Humidity;
-                }
+                
                 return await _wasteRepositories.UpdateWaste(newwaste);
             }
             throw new NotImplementedException();

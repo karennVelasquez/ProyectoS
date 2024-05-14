@@ -8,8 +8,8 @@ namespace SGRA2._0.Service
     {
         Task<List<RecordTime>> GetAll();
         Task<RecordTime> GetRecordTime(int IdRecordTime);
-        Task<RecordTime> CreateRecordTime(int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected);
-        Task<RecordTime> UpdateRecordTime(int IdRecordTime, int? IdLevel = null, int? IdWaste = null, DateTime? Collecttime = null, int? AmountCollected = null);
+        Task<RecordTime> CreateRecordTime(int IdLevel, DateTime Collecttime);
+        Task<RecordTime> UpdateRecordTime(int IdRecordTime, int? IdLevel = null,  DateTime? Collecttime = null);
         Task<RecordTime> DeleteRecordTime(int IdRecordTime);
     }
     public class RecordTimeService : IRecordTimeService
@@ -20,9 +20,9 @@ namespace SGRA2._0.Service
             _recordTimeRepositories = recordTimeRepositories;
         }
 
-        public async Task<RecordTime> CreateRecordTime(int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected)
+        public async Task<RecordTime> CreateRecordTime(int IdLevel,  DateTime Collecttime)
         {
-            return await _recordTimeRepositories.CreateRecordTime(IdLevel, IdWaste, Collecttime, AmountCollected);
+            return await _recordTimeRepositories.CreateRecordTime(IdLevel, Collecttime);
             //throw new NotImplementedException();
         }
 
@@ -53,7 +53,7 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<RecordTime> UpdateRecordTime(int IdRecordTime, int? IdLevel = null, int? IdWaste = null, DateTime? Collecttime = null, int? AmountCollected = null)
+        public async Task<RecordTime> UpdateRecordTime(int IdRecordTime, int? IdLevel = null, DateTime? Collecttime = null)
         {
             RecordTime newrecordTime = await _recordTimeRepositories.GetRecordTime(IdRecordTime);
             if (newrecordTime != null)
@@ -62,17 +62,9 @@ namespace SGRA2._0.Service
                 {
                     newrecordTime.IdLevel = (int)IdLevel;
                 }
-                if (IdWaste != null)
-                {
-                    newrecordTime.IdWaste = (int)IdWaste;
-                }
                 if (Collecttime != null)
                 {
                     newrecordTime.Collecttime = (DateTime)Collecttime;
-                }
-                if (AmountCollected != null)
-                {
-                    newrecordTime.AmountCollected = (int)AmountCollected;
                 }
                 return await _recordTimeRepositories.UpdateRecordTime(newrecordTime);
             }

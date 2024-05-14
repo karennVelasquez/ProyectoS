@@ -7,8 +7,8 @@ namespace SGRA2._0.Service
     {
         Task<List<Temperature>> GetAll();
         Task<Temperature> GetTemperature(int IdTemperature);
-        Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature, string Range);
-        Task<Temperature> UpdateTemperature(int IdTemperature, int? IdWaste = null, string? Decompositiontemperature = null, string? Range = null);
+        Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature);
+        Task<Temperature> UpdateTemperature(int IdTemperature, int? IdWaste = null, string? Decompositiontemperature = null);
         Task<Temperature> DeleteTemperature(int IdTemperature);
     }
     public class TemperatureService : ITemperatureService
@@ -18,9 +18,9 @@ namespace SGRA2._0.Service
         {
             _temperatureRepositories = temperatureRepositories;
         }
-        public async Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature, string Range)
+        public async Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature)
         {
-            return await _temperatureRepositories.CreateTemperature(IdWaste, Decompositiontemperature, Range);
+            return await _temperatureRepositories.CreateTemperature(IdWaste, Decompositiontemperature);
             //throw new NotImplementedException();
         }
 
@@ -50,7 +50,7 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<Temperature> UpdateTemperature(int IdTemperature, int? IdWaste = null, string? Decompositiontemperature = null, string? Range = null)
+        public async Task<Temperature> UpdateTemperature(int IdTemperature, int? IdWaste = null, string? Decompositiontemperature = null)
         {
             Temperature newtemperature = await _temperatureRepositories.GetTemperature(IdTemperature);
             if (newtemperature != null)
@@ -63,10 +63,7 @@ namespace SGRA2._0.Service
                 {
                     newtemperature.Decompositiontemperature = Decompositiontemperature;
                 }
-                if (Range != null)
-                {
-                    newtemperature.Range = Range;
-                }
+                
                 return await _temperatureRepositories.UpdateTemperature(newtemperature);
             }
             throw new NotImplementedException();

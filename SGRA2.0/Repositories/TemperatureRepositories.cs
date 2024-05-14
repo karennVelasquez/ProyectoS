@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<Temperature>> GetAll();
         Task<Temperature> GetTemperature(int id);
-        Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature, string Range);
+        Task<Temperature> CreateTemperature(int IdWaste, string Decompositiontemperature);
         Task<Temperature> UpdateTemperature (Temperature temperature);
         Task<Temperature> DeleteTemperature(Temperature temperature);
 
@@ -21,7 +21,7 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Temperature> CreateTemperature(int idWaste, string Decompositiontemperature, string Range)
+        public async Task<Temperature> CreateTemperature(int idWaste, string Decompositiontemperature)
         {
             Waste? waste = _db.wastes.FirstOrDefault(ut => ut.IdWaste == idWaste);
 
@@ -29,7 +29,6 @@ namespace SGRA2._0.Repositories
             {
                 IdWaste = idWaste,
                 Decompositiontemperature = Decompositiontemperature,
-                Range = Range,
                 IsDelete = false,
                 Date = null
             };
@@ -59,8 +58,7 @@ namespace SGRA2._0.Repositories
             if (TemperatureUpdate != null) 
             {
                 TemperatureUpdate.IdWaste = temperature.IdWaste;
-                TemperatureUpdate.Decompositiontemperature = temperature.Decompositiontemperature;  
-                TemperatureUpdate.Range = temperature.Range;
+                TemperatureUpdate.Decompositiontemperature = temperature.Decompositiontemperature;
 
                 await _db.SaveChangesAsync();
             }

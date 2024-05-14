@@ -12,8 +12,8 @@ using SGRA2._0.Context;
 namespace SGRA2._0.Migrations
 {
     [DbContext(typeof(PersonDBContext))]
-    [Migration("20240512212050_Initial")]
-    partial class Initial
+    [Migration("20240514014015_Cambio")]
+    partial class Cambio
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,10 +136,6 @@ namespace SGRA2._0.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Material")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Size")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -279,10 +275,6 @@ namespace SGRA2._0.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UniformedDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("IdFlip");
 
                     b.HasIndex("IdWaste");
@@ -406,9 +398,6 @@ namespace SGRA2._0.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRecordTime"));
 
-                    b.Property<int>("AmountCollected")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Collecttime")
                         .HasColumnType("datetime2");
 
@@ -418,17 +407,12 @@ namespace SGRA2._0.Migrations
                     b.Property<int>("IdLevel")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdWaste")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdRecordTime");
 
                     b.HasIndex("IdLevel");
-
-                    b.HasIndex("IdWaste");
 
                     b.ToTable("recordTimes");
                 });
@@ -509,10 +493,6 @@ namespace SGRA2._0.Migrations
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Range")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdTemperature");
 
@@ -602,6 +582,10 @@ namespace SGRA2._0.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
@@ -628,10 +612,6 @@ namespace SGRA2._0.Migrations
 
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Humidity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdWasteType")
                         .HasColumnType("int");
@@ -800,15 +780,7 @@ namespace SGRA2._0.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SGRA2._0.Model.Waste", "Waste")
-                        .WithMany()
-                        .HasForeignKey("IdWaste")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Level");
-
-                    b.Navigation("Waste");
                 });
 
             modelBuilder.Entity("SGRA2._0.Model.Sale", b =>

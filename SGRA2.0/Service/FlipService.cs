@@ -7,8 +7,8 @@ namespace SGRA2._0.Service
     {
         Task<List<Flip>> GetAll();
         Task<Flip> GetFlip(int IdFlip);
-        Task<Flip> CreateFlip(int IdWaste, int Flipfrequency, string UniformedDescription);
-        Task<Flip> UpdateFlip(int IdFlip, int? IdWaste = null, int? Flipfrequency = null, string? UniformedDescription = null);
+        Task<Flip> CreateFlip(int IdWaste, int Flipfrequency);
+        Task<Flip> UpdateFlip(int IdFlip, int? IdWaste = null, int? Flipfrequency = null);
         Task<Flip> DeleteFlip(int IdFlip);
     }
     public class FlipService : IFlipService
@@ -18,9 +18,9 @@ namespace SGRA2._0.Service
         {
             _flipRepositories = flipRepositories;
         }
-        public async Task<Flip> CreateFlip(int IdWaste, int Flipfrequency, string UniformedDescription)
+        public async Task<Flip> CreateFlip(int IdWaste, int Flipfrequency)
         {
-            return await _flipRepositories.CreateFlip(IdWaste, Flipfrequency, UniformedDescription);
+            return await _flipRepositories.CreateFlip(IdWaste, Flipfrequency);
             //throw new NotImplementedException();
         }
 
@@ -52,7 +52,7 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<Flip> UpdateFlip(int IdFlip, int? IdWaste = null, int? Flipfrequency = null, string? UniformedDescription = null)
+        public async Task<Flip> UpdateFlip(int IdFlip, int? IdWaste = null, int? Flipfrequency = null)
         {
             Flip newflip = await _flipRepositories.GetFlip(IdFlip);
             if (newflip != null)
@@ -65,10 +65,7 @@ namespace SGRA2._0.Service
                 {
                     newflip.Flipfrequency = (int)Flipfrequency;
                 }
-                if (UniformedDescription != null)
-                {
-                    newflip.UniformedDescription = UniformedDescription;
-                }
+               
                 return await _flipRepositories.UpdateFlip(newflip);
             }
             throw new NotImplementedException();

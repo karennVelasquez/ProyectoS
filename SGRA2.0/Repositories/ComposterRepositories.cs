@@ -10,7 +10,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<Composter>> GetAll();
         Task<Composter> GetComposter(int id);
-        Task<Composter> CreateComposter(string Size, string Material, string DrainageSystem);
+        Task<Composter> CreateComposter(string Material, string DrainageSystem);
         Task<Composter> UpdateComposter(Composter composter);
         Task<Composter> DeleteComposter(Composter composter);
     }
@@ -21,11 +21,11 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Composter> CreateComposter(string Size, string Material, string DrainageSystem)
+        public async Task<Composter> CreateComposter( string Material, string DrainageSystem)
         {
             Composter newCompostador = new Composter
             {
-                Size = Size,
+                
                 Material = Material,
                 DrainageSystem = DrainageSystem,
                 IsDelete = false,
@@ -56,7 +56,7 @@ namespace SGRA2._0.Repositories
             if (ComposterUpdate != null)
             {
                 
-                ComposterUpdate.Size = composter.Size;
+                
                 ComposterUpdate.Material = composter.Material;
                 ComposterUpdate.DrainageSystem = composter.DrainageSystem;
 

@@ -10,7 +10,6 @@ namespace SGRA2._0.Model
         public int IdWaste { get; set; }
         public int IdWasteType { get; set; }
         public  WasteType WasteType { get; set; }
-        public  string Humidity { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
     }

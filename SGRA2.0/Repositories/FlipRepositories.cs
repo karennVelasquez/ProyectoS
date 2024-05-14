@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<Flip>> GetAll();
         Task<Flip> GetFlip(int id);
-        Task<Flip> CreateFlip(int IdWaste, int Flipfrequency, string UniformedDescription);
+        Task<Flip> CreateFlip(int IdWaste, int Flipfrequency);
         Task<Flip> UpdateFlip(Flip flip);
         Task<Flip> DeleteFlip(Flip flip);
     }
@@ -20,14 +20,13 @@ namespace SGRA2._0.Repositories
         {
             _db = db;
         }
-        public async Task<Flip> CreateFlip(int idWaste, int Flipfrequency, string UniformedDescription)
+        public async Task<Flip> CreateFlip(int idWaste, int Flipfrequency)
         {
             Waste? waste = _db.wastes.FirstOrDefault(ut => ut.IdWaste == idWaste);
             Flip newFlip = new Flip
             {
                 IdWaste = idWaste,
                 Flipfrequency = Flipfrequency,
-                UniformedDescription = UniformedDescription,
                 IsDelete = false,
                 Date = null
             };
@@ -57,7 +56,6 @@ namespace SGRA2._0.Repositories
             {
                 FlipUpdate.IdWaste = flip.IdWaste;
                 FlipUpdate.Flipfrequency = flip.Flipfrequency;
-                FlipUpdate.UniformedDescription = flip.UniformedDescription;
 
                 await _db.SaveChangesAsync();
             }

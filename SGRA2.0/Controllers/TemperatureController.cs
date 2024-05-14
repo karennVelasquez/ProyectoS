@@ -41,9 +41,9 @@ namespace SGRA2._0.Controllers
 
         //POST api/<temperatureController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<Temperature>> PostTemperature(int IdTemperature, int IdWaste, string Decompositiontemperature, string Range)
+        public async Task<ActionResult<Temperature>> PostTemperature(int IdTemperature, int IdWaste, string Decompositiontemperature)
         {
-            var temperatureToPut = await _temperatureService.CreateTemperature(IdWaste, Decompositiontemperature, Range);
+            var temperatureToPut = await _temperatureService.CreateTemperature(IdWaste, Decompositiontemperature);
             if (temperatureToPut != null)
             {
                 return Ok(temperatureToPut);
@@ -56,9 +56,9 @@ namespace SGRA2._0.Controllers
 
         //PUT api/<temperatureController>
         [HttpPut("Update/{IdTemperature}")]
-        public async Task<ActionResult<Temperature>> PutTemperature(int IdTemperature, int IdWaste, string Decompositiontemperature, string Range)
+        public async Task<ActionResult<Temperature>> PutTemperature(int IdTemperature, int IdWaste, string Decompositiontemperature)
         {
-            var temperatureToPut = await _temperatureService.UpdateTemperature(IdTemperature, IdWaste, Decompositiontemperature, Range);
+            var temperatureToPut = await _temperatureService.UpdateTemperature(IdTemperature, IdWaste, Decompositiontemperature);
             if (temperatureToPut != null)
             {
                 return Ok(temperatureToPut);

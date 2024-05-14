@@ -43,9 +43,9 @@ namespace SGRA2._0.Controllers
 
         //POST api/<ComposterController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<Composter>> PostComposter(string Size, string Material, string DrainageSystem)
+        public async Task<ActionResult<Composter>> PostComposter( string Material, string DrainageSystem)
         {
-            var ComposterToPut = await _composterService.CreateComposter(Size, Material, DrainageSystem);  
+            var ComposterToPut = await _composterService.CreateComposter(Material, DrainageSystem);  
             if(ComposterToPut != null)
             {
                 return Ok(ComposterToPut);
@@ -58,9 +58,9 @@ namespace SGRA2._0.Controllers
 
         //PUT api/<ComposterController>
         [HttpPut("Update/{IdComposter}")]
-        public async Task<ActionResult<Composter>> PutComposter(int IdComposter,string Size, string Material, string DrainageSystem)
+        public async Task<ActionResult<Composter>> PutComposter(int IdComposter, string Material, string DrainageSystem)
         {
-            var ComposterToPut = await _composterService.UpdateComposter(IdComposter, Size, Material, DrainageSystem);
+            var ComposterToPut = await _composterService.UpdateComposter(IdComposter, Material, DrainageSystem);
             if(ComposterToPut != null)
             {
                 return Ok(ComposterToPut);

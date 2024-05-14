@@ -40,9 +40,9 @@ namespace SGRA2._0.Controllers
 
         //POST api/<WasteController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<Waste>> PostWaste(int IdWaste, int IdWasteType, string Humidity)
+        public async Task<ActionResult<Waste>> PostWaste(int IdWaste, int IdWasteType)
         {
-            var wasteToPut = await _wasteService.CreateWaste(IdWasteType, Humidity);  
+            var wasteToPut = await _wasteService.CreateWaste(IdWasteType);  
             if(wasteToPut != null)
             {
                 return Ok(wasteToPut);
@@ -55,9 +55,9 @@ namespace SGRA2._0.Controllers
 
         //PUT api/<WasteController>
         [HttpPut("Update/{IdWaste}")]
-        public async Task<ActionResult<Waste>> PutWaste(int IdWaste, int IdWasteType, string Humidity)
+        public async Task<ActionResult<Waste>> PutWaste(int IdWaste, int IdWasteType)
         {
-            var wasteToPut = await _wasteService.UpdateWaste(IdWaste, IdWasteType, Humidity);
+            var wasteToPut = await _wasteService.UpdateWaste(IdWaste, IdWasteType);
             if(wasteToPut != null)
             {
                 return Ok(wasteToPut);

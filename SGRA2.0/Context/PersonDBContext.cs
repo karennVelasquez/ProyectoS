@@ -149,9 +149,6 @@ namespace SGRA2._0.Context
             modelBuilder.Entity<RecordTime>()
                 .HasOne(e => e.Level).WithMany()
                 .HasForeignKey(e => e.IdLevel);
-            modelBuilder.Entity<RecordTime>()
-                .HasOne(e => e.Waste).WithMany()
-                .HasForeignKey(e => e.IdWaste);
 
             modelBuilder.Entity<Person>()
                 .HasOne(e => e.DocumentType).WithMany()

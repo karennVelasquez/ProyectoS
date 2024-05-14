@@ -11,7 +11,6 @@ namespace SGRA2._0.Model
         public int IdWaste { get; set; }
         public Waste Waste  { get; set; }
         public int Flipfrequency { get; set; }
-        public string UniformedDescription { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
     }

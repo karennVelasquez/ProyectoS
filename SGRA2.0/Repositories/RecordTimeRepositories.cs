@@ -9,7 +9,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<RecordTime>> GetAll();
         Task<RecordTime> GetRecordTime(int id);
-        Task<RecordTime> CreateRecordTime(int IdLevel, int IdWaste, DateTime Collecttime, int AmountCollected);
+        Task<RecordTime> CreateRecordTime(int IdLevel, DateTime Collecttime);
         Task<RecordTime> UpdateRecordTime(RecordTime recordTime);
         Task<RecordTime> DeleteRecordTime(RecordTime recordTime);
         public class RecordTimeRepositories : IRecordTimeRepositories   
@@ -20,16 +20,14 @@ namespace SGRA2._0.Repositories
                 _db = db;
 
             }
-            public async Task<RecordTime> CreateRecordTime(int idLevel, int idWaste, DateTime Collecttime, int AmountCollected)
+            public async Task<RecordTime> CreateRecordTime(int idLevel, DateTime Collecttime)
             {
-                Waste? waste = _db.wastes.FirstOrDefault(ut => ut.IdWaste == idWaste);
+                
                 Level? level = _db.levels.FirstOrDefault(ut => ut.IdLevel == idLevel);
                 RecordTime newTiempoRecord = new RecordTime
                 {
                     IdLevel = idLevel,
-                    IdWaste = idWaste,
                     Collecttime = Collecttime,
-                    AmountCollected = AmountCollected,
                     IsDelete = false,
                     Date = null
                 };
@@ -59,9 +57,7 @@ namespace SGRA2._0.Repositories
                 if (RecordTimeUpdate != null)
                 {
                     RecordTimeUpdate.IdLevel = recordTime.IdLevel;
-                    RecordTimeUpdate.IdWaste = recordTime.IdWaste;
                     RecordTimeUpdate.Collecttime = recordTime.Collecttime;
-                    RecordTimeUpdate.AmountCollected = recordTime.AmountCollected;
                     await _db.SaveChangesAsync();
                 }
 
