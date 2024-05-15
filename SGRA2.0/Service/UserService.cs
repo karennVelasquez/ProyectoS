@@ -10,6 +10,7 @@ namespace SGRA2._0.Service
         Task<User> CreateUser(string UserName, string Email, string Password);
         Task<User> UpdateUser(int IdUser, string? UserName = null, string? Email=null, string? Password = null);
         Task<User> DeleteUser(int IdUser);
+        Task<User> Login(string userName, string email, string password);
     }
     public class UserService : IUserService
     {
@@ -71,5 +72,12 @@ namespace SGRA2._0.Service
             return await _userRepositories.UpdateUser(newuser);
             throw new NotImplementedException();
         }
+
+        //AUTENTICACION
+        public async Task<User> Login(string userName, string email, string password)
+        {
+            return await _userRepositories.Login(userName, email, password);
+        }
+
     }
 }

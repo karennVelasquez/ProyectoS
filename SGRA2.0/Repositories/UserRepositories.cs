@@ -12,6 +12,7 @@ namespace SGRA2._0.Repositories
         Task<User> CreateUser(string UserName, string Email, string Password);
         Task<User> UpdateUser(User user);
         Task<User> DeleteUser(User user);
+        Task<User> Login(string userName, string email, string password);
     }
     public class UserRepositories : IUserRepositories
     {
@@ -68,5 +69,12 @@ namespace SGRA2._0.Repositories
             return historicalCost;
             */
         }
+
+        //AUTENTICACION
+        public async Task<User> Login(string userName, string email, string password)
+        {
+            return await _db.users.FirstOrDefaultAsync(u => u.UserName == userName && u.Email == email && u.Password == password);
+        }
+
     }
 }

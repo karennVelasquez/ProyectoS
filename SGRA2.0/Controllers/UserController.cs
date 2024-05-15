@@ -39,7 +39,7 @@ namespace SGRA2._0.Controllers
         }
 
         //POST api/<UserController>
-        [HttpPost]
+        [HttpPost("Create/")]
         public async Task<ActionResult<User>> PostUser(int IdUser, string UserName, string Email, string Password)
         {
             var userToPut = await _userService.CreateUser(UserName, Email, Password);
@@ -50,6 +50,26 @@ namespace SGRA2._0.Controllers
             else
             {
                 return BadRequest("Error when inserting into the database. ");
+            }
+        }
+
+        //AUTENTICACION
+        [HttpPost("Login")]
+        public async Task<ActionResult<bool>> Login(string userName, string email, string password)
+        {
+            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) 
+            {
+                return BadRequest("Name, email and password are required. ");
+            } 
+           
+            var user = await _userService.Login(userName, email, password);
+            if(user == null) 
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return Ok(false);
             }
         }
 

@@ -5,6 +5,9 @@ using SGRA2._0.Service;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using static SGRA2._0.Repositories.IRecordTimeRepositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -110,6 +113,7 @@ builder.Services.AddScoped<IWasteService,  WasteService>();
 builder.Services.AddScoped<IWasteTypeRepositories,  WasteTypeRepositories>(); 
 builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>();
 
+//CORS SI FUNCIONA
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("NuevaPolitica", app =>
@@ -137,6 +141,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 // Agrega el middleware de CORS al pipeline de solicitud HTTP
 app.UseCors("NuevaPolitica");
+//Autenticacion
+app.UseAuthentication();
 
 app.UseAuthorization();
 app.MapControllers();
