@@ -9,10 +9,12 @@ namespace SGRA2._0.Repositories
     {
         Task<List<User>> GetAll();
         Task<User> GetUser(int id);
+        //
+        Task<int?> GetIdByUsername(string username);
         Task<User> CreateUser(string UserName, string Email, string Password);
         Task<User> UpdateUser(User user);
         Task<User> DeleteUser(User user);
-        Task<User> Login(string userName, string email, string password);
+        Task<User> AuthUser(string userName, string email, string password);
     }
     public class UserRepositories : IUserRepositories
     {
@@ -46,10 +48,23 @@ namespace SGRA2._0.Repositories
         {
             return await _db.users.ToListAsync();
         }
+        //
+        public async Task<int?> GetIdByUsername(string username)
+        {
+            var usuario = await _db.users.FirstOrDefaultAsync(u => u.UserName == username);
+            return usuario?.IdUser;
+        }
         public async Task<User> GetUser(int id)
         {
             return await _db.users.FirstOrDefaultAsync(u => u.IdUser == id);
         }
+
+        //AUTENTICACION
+        public async Task<User> AuthUser(string userName, string email, string password)
+        {
+            return await _db.users.FirstOrDefaultAsync(u => u.UserName == userName && u.Email == email && u.Password == password);
+        }
+
         public async Task<User> UpdateUser(User user)
         {
             User UserUpdate = await _db.users.FindAsync(user.IdUser);
@@ -68,12 +83,6 @@ namespace SGRA2._0.Repositories
             await _db.SaveChangesAsync();
             return historicalCost;
             */
-        }
-
-        //AUTENTICACION
-        public async Task<User> Login(string userName, string email, string password)
-        {
-            return await _db.users.FirstOrDefaultAsync(u => u.UserName == userName && u.Email == email && u.Password == password);
         }
 
     }

@@ -190,7 +190,7 @@ namespace SGRA2._0.Context
                 .HasForeignKey(e => e.IdUser);
             modelBuilder.Entity<Achievements>()
                 .HasOne(e =>e.Games).WithMany()
-                .HasForeignKey(e =>e.IdGames);  
+                .HasForeignKey(e =>e.IdGames);
 
             //    modelBuilder.Entity<AchievementsGames>()
             //        .HasOne(e => e.Games).WithMany()
@@ -199,7 +199,15 @@ namespace SGRA2._0.Context
             //        .HasOne(e => e.Achievements).WithMany()
             //        .HasForeignKey(e => e.IdAchievements);
 
-
+            //AUTHENTICATION
+           // modelBuilder.Entity<User>().HasData(
+           //     new User
+           //     {
+           //         IdUser = 1,
+           //         UserName = "System",
+           //         Email = "System",
+           //         Password = "System",
+           //     });
 
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(e => e.GetForeignKeys()))

@@ -37,6 +37,17 @@ namespace SGRA2._0.Controllers
             }
             return Ok(user);
         }
+        //GET api/BYUSERNAME
+        [HttpGet("IdByUsername/{username}")]
+        public async Task<IActionResult> GetIdByUsername(string username)
+        {
+            var id = await _userService.GetIdByUsername(username);
+            if(id == null) 
+            {
+                return NotFound();
+            }
+            return Ok(id);
+        }
 
         //POST api/<UserController>
         [HttpPost("Create/")]
@@ -54,16 +65,16 @@ namespace SGRA2._0.Controllers
         }
 
         //AUTENTICACION
-        [HttpPost("Login")]
+        [HttpPost("Authentication")]
         public async Task<ActionResult<bool>> Login(string userName, string email, string password)
         {
             if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) 
             {
                 return BadRequest("Name, email and password are required. ");
-            } 
-           
-            var user = await _userService.Login(userName, email, password);
-            if(user == null) 
+            }
+           // bool user = await _userService.Authentication(userName, email, password);
+           var user = await _userService.Authentication(userName, email, password);
+            if(user != null) 
             {
                 return Ok(true);
             }
