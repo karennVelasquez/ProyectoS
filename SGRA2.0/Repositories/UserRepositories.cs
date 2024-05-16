@@ -77,12 +77,6 @@ namespace SGRA2._0.Repositories
             }
 
             return UserUpdate;
-            /*
-            _db.historicalCost.Attach(historicalCost); //Llamamos la actualizacion
-            _db.Entry(historicalCost).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
-            return historicalCost;
-            */
         }
 
     }

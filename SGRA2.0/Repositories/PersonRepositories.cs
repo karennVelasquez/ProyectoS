@@ -10,9 +10,13 @@ namespace SGRA2._0.Repositories
     {
         Task<List<Person>> GetAll();
         Task<Person> GetPerson(int id);
+        //
+        Task<int?> GetIdByName(string name);
         Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int Document);
         Task<Person> UpdatePerson(Person person);
         Task<Person> DeletePerson(Person person);
+        //
+        Task<Person> AuthUser(string name, int document);
     }
     public class PersonRepositories : IPersonRepository
     {
@@ -52,9 +56,21 @@ namespace SGRA2._0.Repositories
         {
             return await _db.persons.ToListAsync();
         }
+        //
+        public async Task<int?> GetIdByName(string name)
+        {
+            var persona = await _db.persons.FirstOrDefaultAsync(ut => ut.Name == name);
+            return persona?.IdPerson;
+        }
         public async Task<Person> GetPerson(int id)
         {
             return await _db.persons.FirstOrDefaultAsync(u => u.IdPerson == id);
+        }
+
+        //AUTENTICACION
+        public async Task<Person>AuthUser(string name, int document)
+        {
+            return await _db.persons.FirstOrDefaultAsync(u => u.Name == name && u.Document == document);
         }
         public async Task<Person> UpdatePerson(Person person)
         {

@@ -41,9 +41,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<IAchievementsGamesRespositories, AchievementsGamesRespositories>();
-//builder.Services.AddScoped<IAchievementsGamesService, AchievementsGamesService>();
-
 builder.Services.AddScoped<IAchievementsRepositories,  AchievementsRepositories>();
 builder.Services.AddScoped<IAchievementsService,  AchievementsService>();   
 
@@ -88,9 +85,6 @@ builder.Services.AddScoped<IRecordTimeService,  RecordTimeService>();
 
 builder.Services.AddScoped<ISaleRepositories,  SaleRepositories>(); 
 builder.Services.AddScoped<ISaleService, SaleService>();
-
-//builder.Services.AddScoped<IScoreRepositories, ScoreRepositories>();
-//builder.Services.AddScoped<IScoreService,  ScoreService>();
 
 builder.Services.AddScoped<ISuppliersRepositories, SuppliersRepositories>();
 builder.Services.AddScoped<ISuppliersService,  SuppliersService>(); 
