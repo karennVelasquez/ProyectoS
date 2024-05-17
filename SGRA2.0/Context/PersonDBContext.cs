@@ -28,10 +28,9 @@ namespace SGRA2._0.Context
         public DbSet<RecordTime> recordTimes {  get; set; } 
         public DbSet<Level> levels {  get; set; }    
         public DbSet<Achievements> achievements {  get; set; } 
-        public DbSet<Games> games {  get; set; } 
-     //   public DbSet<AchievementsGames> achievementsGames {  get; set; }     
-     //   public DbSet<Score> scores {  get; set; } 
+        public DbSet<Games> games {  get; set; }
         public DbSet<User> users {  get; set; }
+        public DbSet<PersonLogin> personLogins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,8 +38,6 @@ namespace SGRA2._0.Context
             modelBuilder.Entity<Achievements>()
                 .HasKey(e => e.IdAchievements);
 
-         //   modelBuilder.Entity<AchievementsGames>()
-         //       .HasKey(e => e.IdAchievementsG);
 
             modelBuilder.Entity<ChemicalComposition>()
                 .HasKey(e => e.IdChemicalComposition);
@@ -84,9 +81,6 @@ namespace SGRA2._0.Context
             modelBuilder.Entity<Sale>()
                 .HasKey (e => e.IdSale);
 
-        //    modelBuilder.Entity<Score>()
-        //        .HasKey (e => e.IdScore);
-
             modelBuilder.Entity<Suppliers>()
                 .HasKey (e =>e.IdSuppliers);    
 
@@ -107,6 +101,9 @@ namespace SGRA2._0.Context
 
             modelBuilder.Entity<WasteType>()
                 .HasKey (e =>e.IdWasteType);
+
+            modelBuilder.Entity<PersonLogin>()
+                .HasKey(e => e.IdLoginP);
 
             //Foreign Key
             modelBuilder.Entity<Waste>()
@@ -134,13 +131,6 @@ namespace SGRA2._0.Context
             modelBuilder.Entity<Suppliers>()
                 .HasOne(e => e.WasteType).WithMany()
                 .HasForeignKey(e => e.IdWasteType);
-
-        //    modelBuilder.Entity<Score>()
-        //        .HasOne(e => e.User).WithMany() 
-        //        .HasForeignKey(e => e.IdUser);
-        //    modelBuilder.Entity<Score>()
-        //        .HasOne(e => e.Games).WithMany()
-        //        .HasForeignKey(e => e.IdGames);
             
             modelBuilder.Entity<Sale>()
                 .HasOne(e => e.Customer).WithMany()
@@ -192,22 +182,9 @@ namespace SGRA2._0.Context
                 .HasOne(e =>e.Games).WithMany()
                 .HasForeignKey(e =>e.IdGames);
 
-            //    modelBuilder.Entity<AchievementsGames>()
-            //        .HasOne(e => e.Games).WithMany()
-            //        .HasForeignKey(e => e.IdGames);
-            //    modelBuilder.Entity<AchievementsGames>()
-            //        .HasOne(e => e.Achievements).WithMany()
-            //        .HasForeignKey(e => e.IdAchievements);
-
-            //AUTHENTICATION
-           // modelBuilder.Entity<User>().HasData(
-           //     new User
-           //     {
-           //         IdUser = 1,
-           //         UserName = "System",
-           //         Email = "System",
-           //         Password = "System",
-           //     });
+            modelBuilder.Entity<PersonLogin>()
+                .HasOne(e => e.Person).WithMany()
+                .HasForeignKey(e => e.IdPerson);
 
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(e => e.GetForeignKeys()))

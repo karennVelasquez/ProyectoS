@@ -38,18 +38,6 @@ namespace SGRA2._0.Controllers
             return Ok(person);
         }
 
-        //GET api/BYUSERNAME
-        [HttpGet("GetIdByName/{name}")]
-        public async Task<IActionResult> GetIdByName (string name)
-        {
-            var id = await _personService.GetIdByName(name);
-            if(id == null) 
-            {
-                return NotFound();
-            }
-            return Ok(id);
-        }
-
         //POST api/<PersonController>
         [HttpPost("Create/")]
       
@@ -63,25 +51,6 @@ namespace SGRA2._0.Controllers
             else
             {
                 return BadRequest("Error when inserting into the database. ");
-            }
-        }
-
-        //AUTENTICACION
-        [HttpPost("Authentication")]
-        public async Task<ActionResult<bool>>LoginPerson(string name, int document)
-        {
-            if(string.IsNullOrEmpty(name) || document.ToString().Length != 10)
-            {
-                return BadRequest("Name and document (10- digit document number) are required.");
-            }
-            var person = await _personService.Authentication(name, document);
-            if (person != null) 
-            {
-                return Ok(true);
-            }
-            else
-            {
-                return Ok(false);
             }
         }
 

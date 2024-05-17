@@ -8,6 +8,7 @@ using static SGRA2._0.Repositories.IRecordTimeRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using SGRA2._0.Helpers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,23 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 var conString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<PersonDBContext>(options => options.UseSqlServer(conString));
 
-// Agrega la configuración CORS aquí
-/*builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy( 
-
-                  //  policy =>
-                    {
-                        policy.AllowAnyOrigin();
-                        policy.AllowAnyHeader();
-                    });//
-        policy =>
-        {
-            policy.WithOrigins("http://localhost/") // Aquí debes especificar los orígenes permitidos
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-        });
-});*/
+//APPSETTINGS
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 
 builder.Services.AddControllers();
@@ -106,6 +92,9 @@ builder.Services.AddScoped<IWasteService,  WasteService>();
 
 builder.Services.AddScoped<IWasteTypeRepositories,  WasteTypeRepositories>(); 
 builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>();
+
+builder.Services.AddScoped<IPersonLoginRepository, PersonLoginRepositories>();
+builder.Services.AddScoped<IPersonLoginService, PersonLoginService>();
 
 //CORS SI FUNCIONA
 builder.Services.AddCors(options =>

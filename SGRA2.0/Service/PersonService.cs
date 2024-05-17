@@ -12,13 +12,9 @@ namespace SGRA2._0.Service
     {
         Task<List<Person>> GetAll();
         Task<Person> GetPerson(int IdPerson);
-        //
-        Task<int?> GetIdByName(string name);
         Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int Document);
         Task<Person> UpdatePerson(int IdPerson, string? Name = null, string? Lastname = null, string? Email = null, int? IdDocumentType = null, int? Document = null);
         Task<Person> DeletePerson(int IdPerson);
-        //
-        Task<Person> Authentication(string name, int document);
      
     }
     public class PersonService : IPersonService
@@ -54,23 +50,10 @@ namespace SGRA2._0.Service
             //throw new NotImplementedException();
         }
 
-        //
-        public async Task<int?> GetIdByName(string name)
-        {
-            return await _personRepositories.GetIdByName(name);
-            throw new NotImplementedException();
-        }
         public async Task<Person> GetPerson(int IdPerson)
         {
             return await _personRepositories.GetPerson(IdPerson);
             //throw new NotImplementedException();
-        }
-
-        //AUTENTICACION
-        public async Task<Person> Authentication(string name, int document)
-        {
-            return await _personRepositories.AuthUser(name, document);
-            throw new NotImplementedException();
         }
         public async Task<Person> UpdatePerson(int IdPerson, string? Name = null, string? Lastname = null, string? Email = null, int? IdDocumentType = null, int? Document = null)
         {
