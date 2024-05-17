@@ -14,7 +14,6 @@ using SGRA2._0.Helpers;
 
 
 var builder = WebApplication.CreateBuilder(args);
-//var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 var conString = builder.Configuration.GetConnectionString("Connection");
@@ -26,12 +25,12 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("PersonPolicy", policy => policy.RequireRole("Person"));
     options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
 });
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "Admin"));
+    options.AddPolicy("PersonPolicy", policy => policy.RequireClaim("Role", "Person"));
     options.AddPolicy("UserPolicy", policy => policy.RequireClaim("Role", "User"));
 });
 
@@ -41,7 +40,7 @@ builder.Services.AddSwaggerGen(swagger =>
     swagger.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Organic agricultural waste management system",
+        Title = "Organic Agricultural Waste Management System",
         Description = ".NET 8 Web API"
     });
     // To Enable authorization using Swagger (JWT)
@@ -190,7 +189,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 // Agrega el middleware de CORS al pipeline de solicitud HTTP
-//app.UseCors("NuevaPolitica");
+app.UseCors("NuevaPolitica");
 //Autenticacion
 app.UseAuthentication();
 

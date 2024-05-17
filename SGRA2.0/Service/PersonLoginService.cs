@@ -1,9 +1,13 @@
-﻿using SGRA2._0.Model;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using SGRA2._0.Model;
 using SGRA2._0.Repositories;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Runtime.Intrinsics.Arm;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SGRA2._0.Service
 {
@@ -15,15 +19,20 @@ namespace SGRA2._0.Service
         Task<PersonLogin> CreatePersonLogin(string UserName, string Password, int IdPerson);
         Task<PersonLogin> UpdatePersonLogin(int IdLoginP, string? UserName = null, string? Password = null, int? IdPerson = null);
         Task<PersonLogin> DeletePersonLogin(int IdLoginP);
-        Task<PersonLogin> Authentication(string username, string password);
+       //
+        Task<bool> Authentication(string username, string password);
+        string GenerarToken(string username);
     }
     public class PersonLoginService : IPersonLoginService
     {
         public readonly IPersonLoginRepository _personLoginRepository;
+        //
+        private readonly IConfiguration _configuration;
 
-        public PersonLoginService(IPersonLoginRepository personLoginRepository) 
+        public PersonLoginService(IPersonLoginRepository personLoginRepository, IConfiguration configuration) 
         {
             _personLoginRepository = personLoginRepository;
+            _configuration = configuration;
         }
 
         public async Task<PersonLogin> CreatePersonLogin(string UserName, string Password, int IdPerson)
@@ -61,10 +70,52 @@ namespace SGRA2._0.Service
         }
 
         //AUTENTICACION
-        public async Task<PersonLogin> Authentication(string username, string password)
+        public async Task<bool> Authentication(string username, string password)
         {
-            return await _personLoginRepository.AuthUser(username, password);
+            var plogin = await _personLoginRepository.AuthUser(username, password);
+            if(plogin != null) 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            //return await _personLoginRepository.AuthUser(username, password);
             throw new NotImplementedException();
+        }
+
+        //TOKEN
+        public string GenerarToken(string username)
+        {
+            var key = _configuration.GetValue<string>("Jwt:Key");
+            var keyBytes = Encoding.ASCII.GetBytes(key);
+
+            //Solicitudes de Permiso
+            var claims = new ClaimsIdentity();
+            claims.AddClaim(new Claim(ClaimTypes.Name, username));
+            claims.AddClaim(new Claim(ClaimTypes.Role, "Person"));
+
+            var credencialesToken = new SigningCredentials
+                (
+                    new SymmetricSecurityKey(keyBytes),
+                    SecurityAlgorithms.HmacSha256Signature
+                );
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = claims,
+                Expires = DateTime.UtcNow.AddMinutes(8),
+                SigningCredentials = credencialesToken
+            };
+
+            //Leertoken
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenConfig = tokenHandler.CreateToken(tokenDescriptor);
+
+            string tokenCreado = tokenHandler.WriteToken(tokenConfig);
+
+            return tokenCreado;
         }
 
         public async Task<PersonLogin> UpdatePersonLogin(int IdLoginP, string? UserName = null, string? Password = null, int? IdPerson = null)

@@ -75,7 +75,7 @@ namespace SGRA2._0.Controllers
         {
             if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                return BadRequest("Name and email are required. ");
+                return BadRequest("Name, email and password are required. ");
             }
             // bool user = await _userService.Authentication(userName, email, password);
             bool user = await _userService.Authentication(userName, email, password);

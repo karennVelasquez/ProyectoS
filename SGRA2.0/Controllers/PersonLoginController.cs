@@ -6,7 +6,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Threading.ExecutionContext;
 using Microsoft.AspNetCore.Http;
 using static Azure.Core.HttpHeader;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SGRA2._0.Controllers
 {
@@ -22,6 +23,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<PersonLogin>
         [HttpGet]
+        [Authorize(Roles = "Person")]
         public async Task<ActionResult<List<PersonLogin>>> GetAllPersonLogin()
         {
             return Ok(await _personLoginService.GetAll());
@@ -29,6 +31,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<PersonLogin>Id
         [HttpGet("{IdLoginP}")]
+        [Authorize(Roles = "Person")]
         public async Task<ActionResult<PersonLogin>> GetPersonLogin( int IdLoginP)
         {
             var personLogin = await _personLoginService.GetPersonLogin(IdLoginP);
@@ -53,6 +56,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<PersonLogin>
         [HttpPost("Create/")]
+       // [Authorize(Roles = "Person")]
         public async Task<ActionResult<PersonLogin>> PostPersonLogin(int IdLoginP, string UserName, string Password, int IdPerson)
         {
             var personLoginToPut = await _personLoginService.CreatePersonLogin(UserName, Password, IdPerson);
@@ -68,21 +72,22 @@ namespace SGRA2._0.Controllers
 
         //AUTENTICACION
         [HttpPost("Authentication")]
-        public async Task<ActionResult<bool>> Login(string userName, string password)
+        public async Task<ActionResult<string>> LoginP(string userName, string password)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
             {
-                return BadRequest("Name, email and password are required. ");
+                return BadRequest("Name and password are required. ");
             }
             // bool user = await _userService.Authentication(userName, email, password);
-            var user = await _personLoginService.Authentication(userName, password);
-            if (user != null)
+            bool userp = await _personLoginService.Authentication(userName, password);
+            if (userp != null)
             {
-                return Ok(true);
+                string token = _personLoginService.GenerarToken(userName);
+                return Ok(token);
             }
             else
             {
-                return Ok(false);
+                return Unauthorized();
             }
         }
 
@@ -102,6 +107,4 @@ namespace SGRA2._0.Controllers
         }
 
     }
-
-    
 }

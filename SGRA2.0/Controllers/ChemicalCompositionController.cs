@@ -44,7 +44,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<ChemicalcompositionController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<ChemicalComposition>> PostChemicalComposition(int IdWaste,string ChemicalComposition)
+        public async Task<ActionResult<ChemicalComposition>> PostChemicalComposition(int IdChemicalComposition, int IdWaste,string ChemicalComposition)
         {
             var chemicalCompositionToPut = await _chemicalCompositionService.CreateChemicalComposition(IdWaste, ChemicalComposition);  
             if(chemicalCompositionToPut != null)
