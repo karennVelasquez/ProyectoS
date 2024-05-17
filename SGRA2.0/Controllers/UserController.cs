@@ -6,6 +6,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Threading.ExecutionContext;
 using Microsoft.AspNetCore.Http;
 using static Azure.Core.HttpHeader;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SGRA2._0.Controllers
 {
@@ -18,9 +20,10 @@ namespace SGRA2._0.Controllers
         {
             _userService = userService;
         }
-
+   
         //GET api/<UserController>
         [HttpGet]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<List<User>>> GetAllUser()
         {
             return Ok(await _userService.GetAll());
@@ -28,6 +31,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<UserController>/
         [HttpGet("{IdUser}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> GetUser(int IdUser)
         {
             var user = await _userService.GetUser(IdUser);
@@ -51,6 +55,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<UserController>
         [HttpPost("Create/")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<User>> PostUser(int IdUser, string UserName, string Email, string Password)
         {
             var userToPut = await _userService.CreateUser(UserName, Email, Password);
@@ -75,7 +80,9 @@ namespace SGRA2._0.Controllers
            // bool user = await _userService.Authentication(userName, email, password);
            var user = await _userService.Authentication(userName, email, password);
             if(user != null) 
+           // if (user)
             {
+                string token = _userService.GenerarToken(userName);
                 return Ok(true);
             }
             else

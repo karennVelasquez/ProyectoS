@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using static SGRA2._0.Repositories.IRecordTimeRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using SGRA2._0.Helpers;
 
@@ -18,14 +20,56 @@ var builder = WebApplication.CreateBuilder(args);
 var conString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<PersonDBContext>(options => options.UseSqlServer(conString));
 
-//APPSETTINGS
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
+});
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "Admin"));
+    options.AddPolicy("UserPolicy", policy => policy.RequireClaim("Role", "User"));
+});
+
+builder.Services.AddSwaggerGen(swagger =>
+{
+    //This is to generate the Default UI of Swagger Documentation
+    swagger.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Organic agricultural waste management system",
+        Description = ".NET 8 Web API"
+    });
+    // To Enable authorization using Swagger (JWT)
+    swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer hsgda56hbd\"",
+    });
+    swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] {}
+
+                    }
+                });
+});
 
 builder.Services.AddScoped<IAchievementsRepositories,  AchievementsRepositories>();
 builder.Services.AddScoped<IAchievementsService,  AchievementsService>();   
@@ -95,6 +139,29 @@ builder.Services.AddScoped<IWasteTypeService,  WasteTypeService>();
 
 builder.Services.AddScoped<IPersonLoginRepository, PersonLoginRepositories>();
 builder.Services.AddScoped<IPersonLoginService, PersonLoginService>();
+
+//
+var key = builder.Configuration.GetValue<string>("Jwt:key");
+var keyBytes = Encoding.ASCII.GetBytes(key);
+
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(config =>
+{
+    config.RequireHttpsMetadata = false;
+    config.SaveToken = true;
+    config.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
+});
 
 //CORS SI FUNCIONA
 builder.Services.AddCors(options =>

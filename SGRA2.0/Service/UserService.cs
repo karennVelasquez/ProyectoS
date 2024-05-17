@@ -1,6 +1,11 @@
-﻿using SGRA2._0.Model;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using SGRA2._0.Model;
 using SGRA2._0.Repositories;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Runtime.Intrinsics.Arm;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -18,13 +23,18 @@ namespace SGRA2._0.Service
         //
         Task<User> Authentication(string userName, string email, string password);
         string EncryptPassword (string password);
+        string GenerarToken(string username);
     }
     public class UserService : IUserService
     {
         public readonly IUserRepositories _userRepositories;
-        public UserService(IUserRepositories userRepositories)
+        //
+        private readonly IConfiguration _configuration;
+        public UserService(IUserRepositories userRepositories, IConfiguration configuration)
         {
             _userRepositories = userRepositories;
+            //
+            _configuration = configuration;
         }
         public async Task<User> CreateUser(string UserName, string Email, string Password)
         {
@@ -83,12 +93,43 @@ namespace SGRA2._0.Service
             //var login = await _userRepositories.AuthUser(userName, email, password);
 
             return await _userRepositories.AuthUser(userName, email, password);
-           // string hashedPassword = EncryptPassword(password);
-           // if (login == null && (login.Password == hashedPassword))
-           // return false;
+            // string hashedPassword = EncryptPassword(password);
+            // if (login == null && (login.Password == hashedPassword))
+            // return false;
             throw new NotImplementedException();
         }
 
+
+        //TOKEN
+        public string GenerarToken(string username)
+        {
+            var key = _configuration.GetValue<string>("Jwt:key");
+            var keyBytes = Encoding.ASCII.GetBytes(key);
+
+            var claims = new ClaimsIdentity();
+            claims.AddClaim(new Claim(ClaimTypes.Name, username));
+            claims.AddClaim(new Claim(ClaimTypes.Role, "User"));
+
+            var credencialesToken = new SigningCredentials
+                (
+                    new SymmetricSecurityKey(keyBytes),
+                    SecurityAlgorithms.HmacSha256Signature
+                );
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = claims,
+                Expires = DateTime.UtcNow.AddMinutes(1),
+                SigningCredentials = credencialesToken
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenConfig = tokenHandler.CreateToken(tokenDescriptor);
+
+            string tokenCreado = tokenHandler.WriteToken(tokenConfig);
+
+            return tokenCreado;
+        }
         public async Task<User> UpdateUser(int IdUser, string? UserName = null, string? Email = null, string? Password = null)
         {
             User newuser = await _userRepositories.GetUser(IdUser);
