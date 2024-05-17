@@ -31,7 +31,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<UserController>/
         [HttpGet("{IdUser}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<User>> GetUser(int IdUser)
         {
             var user = await _userService.GetUser(IdUser);
@@ -71,23 +71,23 @@ namespace SGRA2._0.Controllers
 
         //AUTENTICACION
         [HttpPost("Authentication")]
-        public async Task<ActionResult<bool>> Login(string userName, string email, string password)
+        public async Task<ActionResult<string>> Login(string userName, string email, string password  )
         {
-            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) 
+            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                return BadRequest("Name, email and password are required. ");
+                return BadRequest("Name and email are required. ");
             }
-           // bool user = await _userService.Authentication(userName, email, password);
-           var user = await _userService.Authentication(userName, email, password);
-            if(user != null) 
-           // if (user)
+            // bool user = await _userService.Authentication(userName, email, password);
+            bool user = await _userService.Authentication(userName, email, password);
+           // if(user != null) 
+            if (user)
             {
                 string token = _userService.GenerarToken(userName);
-                return Ok(true);
+                return Ok(token);
             }
             else
             {
-                return Ok(false);
+                return Unauthorized();
             }
         }
 

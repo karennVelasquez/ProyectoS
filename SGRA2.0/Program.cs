@@ -141,7 +141,7 @@ builder.Services.AddScoped<IPersonLoginRepository, PersonLoginRepositories>();
 builder.Services.AddScoped<IPersonLoginService, PersonLoginService>();
 
 //
-var key = builder.Configuration.GetValue<string>("Jwt:key");
+var key = builder.Configuration.GetValue<string>("Jwt:Key");
 var keyBytes = Encoding.ASCII.GetBytes(key);
 
 builder.Services.AddAuthentication(config =>
@@ -190,7 +190,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 // Agrega el middleware de CORS al pipeline de solicitud HTTP
-app.UseCors("NuevaPolitica");
+//app.UseCors("NuevaPolitica");
 //Autenticacion
 app.UseAuthentication();
 

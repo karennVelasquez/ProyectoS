@@ -21,7 +21,7 @@ namespace SGRA2._0.Service
         Task<User> UpdateUser(int IdUser, string? UserName = null, string? Email=null, string? Password = null);
         Task<User> DeleteUser(int IdUser);
         //
-        Task<User> Authentication(string userName, string email, string password);
+        Task<bool> Authentication(string userName, string email, string password);
         string EncryptPassword (string password);
         string GenerarToken(string username);
     }
@@ -88,11 +88,19 @@ namespace SGRA2._0.Service
         }
 
         //AUTENTICACION
-        public async Task<User> Authentication(string userName, string email, string password)
+        public async Task<bool> Authentication(string userName, string email, string password)
         {
-            //var login = await _userRepositories.AuthUser(userName, email, password);
+            var login = await _userRepositories.AuthUser(userName, email, password);
 
-            return await _userRepositories.AuthUser(userName, email, password);
+            if (login != null) 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            //return await _userRepositories.AuthUser(userName, email, password);
             // string hashedPassword = EncryptPassword(password);
             // if (login == null && (login.Password == hashedPassword))
             // return false;
@@ -103,9 +111,10 @@ namespace SGRA2._0.Service
         //TOKEN
         public string GenerarToken(string username)
         {
-            var key = _configuration.GetValue<string>("Jwt:key");
+            var key = _configuration.GetValue<string>("Jwt:Key");
             var keyBytes = Encoding.ASCII.GetBytes(key);
 
+            //Solicitudes de Permiso
             var claims = new ClaimsIdentity();
             claims.AddClaim(new Claim(ClaimTypes.Name, username));
             claims.AddClaim(new Claim(ClaimTypes.Role, "User"));
@@ -119,10 +128,11 @@ namespace SGRA2._0.Service
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = claims,
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddMinutes(8),
                 SigningCredentials = credencialesToken
             };
 
+            //Leertoken
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenConfig = tokenHandler.CreateToken(tokenDescriptor);
 
