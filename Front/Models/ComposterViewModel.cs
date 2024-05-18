@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Front.Models
 {
-    public class Level
+    public class ComposterViewModel
     {
         [DisplayName("Id")]
-        public int IdLevel { get; set; }
-        [DisplayName("IdLevel")]
-        public int NumLevel { get; set; }
+        public int IdComposter { get; set; }
+        [DisplayName("Composter")]
+        public string Material { get; set; }
+        public string DrainageSystem { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
     }
