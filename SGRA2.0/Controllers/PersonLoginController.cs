@@ -23,7 +23,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<PersonLogin>
         [HttpGet]
-        [Authorize(Roles = "Person")]
+       // [Authorize(Roles = "Person")]
         public async Task<ActionResult<List<PersonLogin>>> GetAllPersonLogin()
         {
             return Ok(await _personLoginService.GetAll());
@@ -31,7 +31,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<PersonLogin>Id
         [HttpGet("{IdLoginP}")]
-        [Authorize(Roles = "Person")]
+        //[Authorize(Roles = "Person")]
         public async Task<ActionResult<PersonLogin>> GetPersonLogin( int IdLoginP)
         {
             var personLogin = await _personLoginService.GetPersonLogin(IdLoginP);

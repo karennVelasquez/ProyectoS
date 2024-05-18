@@ -23,7 +23,7 @@ namespace SGRA2._0.Controllers
    
         //GET api/<UserController>
         [HttpGet]
-        [Authorize(Roles = "User")]
+        //[Authorize(Roles = "User")]
         public async Task<ActionResult<List<User>>> GetAllUser()
         {
             return Ok(await _userService.GetAll());
@@ -31,7 +31,7 @@ namespace SGRA2._0.Controllers
 
         //GET api/<UserController>/
         [HttpGet("{IdUser}")]
-        [Authorize(Roles = "User")]
+       // [Authorize(Roles = "User")]
         public async Task<ActionResult<User>> GetUser(int IdUser)
         {
             var user = await _userService.GetUser(IdUser);
@@ -55,7 +55,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<UserController>
         [HttpPost("Create/")]
-        [Authorize(Roles = "User")]
+        //[Authorize(Roles = "User")]
         public async Task<ActionResult<User>> PostUser(int IdUser, string UserName, string Email, string Password)
         {
             var userToPut = await _userService.CreateUser(UserName, Email, Password);
