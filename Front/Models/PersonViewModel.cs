@@ -16,5 +16,6 @@ namespace Front.Models
         public int Document { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
+        //
     }
 }
