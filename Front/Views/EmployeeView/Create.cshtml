@@ -25,26 +25,28 @@
     <link href="~/css/site.css" rel="stylesheet" />
 
     <style>
-
         .form-group-inline {
             display: flex;
             align-items: center;
         }
 
-            .form-group-inline label {
-                margin-right: 10px; /* Espacio entre la etiqueta y el campo de entrada */
+        .form-group-inline label {
+            margin-right: 10px;
+            /* Espacio entre la etiqueta y el campo de entrada */
 
-                min-width: 100px; /* Ancho mínimo para las etiquetas */
-            }
+            min-width: 100px;
+            /* Ancho mínimo para las etiquetas */
+        }
 
-            .form-group-inline input {
-                flex-grow: 1; /* Permite que el campo de entrada tome todo el espacio restante */
-            }
+        .form-group-inline input {
+            flex-grow: 1;
+            /* Permite que el campo de entrada tome todo el espacio restante */
+        }
 
-            .form-group-inline span {
-                margin-left: 10px; /* Espacio entre el campo de entrada y el mensaje de validación */
-            }
-
+        .form-group-inline span {
+            margin-left: 10px;
+            /* Espacio entre el campo de entrada y el mensaje de validación */
+        }
     </style>
 
 </head>
@@ -73,7 +75,8 @@
 
                     <label asp-for="IdPerson" class="control-label"></label>
 
-                    <input asp-for="IdPerson" class="form-control" style="border-color: black;" placeholder="IdPerson" />
+                    <input asp-for="IdPerson" class="form-control" style="border-color: black;"
+                        placeholder="IdPerson" />
 
                     <span asp-validation-for="IdPerson" class="text-danger"></span>
 
@@ -83,7 +86,8 @@
 
                     <label asp-for="Position" class="control-label"></label>
 
-                    <input asp-for="Position" class="form-control" style="border-color: black;" placeholder="Position" />
+                    <input asp-for="Position" class="form-control" style="border-color: black;"
+                        placeholder="Position" />
 
                     <span asp-validation-for="Position" class="text-danger"></span>
 
@@ -103,7 +107,8 @@
 
                 <label class="form-check-label">
 
-                <input class="form-check-input" asp-for="StateDelete" /> @Html.DisplayNameFor(model => model.StateDelete)
+                <input class="form-check-input" asp-for="StateDelete" /> @Html.DisplayNameFor(model =>
+                model.StateDelete)
 
                 </label>
 
@@ -111,7 +116,8 @@
 
                 <div class="form-group mt-2">
 
-                    <input type="submit" value="Create" class="btn" style="background-color: lightslategrey; color: white;" />
+                    <input type="submit" value="Create" class="btn"
+                        style="background-color: lightslategrey; color: white;" />
 
                 </div>
 
