@@ -43,7 +43,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<EmployeeController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<Employee>> PostEmployee(int IdPerson, string Position)
+        public async Task<ActionResult<Employee>> PostEmployee(int IdEmployee, int IdPerson, string Position)
         {
             var EmployeeToPut = await _employeeService.CreateEmployee(IdPerson, Position);  
             if(EmployeeToPut != null)

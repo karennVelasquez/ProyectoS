@@ -43,7 +43,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<ComposterController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<Composter>> PostComposter( string Material, string DrainageSystem)
+        public async Task<ActionResult<Composter>> PostComposter(int IdComposter, string Material, string DrainageSystem)
         {
             var ComposterToPut = await _composterService.CreateComposter(Material, DrainageSystem);  
             if(ComposterToPut != null)

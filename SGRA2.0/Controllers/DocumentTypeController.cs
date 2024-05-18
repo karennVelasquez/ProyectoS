@@ -43,7 +43,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<DocumentTypesController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<DocumentType>> PostDocumentType(string Document)
+        public async Task<ActionResult<DocumentType>> PostDocumentType(int IdDocumentTypes, string Document)
         {
             var DocumentTypesToPut = await _documentTypeService.CreateDocumentType(Document);  
             if(DocumentTypesToPut != null)

@@ -44,7 +44,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<AchievementsController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<Achievements>> PostAchievement(int IdUser, int IdGames)
+        public async Task<ActionResult<Achievements>> PostAchievement(int IdAchievements,int IdUser, int IdGames)
         {
             var achievementsToPut = await _achievementsService.CreateAchievements(IdUser, IdGames);  
             if(achievementsToPut != null)

@@ -43,7 +43,7 @@ namespace SGRA2._0.Controllers
 
         //POST api/<CustomerController>
         [HttpPost("Create/")]
-        public async Task<ActionResult<Customer>> PostCustomer(int IdPerson)
+        public async Task<ActionResult<Customer>> PostCustomer(int IdCustomer, int IdPerson)
         {
             var CustomerToPut = await _customerService.CreateCustomer(IdPerson);  
             if(CustomerToPut != null)
