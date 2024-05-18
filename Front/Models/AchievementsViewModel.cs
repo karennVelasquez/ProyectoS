@@ -8,12 +8,15 @@ using System.Text;
 
 namespace Front.Models
 {
-    public class DocumentTypeViewModel
+    public class AchievementsViewModel
     {
         [DisplayName("Id")]
-        public int IdDocumentType { get; set; }
-        [DisplayName("IdDocumentType")]
-        public string Document { get; set; }
+        public int IdAchievements { get; set; }
+        [DisplayName("IdAchievements")]
+        public int IdUser { get; set; }
+        public User User { get; set; }
+        public int IdGames { get; set; }
+        public Games Games { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
     }
