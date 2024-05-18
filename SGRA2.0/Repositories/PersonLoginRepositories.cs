@@ -20,7 +20,7 @@ namespace SGRA2._0.Repositories
     {
         private readonly PersonDBContext _db;
 
-        public PersonLoginRepositories(PersonDBContext db) 
+        public PersonLoginRepositories(PersonDBContext db)
         {
             _db = db;
         }
@@ -38,7 +38,7 @@ namespace SGRA2._0.Repositories
             };
             _db.personLogins.AddAsync(newPersonLogin);
             _db.SaveChanges();
-            return newPersonLogin;  
+            return newPersonLogin;
         }
 
         public async Task<PersonLogin> DeletePersonLogin(PersonLogin personLogin)
