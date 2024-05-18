@@ -1,4 +1,4 @@
-﻿@model Front.Models.WasteTypeViewModel
+﻿@model Front.Models.UserViewModel
 
 @{
 
@@ -8,7 +8,7 @@
 
 <h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">New Register</h1>
 
-<h4 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Waste Type </h4>
+<h4 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">User </h4>
 
 <hr />
 
@@ -71,31 +71,31 @@
 
                 <div class="form-group form-group-inline">
 
-                    <label asp-for="Waste_Type" class="control-label"></label>
+                    <label asp-for="UserName" class="control-label"></label>
 
-                    <input asp-for="Waste_Type" class="form-control" style="border-color: black;" placeholder="Waste_Type" />
+                    <input asp-for="UserName" class="form-control" style="border-color: black;" placeholder="UserName" />
 
-                    <span asp-validation-for="Waste_Type" class="text-danger"></span>
-
-                </div>
-
-                <div class="form-group form-group-inline">
-
-                    <label asp-for="Description" class="control-label"></label>
-
-                    <input asp-for="Description" class="form-control" style="border-color: black;" placeholder="Description" />
-
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
 
                 </div>
 
                 <div class="form-group form-group-inline">
 
-                    <label asp-for="Descomposition" class="control-label"></label>
+                    <label asp-for="Email" class="control-label"></label>
 
-                    <input asp-for="Descomposition" class="form-control"  style="border-color: black;" placeholder="Descomposition" />
+                    <input asp-for="Email" class="form-control" style="border-color: black;" placeholder="Email" />
 
-                    <span asp-validation-for="Descomposition" class="text-danger"></span>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group form-group-inline">
+
+                    <label asp-for="Password" class="control-label"></label>
+
+                    <input asp-for="Password" class="form-control" style="border-color: black;" placeholder="Password" />
+
+                    <span asp-validation-for="Password" class="text-danger"></span>
 
                 </div>
 
@@ -127,7 +127,7 @@
 
                 <div>
 
-                    <a asp-action="WasteTypeGet" style="color: darkslategrey;">Back</a>
+                    <a asp-action="UserGet" style="color: darkslategrey;">Back</a>
 
                 </div>
 
