@@ -12,7 +12,7 @@ namespace Front.Models
         public string Lastname { get; set; }
         public string Email { get; set; }
         public int IdDocumentType { get; set; }
-        public DocumentTYpeViewModel DocumentType { get; set; }
+        public DocumentTypeViewModel DocumentType { get; set; }
         public int Document { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
