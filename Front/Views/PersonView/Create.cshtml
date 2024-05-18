@@ -1,4 +1,4 @@
-﻿@model Front.Models.WasteViewModel
+﻿@model Front.Models.PersonViewModel
 
 @{
 
@@ -8,7 +8,7 @@
 
 <h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">New Register</h1>
 
-<h4 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Waste </h4>
+<h4 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Person </h4>
 
 <hr />
 
@@ -71,14 +71,53 @@
 
                 <div class="form-group form-group-inline">
 
-                    <label asp-for="IdWasteType" class="control-label"></label>
+                    <label asp-for="Name" class="control-label"></label>
 
-                    <input asp-for="IdWasteType" class="form-control" style="border-color: black;" placeholder="IdWasteType" />
+                    <input asp-for="Name" class="form-control" style="border-color: black;" placeholder="Name" />
 
-                    <span asp-validation-for="IdWasteType" class="text-danger"></span>
+                    <span asp-validation-for="Name" class="text-danger"></span>
 
                 </div>
 
+                <div class="form-group form-group-inline">
+
+                    <label asp-for="Lastname" class="control-label"></label>
+
+                    <input asp-for="Lastname" class="form-control" style="border-color: black;" placeholder="Lastname" />
+
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group form-group-inline">
+
+                    <label asp-for="Email" class="control-label"></label>
+
+                    <input asp-for="Email" class="form-control" style="border-color: black;" placeholder="Email" />
+
+                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group form-group-inline">
+
+                    <label asp-for="IdDocumentType" class="control-label"></label>
+
+                    <input asp-for="IdDocumentType" class="form-control" style="border-color: black;" placeholder="IdDocumentType" />
+
+                    <span asp-validation-for="IdDocumentType" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group form-group-inline">
+
+                    <label asp-for="Document" class="control-label"></label>
+
+                    <input asp-for="Document" class="form-control" style="border-color: black;" placeholder="Document" />
+
+                    <span asp-validation-for="Document" class="text-danger"></span>
+
+                </div>
                 @*<div class="form-group">
 
                 <label asp-for="RegisterDate" class="control-label"></label>
@@ -107,7 +146,7 @@
 
                 <div>
 
-                    <a asp-action="WasteGet" style="color: darkslategrey;">Back</a>
+                    <a asp-action="PersonGet" style="color: darkslategrey;">Back</a>
 
                 </div>
 

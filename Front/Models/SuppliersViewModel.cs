@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using SGRA2._0.Model;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using SGRA2._0.Model;
 
@@ -8,12 +9,11 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdSuppliers { get; set; }
-        [DisplayName("IdSuppliers")]
+        [DisplayName("Suppliers")]
         public int IdPerson { get; set; }
         public Person Person { get; set; }
         public int IdWasteType { get; set; }
         public WasteType WasteType { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime? Date { get; set; }
     }
 }

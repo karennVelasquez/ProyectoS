@@ -1,15 +1,11 @@
-using Azure;
+﻿using Azure;
 using Front.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
-using SGRA2._0.Model;
-using System.ComponentModel;
 using System.Text;
-
 namespace Front.Controllers
 {
-    public class PersonViewController
+    public class PersonViewController : Controller
     {
         Uri baseAddress = new Uri("http://sistemagestionresiduosagricolas.somee.com/api");
         private readonly HttpClient _client;
@@ -46,7 +42,7 @@ namespace Front.Controllers
             {
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Person/Create?Person={model.Person}&Name={model.Name}&LastName={model.Lastname}&Email={model.Email}&IdDocumentType={model.IdDocumentType}&DocumentType={model.DocumentType}&Document={model.Document}", content).Result;
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Person/Create?Name={model.Name}&Lastname={model.Lastname}&Email={model.Email}&IdDocumentType={model.IdDocumentType}&Document={model.Document}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Person Created";
@@ -88,7 +84,7 @@ namespace Front.Controllers
             {
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Person/Update/{model.IdPerson}?Waste_Type={model.Waste_Type}&Description={model.Description}&Descomposition={model.Descomposition}", content).Result;
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Person/Update/{model.IdPerson}?Name={model.Name}&Lastname={model.Lastname}&Email={model.Email}&IdDocumentType={model.IdDocumentType}&Document={model.Document}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Person details updated";

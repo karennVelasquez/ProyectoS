@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+using Azure;
+using Front.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Text;
 namespace Front.Controllers
 {
-    public class SuppliersViewController
+    public class SuppliersViewController : Controller
     {
         Uri baseAddress = new Uri("http://sistemagestionresiduosagricolas.somee.com/api");
         private readonly HttpClient _client;
@@ -42,7 +42,7 @@ namespace Front.Controllers
             {
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Suppliers/Create?Suppliers={model.Suppliers}&IdPerson={model.IdPerson}&Person={model.Person}&IdWasteType={model.IdWasteType}&WasteType={model.WasteType}", content).Result;
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Suppliers/Create?IdPerson={model.IdPerson}&IdWasteType={model.IdWasteType}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Suppliers Created";
@@ -84,7 +84,7 @@ namespace Front.Controllers
             {
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Suppliers/Update/{model.IdSuppliers}?Waste_Type={model.Waste_Type}&Description={model.Description}&Descomposition={model.Descomposition}", content).Result;
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Suppliers/Update/{model.IdSuppliers}?IdPerson={model.IdPerson}&IdWasteType={model.IdWasteType}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Suppliers details updated";
@@ -141,3 +141,4 @@ namespace Front.Controllers
         }
     }
 }
+

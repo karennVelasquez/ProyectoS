@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Front.Models.WasteViewModel>
+﻿@model IEnumerable<Front.Models.PersonViewController>
 
 @{
-    ViewData["Title"] = "Waste";
+    ViewData["Title"] = "Person";
 }
 
-<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Waste</h1>
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Person</h1>
 <p>
     <a asp-action="Create" style="color: darkslategrey;">Create New</a>
 </p>
@@ -45,10 +45,22 @@
     <thead style="color: black; background-color: lightgray;">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdWaste)
+                @Html.DisplayNameFor(model => model.IdPerson)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdWasteType)
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDocumentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Document)
             </th>
             <th></th>
         </tr>
@@ -58,14 +70,20 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdWaste)
+                    @Html.DisplayFor(modelItem => item.IdPerson)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdWasteType)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Update", "Update", new { id = item.IdWaste }, new { style = "color: darkslategrey;" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdWaste }, new { style = "color: darkslategrey;" })
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "Update", new { id = item.IdPerson }, new { style = "color: darkslategrey;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdPerson }, new { style = "color: darkslategrey;" })
                 </td>
             </tr>
         }
