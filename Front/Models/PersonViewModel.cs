@@ -14,7 +14,7 @@ namespace Front.Models
     {
         public PersonViewModel() 
         {
-            DocumentType = new List<SelectListItem>();
+            TypesDocument = new List<SelectListItem>();
         }
 
         [DisplayName("Id")]
@@ -25,11 +25,12 @@ namespace Front.Models
         
         [DisplayName("Document Type")]
         public int IdDocumentType { get; set; }
-        public IEnumerable<SelectListItem> DocumentType { get; set; }
+        public IEnumerable<SelectListItem> TypesDocument { get; set; }
+        public string Document { get; set; } // // Propiedad para mostrar el nombre del tipo de identificación
+
 
         [DisplayName("Number Document")]
         public int NumDocument { get; set; }
-        
         public bool IsDelete { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Front.ViewModels
         public string Name { get; set; }
         public string Lastname { get; set; }
         public string Email { get; set; }
-        public int DocumentTypes { get; set; }
+        public int DocumentType { get; set; }
         public int NumDocument { get; set; }
         public int Document { get; set; }
     }

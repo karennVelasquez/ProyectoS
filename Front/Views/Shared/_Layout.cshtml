@@ -7,100 +7,95 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Front.styles.css" asp-append-version="true" />
+    <style>
+        .vertical-nav {
+            width: 200px;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: #4F6F52;
+            padding-top: 20px;
+            border-right: 1px solid #1A4D2E;
+        }
+
+            .vertical-nav a {
+                padding: 10px 15px;
+                text-align: left;
+                text-decoration: none;
+                font-size: 18px;
+                color: #333;
+                display: block;
+            }
+
+                .vertical-nav a:hover {
+                    background-color: #B5C18E;
+                    color: #000;
+                }
+
+        .main-content {
+            margin-left: 220px; /* Same as the width of the sidebar */
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Front</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="EmployeeView" asp-action="EmployeeGet">Employee</a>
-                        </li>
-                        <li class="nav-item">
-
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SuppliersView" asp-action="SuppliersGet">Suppliers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DocumentTypeView" asp-action="DocumentTypeGet">DocumentType</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="WasteTypeView" asp-action="WasteTypeGet">Waste Type</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="WasteView" asp-action="WasteGet">Waste</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ChemicalCompositionView" asp-action="ChemicalCompositionGet">ChemicalComposition</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CollectWasteView" asp-action="CollectWasteGet">CollectWaste</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ComposterView" asp-action="ComposterGet">Composter</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserView" asp-action="UserGet">User</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AchievementsView" asp-action="AchievementsGet">Achievements</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GamesView" asp-action="GamesGet">Games</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LevelView" asp-action="LevelGet">Level</a>
-                        </li>
-                        <li class="nav-item">
-
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Exit">Exit</a>
-
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @{
-                var errorMessage = TempData["errorMessage"]?.ToString();
-                var successMessage = TempData["successMessage"]?.ToString();
-            }
-            @if (!string.IsNullOrWhiteSpace(successMessage))
-            {
-                <div class=" alert alert-success">
-                    <b>Success : </b>@successMessage
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" arial-label="Close"></button>
-                </div>
-            }
-            else if (!string.IsNullOrWhiteSpace(errorMessage))
-            {
-                <div class=" alert alert-danger">
-                    <b>Error : </b>@errorMessage
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" arial-label="Close"></button>
-                </div>
-            }
-            @RenderBody()
-        </main>
+    <div class="vertical-nav">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SGRA</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="PersonViewController1" asp-action="PersonGet">Person</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="EmployeeView" asp-action="EmployeeGet">Employee</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="SuppliersView" asp-action="SuppliersGet">Suppliers</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="DocumentTypeView" asp-action="DocumentTypeGet">DocumentType</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="WasteTypeView" asp-action="WasteTypeGet">Waste Type</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="WasteView" asp-action="WasteGet">Waste</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="ChemicalCompositionView" asp-action="ChemicalCompositionGet">ChemicalComposition</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="CollectWasteView" asp-action="CollectWasteGet">CollectWaste</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="ComposterView" asp-action="ComposterGet">Composter</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="UserView" asp-action="UserGet">User</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="AchievementsView" asp-action="AchievementsGet">Achievements</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="GamesView" asp-action="GamesGet">Games</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="LevelView" asp-action="LevelGet">Level</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Exit">Exit</a>
     </div>
-
-    <footer class="border-top footer text-muted">
+    <div class="main-content">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <!-- Keep this area for future top nav or logo if needed -->
+                </div>
+            </nav>
+        </header>
         <div class="container">
-            &copy; 2024 - Front - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main role="main" class="pb-3">
+                @{
+                    var errorMessage = TempData["errorMessage"]?.ToString();
+                    var successMessage = TempData["successMessage"]?.ToString();
+                }
+                @if (!string.IsNullOrWhiteSpace(successMessage))
+                {
+                    <div class=" alert alert-success">
+                        <b>Success : </b>@successMessage
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" arial-label="Close"></button>
+                    </div>
+                }
+                else if (!string.IsNullOrWhiteSpace(errorMessage))
+                {
+                    <div class=" alert alert-danger">
+                        <b>Error : </b>@errorMessage
+                        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" arial-label="Close"></button>
+                    </div>
+                }
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2024 - SGRA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
     <script src="~/js/costumjs.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
