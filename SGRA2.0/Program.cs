@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using SGRA2._0.Helpers;
 
 
 var builder = WebApplication.CreateBuilder(args);
