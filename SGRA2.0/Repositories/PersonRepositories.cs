@@ -10,7 +10,7 @@ namespace SGRA2._0.Repositories
     {
         Task<List<Person>> GetAll();
         Task<Person> GetPerson(int id);
-        Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int Document);
+        Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int NumDocument);
         Task<Person> UpdatePerson(Person person);
         Task<Person> DeletePerson(Person person);
     }
@@ -23,16 +23,16 @@ namespace SGRA2._0.Repositories
             _db = db;
 
         }
-        public async Task<Person> CreatePerson(string Name, string Lastname, string Email, int idDocumentType, int Document)
+        public async Task<Person> CreatePerson(string Name, string Lastname, string Email, int idDocumentType, int NumDocument)
         {
-            DocumentType? documentType = _db.documentTypes.FirstOrDefault(ut => ut.IdDocumentType == idDocumentType);
+            DocumentType? DocumentType = _db.documentTypes.FirstOrDefault(ut => ut.IdDocumentType == idDocumentType);
             Person newPerson = new Person
             {
                 Name = Name,
                 Lastname = Lastname,
                 Email = Email,
                 IdDocumentType = idDocumentType,
-                Document = Document,
+                NumDocument = NumDocument,
                 IsDelete = false,
                 Date = null
             };
@@ -66,7 +66,7 @@ namespace SGRA2._0.Repositories
                 PersonUpdate.Lastname = person.Lastname;
                 PersonUpdate.Email = person.Email;
                 PersonUpdate.IdDocumentType = person.IdDocumentType;
-                PersonUpdate.Document = person.Document;
+                PersonUpdate.NumDocument = person.NumDocument;
 
                 await _db.SaveChangesAsync();
             }

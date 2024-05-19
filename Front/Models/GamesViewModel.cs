@@ -11,10 +11,9 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdGames { get; set; }
-        [DisplayName("IdGames")]
+        [DisplayName("Games")]
         public int IdLevel { get; set; }
         public Level Level { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime? Date { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace SGRA2._0.Model
         public string Email { get; set; }
         public int IdDocumentType { get; set; }
         public DocumentType DocumentType { get; set; }
-        public int Document { get; set; }
+        public int NumDocument { get; set; }
         public bool IsDelete { get; set; }
         public DateTime? Date { get; set; }
 

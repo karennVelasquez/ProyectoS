@@ -11,7 +11,7 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdChemicalComposition { get; set; }
-        [DisplayName("ChemicalComposition")]
+        [DisplayName("Waste")]
         public int IdWaste { get; set; }
         public Waste Waste { get; set; }
         public string Chemical_Composition { get; set; }

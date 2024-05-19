@@ -6,7 +6,7 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdWasteType { get; set; }
-        [DisplayName("WasteType")]
+        [DisplayName("Waste Type")]
         public string Waste_Type { get; set; }
         public string Description { get; set; }
         public string Descomposition { get; set; }

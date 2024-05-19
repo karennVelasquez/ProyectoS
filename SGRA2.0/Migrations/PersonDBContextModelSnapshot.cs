@@ -17,7 +17,7 @@ namespace SGRA2._0.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -336,9 +336,6 @@ namespace SGRA2._0.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Document")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -356,6 +353,9 @@ namespace SGRA2._0.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumDocument")
+                        .HasColumnType("int");
 
                     b.HasKey("IdPerson");
 

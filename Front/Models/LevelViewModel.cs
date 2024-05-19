@@ -13,6 +13,5 @@ namespace Front.Models
         [DisplayName("IdLevel")]
         public int NumLevel { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime? Date { get; set; }
     }
 }

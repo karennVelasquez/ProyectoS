@@ -15,6 +15,5 @@ namespace Front.Models
         public int IdPerson { get; set; }
         public Person Person { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime? Date { get; set; }
     }
 }

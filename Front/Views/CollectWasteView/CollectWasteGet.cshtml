@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Front.Models.CollectWasteViewModel>
+
+@{
+    ViewData["Title"] = "Collect Waste";
+}
+
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult CollectWaste</h1>
+<p>
+    <a asp-action="Create" style="color: darkslategrey;">Create New</a>
+</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Estilizada</title>
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse; /* Elimina los espacios entre celdas */
+            font-family: Arial, sans-serif; /* Define la fuente */
+            margin: 20px 0; /* Espaciado alrededor de la tabla */
+        }
+
+            .table th, .table td {
+                border: 1px solid #ddd; /* Borde alrededor de las celdas */
+                padding: 8px; /* Espaciado dentro de las celdas */
+                text-align: left; /* Alineación del texto */
+            }
+
+            .table th {
+                background-color: gray; /* Fondo para los encabezados */
+                font-weight: bold; /* Texto en negrita */
+            }
+
+            .table tr:nth-child(even) {
+                background-color: lightgray; /* Color de fondo para filas pares */
+            }
+
+            .table tr:hover {
+                background-color: darkgray; /* Color de fondo al pasar el ratón */
+            }
+    </style>
+</head>
+
+<table class="table" style="color: black;">
+    <thead style="color: black; background-color: lightgray;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCollectWaste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSuppliers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdComposter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CollectionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCollectWaste)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdSuppliers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdComposter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollectionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "Update", new { id = item.IdCollectWaste }, new { style = "color: darkslategrey;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdCollectWaste }, new { style = "color: darkslategrey;" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

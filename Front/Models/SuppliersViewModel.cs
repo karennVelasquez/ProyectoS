@@ -9,7 +9,6 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdSuppliers { get; set; }
-        [DisplayName("Suppliers")]
         public int IdPerson { get; set; }
         public Person Person { get; set; }
         public int IdWasteType { get; set; }

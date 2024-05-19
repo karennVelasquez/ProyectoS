@@ -12,7 +12,7 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdAchievements { get; set; }
-        [DisplayName("IdAchievements")]
+        [DisplayName("User")]
         public int IdUser { get; set; }
         public User User { get; set; }
         public int IdGames { get; set; }

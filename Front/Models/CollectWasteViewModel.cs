@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
+using SGRA2._0.Model;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using SGRA2._0.Model;
 
 namespace Front.Models
@@ -11,7 +9,6 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdCollectWaste { get; set; }
-        [DisplayName("CollectWaste")]
         public int IdSuppliers { get; set; }
         public Suppliers Suppliers { get; set; }
         public int IdComposter { get; set; }

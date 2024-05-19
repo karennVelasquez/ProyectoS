@@ -12,8 +12,8 @@ namespace SGRA2._0.Service
     {
         Task<List<Person>> GetAll();
         Task<Person> GetPerson(int IdPerson);
-        Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int Document);
-        Task<Person> UpdatePerson(int IdPerson, string? Name = null, string? Lastname = null, string? Email = null, int? IdDocumentType = null, int? Document = null);
+        Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int NumDocument);
+        Task<Person> UpdatePerson(int IdPerson, string? Name = null, string? Lastname = null, string? Email = null, int? IdDocumentType = null, int? NumDocument = null);
         Task<Person> DeletePerson(int IdPerson);
      
     }
@@ -24,9 +24,9 @@ namespace SGRA2._0.Service
         {
             _personRepositories = personRepositories;
         }
-        public async Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int Document)
+        public async Task<Person> CreatePerson(string Name, string Lastname, string Email, int IdDocumentType, int NumDocument)
         {
-            return await _personRepositories.CreatePerson(Name, Lastname, Email, IdDocumentType, Document);
+            return await _personRepositories.CreatePerson(Name, Lastname, Email, IdDocumentType, NumDocument);
             //throw new NotImplementedException();
         }
         public async Task<Person> DeletePerson(int IdPerson)
@@ -55,7 +55,7 @@ namespace SGRA2._0.Service
             return await _personRepositories.GetPerson(IdPerson);
             //throw new NotImplementedException();
         }
-        public async Task<Person> UpdatePerson(int IdPerson, string? Name = null, string? Lastname = null, string? Email = null, int? IdDocumentType = null, int? Document = null)
+        public async Task<Person> UpdatePerson(int IdPerson, string? Name = null, string? Lastname = null, string? Email = null, int? IdDocumentType = null, int? NumDocument = null)
         {
             Person newperson = await _personRepositories.GetPerson(IdPerson);
             if (newperson != null)
@@ -76,9 +76,9 @@ namespace SGRA2._0.Service
                 {
                     newperson.IdDocumentType = (int)IdDocumentType;
                 }
-                if (Document != null)
+                if (NumDocument != null)
                 {
-                    newperson.Document = (int)Document;
+                    newperson.NumDocument = (int)NumDocument;
                 }
                 return await _personRepositories.UpdatePerson(newperson);
             }

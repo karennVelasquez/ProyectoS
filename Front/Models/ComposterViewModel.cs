@@ -10,10 +10,8 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdComposter { get; set; }
-        [DisplayName("Composter")]
         public string Material { get; set; }
         public string DrainageSystem { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime? Date { get; set; }
     }
 }

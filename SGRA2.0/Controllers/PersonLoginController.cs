@@ -106,5 +106,19 @@ namespace SGRA2._0.Controllers
             }
         }
 
+        //DELETE api/<PersonController>
+        [HttpPut("Delete/{IdPerson}")]
+        public async Task<ActionResult<Person>> DeletePersonLogin(int IdLoginP)
+        {
+            var personToDelete = await _personLoginService.DeletePersonLogin(IdLoginP);
+            if (personToDelete != null)
+            {
+                return Ok(personToDelete);
+            }
+            else
+            {
+                return BadRequest("Error updating the database. ");
+            }
+        }
     }
 }
