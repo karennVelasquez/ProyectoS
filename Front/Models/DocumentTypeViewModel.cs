@@ -12,9 +12,8 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdDocumentType { get; set; }
-        [DisplayName("IdDocumentType")]
+        [DisplayName("DocumentType")]
         public string Document { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime? Date { get; set; }
     }
 }

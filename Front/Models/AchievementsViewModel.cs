@@ -18,6 +18,5 @@ namespace Front.Models
         public int IdGames { get; set; }
         public Games Games { get; set; }
         public bool IsDelete { get; set; }
-        public DateTime? Date { get; set; }
     }
 }

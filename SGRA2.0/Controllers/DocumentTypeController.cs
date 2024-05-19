@@ -72,10 +72,10 @@ namespace SGRA2._0.Controllers
         }
 
         //DELETE api/<DocumentTypesController>
-        [HttpPut("Delete/{IdDocumentTypes}")]
-        public async Task<ActionResult<DocumentType>> DeleteDocumentType(int IdDocumentTypes)
+        [HttpPut("Delete/{IdDocumentType}")]
+        public async Task<ActionResult<DocumentType>> DeleteDocumentType(int IdDocumentType)
         {
-            var documentTypeToDelete = await _documentTypeService.DeleteDocumentType(IdDocumentTypes);   
+            var documentTypeToDelete = await _documentTypeService.DeleteDocumentType(IdDocumentType);   
             if(documentTypeToDelete != null) 
             {
                 return Ok(documentTypeToDelete);
