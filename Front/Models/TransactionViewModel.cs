@@ -11,9 +11,11 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdTransaction { get; set; }
-        [DisplayName("Transaction")]
+
+        [DisplayName("Suppliers")]
         public int IdSuppliers { get; set; }
         public Suppliers Suppliers { get; set; }
+
         public int DeliveredQuantity { get; set; }
         public DateTime DeliveredDate { get; set; }
         public string Price { get; set; }

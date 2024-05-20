@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SGRASystem</title>
+    <link rel="icon" type="image/png" href="~s/src/logo.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Front.styles.css" asp-append-version="true" />
     <style>
         .vertical-nav {
-            width: 200px;
+            width: 230px;
             position: fixed;
             height: 100%;
             top: 0;
@@ -17,6 +18,7 @@
             background-color: #4F6F52;
             padding-top: 20px;
             border-right: 1px solid #1A4D2E;
+            overflow-y: auto; /* Permitir desplazamiento vertical */
         }
 
             .vertical-nav a {
@@ -46,6 +48,7 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="PersonViewController1" asp-action="PersonGet">Person</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="EmployeeView" asp-action="EmployeeGet">Employee</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="CustomerView" asp-action="CustomerGet">Customer</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="SuppliersView" asp-action="SuppliersGet">Suppliers</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="DocumentTypeView" asp-action="DocumentTypeGet">DocumentType</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="WasteTypeView" asp-action="WasteTypeGet">Waste Type</a>
@@ -53,6 +56,9 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="ChemicalCompositionView" asp-action="ChemicalCompositionGet">ChemicalComposition</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="CollectWasteView" asp-action="CollectWasteGet">CollectWaste</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="ComposterView" asp-action="ComposterGet">Composter</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="FinalCompostVIew" asp-action="FinalCompostGet">FinalCompost</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="FlipView" asp-action="FlipGet">Flip</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="ProcessStageView" asp-action="ProcessStageGet">ProcessStage</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="UserView" asp-action="UserGet">User</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="AchievementsView" asp-action="AchievementsGet">Achievements</a>
         <a class="nav-link text-dark" asp-area="" asp-controller="GamesView" asp-action="GamesGet">Games</a>
@@ -60,13 +66,6 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Exit">Exit</a>
     </div>
     <div class="main-content">
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container-fluid">
-                    <!-- Keep this area for future top nav or logo if needed -->
-                </div>
-            </nav>
-        </header>
         <div class="container">
             <main role="main" class="pb-3">
                 @{

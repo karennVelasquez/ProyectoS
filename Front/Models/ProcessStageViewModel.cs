@@ -10,7 +10,6 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdProcessStage { get; set; }
-        [DisplayName("ProcessStage")]
         public string Stage { get; set; }
         public bool IsDelete { get; set; }
     }

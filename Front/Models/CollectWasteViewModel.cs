@@ -9,8 +9,12 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdCollectWaste { get; set; }
+
+        [DisplayName("Suppliers")]
         public int IdSuppliers { get; set; }
         public Suppliers Suppliers { get; set; }
+
+        [DisplayName("Composter")]
         public int IdComposter { get; set; }
         public Composter Composter { get; set; }
         public DateTime CollectionDate { get; set; }

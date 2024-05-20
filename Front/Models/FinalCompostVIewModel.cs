@@ -11,7 +11,8 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdFinalCompost { get; set; }
-        [DisplayName("FinalCompost")]
+
+        [DisplayName("Waste")]
         public int IdWaste { get; set; }
         public Waste Waste { get; set; }
         public string HumidityLevel { get; set; }

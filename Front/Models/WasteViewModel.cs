@@ -8,7 +8,8 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdWaste { get; set; }
-        [DisplayName("WasteType")]
+
+        [DisplayName("Waste Type")]
         public int IdWasteType { get; set; }
         public WasteType WasteType { get; set; }
         public bool IsDelete { get; set; }

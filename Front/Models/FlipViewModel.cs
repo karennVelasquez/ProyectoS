@@ -11,9 +11,12 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdFlip { get; set; }
-        [DisplayName("Flip")]
+
+        [DisplayName("Waste")]
         public int IdWaste { get; set; }
         public Waste Waste { get; set; }
+
+        [DisplayName("Flip Frequency")]
         public int Flipfrequency { get; set; }
         public bool IsDelete { get; set; }
     }

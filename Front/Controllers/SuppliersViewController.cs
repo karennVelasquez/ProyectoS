@@ -2,6 +2,7 @@ using Azure;
 using Front.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SGRA2._0.Model;
 using System.Text;
 namespace Front.Controllers
 {
@@ -24,10 +25,70 @@ namespace Front.Controllers
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<SuppliersViewModel>>(data);
+
+                //Obtener datos adicionales
+                List<Person> person = GetPerson();
+                List<DocumentType> documentTypes = GetDocumentType();
+                List<WasteType> wasteTypes = GetWasteType();
+
+                //Mapear datos relacionados
+                foreach (var suppliers in Loginlist)
+                {
+                    suppliers.Name = person.FirstOrDefault(p => p.IdPerson == suppliers.IdPerson)?.Name;
+                    suppliers.LastName = person.FirstOrDefault(p => p.IdPerson == suppliers.IdPerson)?.Lastname;
+                    suppliers.NumDocument = person.FirstOrDefault(ni => ni.IdPerson == suppliers.IdPerson).NumDocument;
+                    suppliers.Waste_Type = wasteTypes.FirstOrDefault(wt => wt.IdWasteType  == suppliers.IdWasteType)?.Waste_Type;
+
+                    var wasteTypeInfo = wasteTypes.FirstOrDefault(wt => wt.IdWasteType == suppliers.IdPerson);
+                    var personInfo = person.FirstOrDefault(p => p.IdPerson == suppliers.IdPerson);
+                    if (personInfo != null)
+                    {
+                        var documentType = documentTypes.FirstOrDefault(ti => ti.IdDocumentType == personInfo.IdDocumentType);
+                        if (documentType != null)
+                        {
+                            suppliers.Document = documentType.Document;
+                        }
+                    }
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.IsDelete).ToList();
 
             return View(inactiveLogins);
+        }
+
+        ///
+        private List<Person> GetPerson()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Person>>(data);
+            }
+            return new List<Person>();
+        }
+        ///
+        private List<DocumentType> GetDocumentType()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<DocumentType>>(data);
+            }
+            return new List<DocumentType>();
+        }
+
+        ///
+        private List<WasteType> GetWasteType()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/WasteType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<WasteType>>(data);
+            }
+            return new List<WasteType>();
         }
 
         [HttpGet]

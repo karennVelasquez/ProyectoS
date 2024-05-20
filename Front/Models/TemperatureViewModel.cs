@@ -11,7 +11,8 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdTemperature { get; set; }
-        [DisplayName("Temperature")]
+
+        [DisplayName("Waste")]
         public int IdWaste { get; set; }
         public Waste Waste { get; set; }
         public string Decompositiontemperature { get; set; }

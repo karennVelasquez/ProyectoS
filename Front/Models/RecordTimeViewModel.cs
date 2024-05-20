@@ -11,7 +11,8 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdRecordTime { get; set; }
-        [DisplayName("RecordTime")]
+
+        [DisplayName("Level")]
         public int IdLevel { get; set; }
         public Level Level { get; set; }
         public DateTime Collecttime { get; set; }

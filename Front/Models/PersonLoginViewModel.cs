@@ -9,6 +9,8 @@ namespace Front.Models
         public int IdLoginP { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+
+        [DisplayName("Person")]
         public int IdPerson { get; set; }
 
         public bool IsDelete { get; set; }

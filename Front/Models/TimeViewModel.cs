@@ -11,10 +11,13 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdTime { get; set; }
-        [DisplayName("Time")]
+
+        [DisplayName("Waste")]
         public int IdWaste { get; set; }
         public Waste Waste { get; set; }
         public int Processduration { get; set; }
+
+        [DisplayName("ProcessStage")]
         public int IdProcessStage { get; set; }
         public ProcessStage ProcessStage { get; set; }
         public bool IsDelete { get; set; }

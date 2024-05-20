@@ -29,13 +29,13 @@ namespace Front.Controllers
 
                 //Obtener datos adicionales
 
-                List<DocumentType> typesDocument = GetTypesDocument();
+                List<DocumentType> documentTypes = GetDocumentType();
 
                 //Mapear datos
 
                 foreach (var person in Loginlist)
                 {
-                    person.Document = typesDocument.FirstOrDefault(ti => ti.IdDocumentType == person.IdDocumentType)?.Document;
+                    person.Document = documentTypes.FirstOrDefault(ti => ti.IdDocumentType == person.IdDocumentType)?.Document;
                 }
             }
             var inactiveLogins = Loginlist.Where(login => !login.IsDelete).ToList();
@@ -43,9 +43,9 @@ namespace Front.Controllers
             return View(inactiveLogins);
         }
 
-        private List<DocumentType> GetTypesDocument()
+        private List<DocumentType> GetDocumentType()
         {
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;

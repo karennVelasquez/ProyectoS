@@ -2,6 +2,7 @@
 using Front.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SGRA2._0.Model;
 using System.Text;
 namespace Front.Controllers
 {
@@ -24,10 +25,55 @@ namespace Front.Controllers
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(data);
+
+                //Obtener datos adicionales
+                List<Person> person = GetPerson();
+                List<DocumentType> documentTypes = GetDocumentType();
+
+                //Mapear datos relacionados
+                foreach (var employee in Loginlist)
+                {
+                    employee.Name = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Name;
+                    employee.LastName = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Lastname;
+                    employee.NumDocument = person.FirstOrDefault(ni => ni.IdPerson == employee.IdPerson).NumDocument;
+
+                    var personInfo = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson);
+                    if (personInfo != null)
+                    {
+                        var documentType = documentTypes.FirstOrDefault(ti => ti.IdDocumentType == personInfo.IdDocumentType);
+                        if (documentType != null)
+                        {
+                            employee.Document = documentType.Document;
+                        }
+                    }
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.IsDelete).ToList();
 
             return View(inactiveLogins);
+        }
+
+        ///
+        private List<Person> GetPerson()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Person>>(data);
+            }
+            return new List<Person>();
+        }
+        ///
+        private List<DocumentType> GetDocumentType()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<DocumentType>>(data);
+            }
+            return new List<DocumentType>();
         }
 
         [HttpGet]

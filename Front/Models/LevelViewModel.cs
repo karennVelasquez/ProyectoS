@@ -10,7 +10,6 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdLevel { get; set; }
-        [DisplayName("IdLevel")]
         public int NumLevel { get; set; }
         public bool IsDelete { get; set; }
     }

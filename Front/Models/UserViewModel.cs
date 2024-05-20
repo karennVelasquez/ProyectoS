@@ -1,8 +1,15 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using Azure;
+using Front.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using SGRA2._0.Model;
+using System.ComponentModel;
+using System.Text;
+
 namespace Front.Models
 {
-    public class UserViewModel
+    public class UserViewModel()
     {
         [DisplayName("Id")]
         public int IdUser { get; set; }

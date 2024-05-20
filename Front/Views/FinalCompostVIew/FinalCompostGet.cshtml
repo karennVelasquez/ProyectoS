@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Front.Models.FinalCompostVIewModel>
+
+@{
+    ViewData["Title"] = "Final Compost";
+}
+
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult FinalCompost</h1>
+<p>
+    <a asp-action="Create" style="color: darkslategrey;">Create New</a>
+</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Estilizada</title>
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse; /* Elimina los espacios entre celdas */
+            font-family: Arial, sans-serif; /* Define la fuente */
+            margin: 20px 0; /* Espaciado alrededor de la tabla */
+        }
+
+            .table th, .table td {
+                border: 1px solid #ddd; /* Borde alrededor de las celdas */
+                padding: 8px; /* Espaciado dentro de las celdas */
+                text-align: left; /* Alineación del texto */
+            }
+
+            .table th {
+                background-color: darkslategrey; /* Fondo para los encabezados */
+                font-weight: bold; /* Texto en negrita */
+            }
+
+            .table tr:nth-child(even) {
+                background-color: #E1F0DA; /* Color de fondo para filas pares */
+            }
+
+            .table tr:hover {
+                background-color: #BFD8AF; /* Color de fondo al pasar el ratón */
+            }
+    </style>
+</head>
+
+<table class="table" style="color: black;">
+    <thead style="color: white; background-color: lightgray;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdFinalCompost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdWaste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HumidityLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinalPh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nutrients)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdFinalCompost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdWaste)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HumidityLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FinalPh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nutrients)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "Update", new { id = item.IdFinalCompost }, new { style = "color: darkslategrey;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdFinalCompost }, new { style = "color: darkslategrey;" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

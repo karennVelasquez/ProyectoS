@@ -11,7 +11,8 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdSale { get; set; }
-        [DisplayName("Sale")]
+
+        [DisplayName("Customer")]
         public int IdCustomer { get; set; }
         public Customer Customer { get; set; }
         public DateTime SaleDate { get; set; }

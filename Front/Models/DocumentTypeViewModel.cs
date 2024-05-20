@@ -12,7 +12,8 @@ namespace Front.Models
     {
         [DisplayName("Id")]
         public int IdDocumentType { get; set; }
-        [DisplayName("DocumentType")]
+
+        [DisplayName("Document Type")]
         public string Document { get; set; }
         public bool IsDelete { get; set; }
     }

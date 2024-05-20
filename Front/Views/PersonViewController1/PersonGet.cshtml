@@ -27,22 +27,22 @@
             }
 
             .table th {
-                background-color: gray; /* Fondo para los encabezados */
+                background-color: darkslategrey; /* Fondo para los encabezados */
                 font-weight: bold; /* Texto en negrita */
             }
 
             .table tr:nth-child(even) {
-                background-color: lightgray; /* Color de fondo para filas pares */
+                background-color: #E1F0DA; /* Color de fondo para filas pares */
             }
 
             .table tr:hover {
-                background-color: darkgray; /* Color de fondo al pasar el ratón */
+                background-color: #BFD8AF; /* Color de fondo al pasar el ratón */
             }
     </style>
 </head>
 
 <table class="table" style="color: black;">
-    <thead style="color: black; background-color: lightgray;">
+    <thead style="color: white; background-color: lightgray;">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.IdPerson)
@@ -57,7 +57,7 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdDocumentType)
+                @Html.DisplayNameFor(model => model.Document)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NumDocument)
@@ -82,7 +82,7 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdDocumentType)
+                    @Html.DisplayFor(modelItem => item.Document)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NumDocument)

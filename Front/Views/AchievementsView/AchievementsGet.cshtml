@@ -4,10 +4,10 @@
     ViewData["Title"] = "Achievements";
 }
 
-<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Achievements</h1>
-<p>
+<h1 style="color: darkslategrey; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Achievements</h1>
+@*<p>
     <a asp-action="Create" style="color: darkslategrey;">Create New</a>
-</p>
+</p>*@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,22 +27,22 @@
             }
 
             .table th {
-                background-color: gray; /* Fondo para los encabezados */
+                background-color: darkslategrey; /* Fondo para los encabezados */
                 font-weight: bold; /* Texto en negrita */
             }
 
             .table tr:nth-child(even) {
-                background-color: lightgray; /* Color de fondo para filas pares */
+                background-color: #E1F0DA; /* Color de fondo para filas pares */
             }
 
             .table tr:hover {
-                background-color: darkgray; /* Color de fondo al pasar el ratón */
+                background-color: #BFD8AF; /* Color de fondo al pasar el ratón */
             }
     </style>
 </head>
 
 <table class="table" style="color: black;">
-    <thead style="color: black; background-color: lightgray;">
+    <thead style="color: white; background-color: lightgray;">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.IdAchievements)
@@ -51,7 +51,13 @@
                 @Html.DisplayNameFor(model => model.IdUser)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.IdGames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumLevel)
             </th>
             <th></th>
         </tr>
@@ -67,7 +73,13 @@
                     @Html.DisplayFor(modelItem => item.IdUser)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.IdGames)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumLevel)
                 </td>
                 <td>
                     @Html.ActionLink("Update", "Update", new { id = item.IdAchievements }, new { style = "color: darkslategrey;" }) |

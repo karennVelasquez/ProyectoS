@@ -1,10 +1,10 @@
-﻿@model Front.Models.LevelViewModel
+﻿@model Front.Models.CustomerViewModel
 
 @{
-    ViewData["Title"] = "Update Level";
+    ViewData["Title"] = "Update Customer";
 }
 <h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Update</h1>
-<h4 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Level</h4>
+<h4 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Customer</h4>
 <hr />
 <head>
     <title>Inline Form Elements Example</title>
@@ -19,7 +19,7 @@
         }
 
             .form-group-inline label {
-                margin-right: 10px; /* Espacio entre la etiqueta y el campo de entrada */
+                margin-right: 65px; /* Espacio entre la etiqueta y el campo de entrada */
                 min-width: 100px; /* Ancho mínimo para las etiquetas */
             }
 
@@ -38,15 +38,15 @@
             <form asp-action="Update">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group form-group-inline">
-                    <label asp-for="IdLevel" class="control-label"></label>
-                    <input asp-for="IdLevel" class="form-control" style="border-color: black;" disabled />
-                    <input type="hidden" asp-for="IdLevel" />
-                    <span asp-validation-for="IdLevel" class="text-danger"></span>
+                    <label asp-for="IdCustomer" class="control-label"></label>
+                    <input asp-for="IdCustomer" class="form-control" style="border-color: black;" disabled />
+                    <input type="hidden" asp-for="IdCustomer" />
+                    <span asp-validation-for="IdCustomer" class="text-danger"></span>
                 </div>
                 <div class="form-group form-group-inline">
-                    <label asp-for="NumLevel" class="control-label"></label>
-                    <input asp-for="NumLevel" class="form-control" style="border-color: black;" />
-                    <span asp-validation-for="NumLevel" class="text-danger"></span>
+                    <label asp-for="IdPerson" class="control-label"></label>
+                    <input asp-for="IdPerson" class="form-control" style="border-color: black;" />
+                    <span asp-validation-for="IdPerson" class="text-danger"></span>
                 </div>
                 @*@<div class="form-group form-group-inline">
                 <label asp-for="Password" class="control-label"></label>
@@ -65,10 +65,10 @@
                 </label>
                 </div>*@
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn" style="background-color: lightslategrey; color: white;" />
+                    <input type="submit" value="Save" class="btn" style="background-color: #789461; color: white;" />
                 </div>
                 <div>
-                    <a asp-action="LevelGet" style="color: darkslategrey;">Back</a>
+                    <a asp-action="CustomerGet" style="color: darkslategrey;">Back</a>
                 </div>
             </form>
         </div>
