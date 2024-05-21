@@ -1,65 +1,62 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SGRA2._0.Context;
-using SGRA2._0.Model;
-using Microsoft.EntityFrameworkCore;
-using Front.ViewModels;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
+﻿using Front.ViewModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SGRA2._0.Context;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
-
 
 namespace Front.Controllers
 {
-    public class PersonLoginController : Controller
+    public class AccesoSystemController : Controller
     {
         private readonly PersonDBContext _personDBContext;
         Uri baseAddress = new Uri("http://sistemagestionresiduosagricolas.somee.com/api");
         private readonly HttpClient _client;
-        public PersonLoginController(PersonDBContext persondbContext)
+        public AccesoSystemController(PersonDBContext persondbContext)
         {
             _personDBContext = persondbContext;
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
         }
 
-      /*  [HttpGet]
-        public IActionResult Registro()
-        {
-            return View();
-        }
+        /*  [HttpGet]
+          public IActionResult Registro()
+          {
+              return View();
+          }
 
-        [HttpPost]
-        public async Task<IActionResult> Registro(PersonLoginWM model)
-        {
-            if (model.Password != model.ConfirmPassword)
-            {
-                ViewData["Mensaje"] = "Las contraseñas no coinciden";
-                return View();
-            }
-            else
-            {
-                try
-                {
-                    String data = JsonConvert.SerializeObject(model);
-                    StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await _client.PostAsync(_client.BaseAddress + $"/PersonLogin/Create?UserName={model.UserName}&Password={model.Password}&IdPerson={model.IdPerson}", content);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        TempData["successMessage"] = "User Created";
-                        return RedirectToAction("Login", "PersonLogin");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    TempData["errorMessage"] = ex.Message;
-                    return View();
-                }
-                return View();
-            }
-        }*/
+          [HttpPost]
+          public async Task<IActionResult> Registro(PersonLoginWM model)
+          {
+              if (model.Password != model.ConfirmPassword)
+              {
+                  ViewData["Mensaje"] = "Las contraseñas no coinciden";
+                  return View();
+              }
+              else
+              {
+                  try
+                  {
+                      String data = JsonConvert.SerializeObject(model);
+                      StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                      HttpResponseMessage response = await _client.PostAsync(_client.BaseAddress + $"/PersonLogin/Create?UserName={model.UserName}&Password={model.Password}&IdPerson={model.IdPerson}", content);
+                      if (response.IsSuccessStatusCode)
+                      {
+                          TempData["successMessage"] = "User Created";
+                          return RedirectToAction("Login", "PersonLogin");
+                      }
+                  }
+                  catch (Exception ex)
+                  {
+                      TempData["errorMessage"] = ex.Message;
+                      return View();
+                  }
+                  return View();
+              }
+          }*/
 
 
         [HttpGet]
@@ -70,7 +67,7 @@ namespace Front.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginS(LoginSystem model)
+        public async Task<IActionResult> LoginS(PersonLoginWM model)
         {
             try
             {

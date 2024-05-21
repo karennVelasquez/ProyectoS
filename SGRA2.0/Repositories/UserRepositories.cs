@@ -14,7 +14,7 @@ namespace SGRA2._0.Repositories
         Task<User> CreateUser(string UserName, string Email, string Password);
         Task<User> UpdateUser(User user);
         Task<User> DeleteUser(User user);
-        Task<User> AuthUser(string userName, string email, string password);
+        Task<User> AuthUser(string userName, string email);
     }
     public class UserRepositories : IUserRepositories
     {
@@ -60,9 +60,9 @@ namespace SGRA2._0.Repositories
         }
 
         //AUTENTICACION
-        public async Task<User> AuthUser(string userName, string email, string password)
+        public async Task<User> AuthUser(string userName, string email)
         {
-            return await _db.users.FirstOrDefaultAsync(u => u.UserName == userName && u.Email == email && u.Password == password);
+            return await _db.users.FirstOrDefaultAsync(u => u.UserName == userName && u.Email == email);
         }
 
         public async Task<User> UpdateUser(User user)

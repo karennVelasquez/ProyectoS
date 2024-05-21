@@ -38,6 +38,7 @@ namespace SGRA2._0.Service
         }
         public async Task<User> CreateUser(string UserName, string Email, string Password)
         {
+            Password = EncryptPassword(Password);
             return await _userRepositories.CreateUser(UserName, Email, Password);
             //throw new NotImplementedException();
         }
@@ -90,9 +91,9 @@ namespace SGRA2._0.Service
         //AUTENTICACION
         public async Task<bool> Authentication(string userName, string email, string password)
         {
-            var login = await _userRepositories.AuthUser(userName, email, password);
-
-            if (login != null) 
+            var login = await _userRepositories.AuthUser(userName, email);
+            string hashedPassword = EncryptPassword(password);
+            if (login != null && (login.Password == hashedPassword)) 
             {
                 return true;
             }
@@ -100,10 +101,6 @@ namespace SGRA2._0.Service
             {
                 return false;
             }
-            //return await _userRepositories.AuthUser(userName, email, password);
-            // string hashedPassword = EncryptPassword(password);
-            // if (login == null && (login.Password == hashedPassword))
-            // return false;
             throw new NotImplementedException();
         }
 
@@ -155,6 +152,7 @@ namespace SGRA2._0.Service
                 }
                 if (Password != null)
                 {
+                   Password = EncryptPassword(Password);
                     newuser.Password = Password;
                 }
             }

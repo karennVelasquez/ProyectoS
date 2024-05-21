@@ -1,4 +1,4 @@
-﻿@model Front.ViewModels.PersonLoginSystem;
+﻿@model Front.ViewModels.PersonLoginWM;
 @{
     Layout = null;
 }
@@ -18,16 +18,16 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-header  text-center">
-                    <h1 style="color: grey; font-family:fantasy,sans-serif; font-weight:bold;">Sign in</h1>
+                    <h1 style="color: grey; font-family:fantasy,sans-serif; font-weight:bold;">Sign in Prueba1</h1>
                 </div>
                 <div class="card-body">
 
 
-                    <form asp-controller="PersonLogin" asp-action="Login" method="post">
+                    <form asp-controller="AccesoSystem" asp-action="LoginS" method="post">
                         <input class="form-control mb-3" type="text" placeholder="User Name" required asp-for="UserName" />
                         <input class="form-control mb-3" type="password" placeholder="Password" required asp-for="Password" />
                         <div class="d-grid gap-2 mb-3">
-                            <a asp-controller="PersonLogin" asp-action="Registro" style="color: mediumseagreen;">Forgot password?</a>
+                            <a asp-controller="AccesoSystem" asp-action="LoginS" style="color: mediumseagreen;">Forgot password?</a>
                         </div>
                         <div class="d-grid gap-2 mb-3">
                             <!--<button class="btn btn-primary" type="submit">Iniciar Sesión</button>-->
@@ -40,7 +40,7 @@
                                 @ViewData["Mensaje"]
                             </div>
                         }
-                        Don't have an account?  <a asp-controller="PersonLogin" asp-action="Registro" style="color: mediumseagreen;">Sign up</a>
+                        Don't have an account?  <a asp-controller="AccesoSystem" asp-action="LoginS" style="color: mediumseagreen;">Sign up</a>
                     </form>
                 </div>
             </div>

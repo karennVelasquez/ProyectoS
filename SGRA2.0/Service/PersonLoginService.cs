@@ -15,13 +15,13 @@ namespace SGRA2._0.Service
     {
         Task<List<PersonLogin>> GetAll();
         Task<PersonLogin> GetPersonLogin(int IdLoginP);
-        Task<int?> GetIdByUsernameP(string usernameP);
-        Task<PersonLogin> CreatePersonLogin(string UserName, string Password, int IdPerson);
-        Task<PersonLogin> UpdatePersonLogin(int IdLoginP, string? UserName = null, string? Password = null, int? IdPerson = null);
+        Task<int?> GetIdByUsernameP(string UsernameP);
+        Task<PersonLogin> CreatePersonLogin(string Username, string Password, int IdPerson);
+        Task<PersonLogin> UpdatePersonLogin(int IdLoginP, string? Username = null, string? Password = null, int? IdPerson = null);
         Task<PersonLogin> DeletePersonLogin(int IdLoginP);
        //
-        Task<bool> Authentication(string username, string password);
-        string GenerarToken(string username);
+        Task<bool> Authentication(string Username, string password);
+        string GenerarToken(string Username);
     }
     public class PersonLoginService : IPersonLoginService
     {
@@ -35,9 +35,10 @@ namespace SGRA2._0.Service
             _configuration = configuration;
         }
 
-        public async Task<PersonLogin> CreatePersonLogin(string UserName, string Password, int IdPerson)
+        public async Task<PersonLogin> CreatePersonLogin(string Username, string Password, int IdPerson)
         {
-            return await _personLoginRepository.CreatePersonLogin(UserName, Password, IdPerson);
+            Password = EncryptPassword(Password);
+            return await _personLoginRepository.CreatePersonLogin(Username, Password, IdPerson);
         }
 
         public async Task<PersonLogin> DeletePersonLogin(int IdLoginP)
@@ -58,9 +59,9 @@ namespace SGRA2._0.Service
         }
 
         //
-        public async Task<int?> GetIdByUsernameP(string usernameP)
+        public async Task<int?> GetIdByUsernameP(string UsernameP)
         {
-            return await _personLoginRepository.GetIdByUsernameP(usernameP);
+            return await _personLoginRepository.GetIdByUsernameP(UsernameP);
             throw new NotImplementedException();
         }
 
@@ -69,11 +70,23 @@ namespace SGRA2._0.Service
             return await _personLoginRepository.GetPersonLogin(IdLoginP);
         }
 
-        //AUTENTICACION
-        public async Task<bool> Authentication(string username, string password)
+        private string EncryptPassword(string password)
         {
-            var plogin = await _personLoginRepository.AuthUser(username, password);
-            if(plogin != null) 
+            SHA256 sha256 = SHA256Managed.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder sb = new StringBuilder();
+            stream = sha256.ComputeHash(encoding.GetBytes(password));
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+            return sb.ToString();
+        }
+
+        //AUTENTICACION
+        public async Task<bool> Authentication(string Username, string password)
+        {
+            var plogin = await _personLoginRepository.AuthUser(Username);
+            string hashedPassword = EncryptPassword(password);
+            if(plogin != null && (plogin.Password == hashedPassword)) 
             {
                 return true;
             }
@@ -81,19 +94,19 @@ namespace SGRA2._0.Service
             {
                 return false;
             }
-            //return await _personLoginRepository.AuthUser(username, password);
+            //return await _personLoginRepository.AuthUser(Username, password);
             throw new NotImplementedException();
         }
 
         //TOKEN
-        public string GenerarToken(string username)
+        public string GenerarToken(string Username)
         {
             var key = _configuration.GetValue<string>("Jwt:Key");
             var keyBytes = Encoding.ASCII.GetBytes(key);
 
             //Solicitudes de Permiso
             var claims = new ClaimsIdentity();
-            claims.AddClaim(new Claim(ClaimTypes.Name, username));
+            claims.AddClaim(new Claim(ClaimTypes.Name, Username));
             claims.AddClaim(new Claim(ClaimTypes.Role, "Person"));
 
             var credencialesToken = new SigningCredentials
@@ -118,17 +131,18 @@ namespace SGRA2._0.Service
             return tokenCreado;
         }
 
-        public async Task<PersonLogin> UpdatePersonLogin(int IdLoginP, string? UserName = null, string? Password = null, int? IdPerson = null)
+        public async Task<PersonLogin> UpdatePersonLogin(int IdLoginP, string? Username = null, string? Password = null, int? IdPerson = null)
         {
             PersonLogin newpersonLogin = await _personLoginRepository.GetPersonLogin(IdLoginP);
             if(newpersonLogin == null) 
             {
-                if(UserName != null) 
+                if(Username != null) 
                 {
-                    newpersonLogin.UserName = UserName;
+                    newpersonLogin.Username = Username;
                 }
                 if(Password != null) 
                 {
+                    Password = EncryptPassword(Password);
                     newpersonLogin.Password = Password;
                 }
                 if (IdPerson != null)

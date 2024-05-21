@@ -57,9 +57,9 @@ namespace SGRA2._0.Controllers
         //POST api/<PersonLogin>
         [HttpPost("Create/")]
        // [Authorize(Roles = "Person")]
-        public async Task<ActionResult<PersonLogin>> PostPersonLogin(int IdLoginP, string UserName, string Password, int IdPerson)
+        public async Task<ActionResult<PersonLogin>> PostPersonLogin(int IdLoginP, string Username, string Password, int IdPerson)
         {
-            var personLoginToPut = await _personLoginService.CreatePersonLogin(UserName, Password, IdPerson);
+            var personLoginToPut = await _personLoginService.CreatePersonLogin(Username, Password, IdPerson);
             if( personLoginToPut != null)
             {
                 return Ok(personLoginToPut);
@@ -93,9 +93,9 @@ namespace SGRA2._0.Controllers
 
         //PUT api/<LoginPerson>
         [HttpPut("Update/{IdLoginP}")]
-        public async Task<ActionResult<PersonLogin>> PutPersonLogin (int IdLoginP, string UserName, string Password, int IdPerson)
+        public async Task<ActionResult<PersonLogin>> PutPersonLogin (int IdLoginP, string Username, string Password, int IdPerson)
         {
-            var PersonLoginToPut = await _personLoginService.UpdatePersonLogin(IdLoginP, UserName, Password, IdPerson);
+            var PersonLoginToPut = await _personLoginService.UpdatePersonLogin(IdLoginP, Username, Password, IdPerson);
             if (PersonLoginToPut != null) 
             {
                 return Ok(PersonLoginToPut);
