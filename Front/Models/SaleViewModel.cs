@@ -14,6 +14,7 @@ namespace Front.Models
         {
             Person = new List<SelectListItem>();
             Customer = new List<SelectListItem>();
+            DocumentType = new List<SelectListItem>();
         }
         [DisplayName("Id")]
         public int IdSale { get; set; }
@@ -26,6 +27,16 @@ namespace Front.Models
         public IEnumerable<SelectListItem> Person { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
+
+        public int IdDocumentType { get; set; }
+        public IEnumerable<SelectListItem> DocumentType { get; set; }
+        [DisplayName("Document Type")]
+        public string Document { get; set; } // // Propiedad para mostrar el nombre del tipo de identificación
+
+
+        [DisplayName("Number Document")]
+        public int NumDocument { get; set; }
 
 
         public DateTime SaleDate { get; set; }

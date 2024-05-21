@@ -29,22 +29,32 @@ namespace Front.Controllers
                 
                //Obtener datos adicionales
                 List<Person> persons = GetPerson();
+                List<DocumentType> documentTypes = GetDocumentType();
                 List<Customer> customers = GetCustomer();
 
                 // Mapear datos relacionados
                 foreach (var sale in Loginlist)
                 {
-                    sale.Name = persons.FirstOrDefault(p => p.IdPerson == sale.IdPerson)?.Name;
-                    sale.LastName = persons.FirstOrDefault(p => p.IdPerson == sale.IdPerson)?.Lastname;
-
+                    
                     var customerInfo = customers.FirstOrDefault(c => c.IdCustomer == sale.IdCustomer);
-                    if(customerInfo != null)
+                    var personInfo = persons.FirstOrDefault(c => c.IdPerson == customerInfo.IdPerson);
+
+                    if(customerInfo != null || personInfo != null)
                     {
-                        var person = persons.FirstOrDefault(t => t.IdPerson == customerInfo.IdPerson);
-                        if(person != null)
+                        var name = persons.FirstOrDefault(ti => ti.IdPerson == customerInfo.IdPerson);
+                        var lastname = persons.FirstOrDefault(ti => ti.IdPerson == customerInfo.IdPerson);
+                        var email = persons.FirstOrDefault(ti => ti.IdPerson == customerInfo.IdPerson);
+                        var numDocument = persons.FirstOrDefault(ti => ti.IdPerson == customerInfo.IdPerson);
+                        
+                        var documentType = documentTypes.FirstOrDefault(c => c.IdDocumentType == personInfo.IdDocumentType);
+
+                        if(name !=null || lastname !=null || email !=null || numDocument !=null || documentType !=null)
                         {
-                            sale.Name = person.Name;
-                            sale.LastName = person.Lastname;
+                            sale.Name = name.Name;
+                            sale.LastName = lastname.Lastname;
+                            sale.Email = email.Email;
+                            sale.NumDocument = numDocument.NumDocument;
+                            sale.Document = documentType.Document;
                         }
                     }
                 }
@@ -65,11 +75,20 @@ namespace Front.Controllers
             }
             return new List<Person>();
         }
-
+        private List<DocumentType> GetDocumentType()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<DocumentType>>(data);
+            }
+            return new List<DocumentType>();
+        }
         ///
         private List<Customer> GetCustomer()
         {
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Customer").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
