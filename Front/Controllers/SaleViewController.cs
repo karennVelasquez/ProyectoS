@@ -26,7 +26,7 @@ namespace Front.Controllers
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<SaleViewModel>>(data);
 
-                /*
+                
                //Obtener datos adicionales
                 List<Person> persons = GetPerson();
                 List<Customer> customers = GetCustomer();
@@ -40,13 +40,42 @@ namespace Front.Controllers
                     var customerInfo = customers.FirstOrDefault(c => c.IdCustomer == sale.IdCustomer);
                     if(customerInfo != null)
                     {
-                        var person = persons.FirstOrDefault(t => t.IdPerson == )
+                        var person = persons.FirstOrDefault(t => t.IdPerson == customerInfo.IdPerson);
+                        if(person != null)
+                        {
+                            sale.Name = person.Name;
+                            sale.LastName = person.Lastname;
+                        }
                     }
-                }*/
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.IsDelete).ToList();
 
             return View(inactiveLogins);
+        }
+
+        ///
+        private List<Person> GetPerson()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Person>>(data);
+            }
+            return new List<Person>();
+        }
+
+        ///
+        private List<Customer> GetCustomer()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Customer>>(data);
+            }
+            return new List<Customer>();
         }
 
         [HttpGet]

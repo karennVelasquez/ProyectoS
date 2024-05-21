@@ -111,7 +111,7 @@ namespace Front.Controllers
 
                         TempData["successMessage"] = "Login successful";
                         TempData["responseBody"] = token;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("IndexGame", "Home");
                     }
                 }
                 else if (response.StatusCode == HttpStatusCode.Unauthorized)

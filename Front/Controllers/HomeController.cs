@@ -28,14 +28,27 @@ namespace Front.Controllers
         {
             return View();
         }
+        public IActionResult IndexGame()
+        {
+            return View();
+        }
 
+        public IActionResult PrivacyGame()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<IActionResult> Exit()
+        public async Task<IActionResult> ExitSystem()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("MainPage", "Main");
+        }
+        public async Task<IActionResult> ExitGame()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("MainPage", "Main");

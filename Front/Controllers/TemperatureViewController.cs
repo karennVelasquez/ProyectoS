@@ -2,63 +2,51 @@
 using Front.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SGRA2._0.Model;
-using System.Net;
 using System.Text;
 namespace Front.Controllers
 {
-    public class TransactionViewController : Controller
+    public class TemperatureViewController : Controller
     {
         Uri baseAddress = new Uri("http://sistemagestionresiduosagricolas.somee.com/api");
         private readonly HttpClient _client;
 
-        public TransactionViewController()
+        public TemperatureViewController()
         {
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
         }
         [HttpGet]
-        public IActionResult PersonGet()
+        public IActionResult TemperatureGet()
         {
-            List<PersonViewModel> Loginlist = new List<PersonViewModel>();
-            HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            List<TemperatureViewModel> Loginlist = new List<TemperatureViewModel>();
+            HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + "/Temperature").Result;
             if (respone.IsSuccessStatusCode)
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
-                Loginlist = JsonConvert.DeserializeObject<List<PersonViewModel>>(data);
-
-                //Obtener datos adicionales
-
-                
-
-                //Mapear datos
-
-                
+                Loginlist = JsonConvert.DeserializeObject<List<TemperatureViewModel>>(data);
             }
             var inactiveLogins = Loginlist.Where(login => !login.IsDelete).ToList();
 
             return View(inactiveLogins);
         }
 
-        
-        
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Create(PersonViewModel model)
+        public IActionResult Create(TemperatureViewModel model)
         {
             try
             {
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Person/Create?Name={model.Name}&Lastname={model.Lastname}&Email={model.Email}&IdDocumentType={model.IdDocumentType}&NumDocument={model.NumDocument}", content).Result;
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Temperature/Create?IdWaste={model.IdWaste}&Decompositiontemperature={model.Decompositiontemperature}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "Person Created";
-                    return RedirectToAction("PersonGet");
+                    TempData["successMessage"] = "Temperature Created";
+                    return RedirectToAction("TemperatureGet");
                 }
             }
             catch (Exception ex)
@@ -74,12 +62,12 @@ namespace Front.Controllers
         {
             try
             {
-                PersonViewModel login = new PersonViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person/" + id).Result;
+                TemperatureViewModel login = new TemperatureViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Temperature/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<PersonViewModel>(data);
+                    login = JsonConvert.DeserializeObject<TemperatureViewModel>(data);
                 }
                 return View(login);
             }
@@ -90,17 +78,17 @@ namespace Front.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Update(PersonViewModel model)
+        public IActionResult Update(TemperatureViewModel model)
         {
             try
             {
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Person/Update/{model.IdPerson}?Name={model.Name}&Lastname={model.Lastname}&Email={model.Email}&IdDocumentType={model.IdDocumentType}&NumDocument={model.NumDocument}", content).Result;
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Temperature/Update/{model.IdTemperature}?IdWaste={model.IdWaste}&Decompositiontemperature={model.Decompositiontemperature}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "Person details updated";
-                    return RedirectToAction("PersonGet");
+                    TempData["successMessage"] = "Temperature details updated";
+                    return RedirectToAction("TemperatureGet");
                 }
             }
             catch (Exception ex)
@@ -115,12 +103,12 @@ namespace Front.Controllers
         {
             try
             {
-                PersonViewModel login = new PersonViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person/" + id).Result;
+                TemperatureViewModel login = new TemperatureViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Temperature/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<PersonViewModel>(data);
+                    login = JsonConvert.DeserializeObject<TemperatureViewModel>(data);
                 }
                 return View(login);
             }
@@ -137,11 +125,11 @@ namespace Front.Controllers
         {
             try
             {
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Person/Delete/{id}", null).Result;
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Temperature/Delete/{id}", null).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "Person details deleted";
-                    return RedirectToAction("PersonGet");
+                    TempData["successMessage"] = "Temperature details deleted";
+                    return RedirectToAction("TemperatureGet");
                 }
             }
             catch (Exception ex)
@@ -149,8 +137,7 @@ namespace Front.Controllers
                 TempData["errorMessage"] = ex.Message;
                 return View();
             }
-            return View("PersonGet");
+            return View("TemperatureGet");
         }
     }
 }
-

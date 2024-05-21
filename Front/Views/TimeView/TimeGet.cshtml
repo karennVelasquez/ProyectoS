@@ -1,14 +1,13 @@
-﻿@model IEnumerable<Front.Models.AchievementsViewModel>
+﻿@model IEnumerable<Front.Models.TimeViewModel>
 
 @{
-    Layout = "_LayoutGame";
-    ViewData["Title"] = "Achievements";
+    ViewData["Title"] = "Time";
 }
 
-<h1 style="color: darkslategrey; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Achievements</h1>
-@*<p>
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Time</h1>
+<p>
     <a asp-action="Create" style="color: darkslategrey;">Create New</a>
-</p>*@
+</p>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,19 +45,16 @@
     <thead style="color: white; background-color: lightgray;">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdAchievements)
+                @Html.DisplayNameFor(model => model.IdTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdUser)
+                @Html.DisplayNameFor(model => model.IdWaste)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                @Html.DisplayNameFor(model => model.IdProcessStage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdGames)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumLevel)
+                @Html.DisplayNameFor(model => model.Stage)
             </th>
             <th></th>
         </tr>
@@ -68,23 +64,20 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdAchievements)
+                    @Html.DisplayFor(modelItem => item.IdTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdUser)
+                    @Html.DisplayFor(modelItem => item.IdWaste)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
+                    @Html.DisplayFor(modelItem => item.IdProcessStage)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdGames)
+                    @Html.DisplayFor(modelItem => item.Stage)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NumLevel)
-                </td>
-                <td>
-                    @Html.ActionLink("Update", "Update", new { id = item.IdAchievements }, new { style = "color: darkslategrey;" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdAchievements }, new { style = "color: darkslategrey;" })
+                    @Html.ActionLink("Update", "Update", new { id = item.IdTime }, new { style = "color: darkslategrey;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdTime }, new { style = "color: darkslategrey;" })
                 </td>
             </tr>
         }
