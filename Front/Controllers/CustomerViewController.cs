@@ -38,6 +38,7 @@ namespace Front.Controllers
                 {
                     customer.Name = person.FirstOrDefault(p => p.IdPerson == customer.IdPerson)?.Name;
                     customer.LastName = person.FirstOrDefault(p => p.IdPerson == customer.IdPerson)?.Lastname;
+                    customer.Email = person.FirstOrDefault(p => p.IdPerson == customer.IdPerson)?.Email;
                     customer.NumDocument = person.FirstOrDefault(ni => ni.IdPerson == customer.IdPerson).NumDocument;
 
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == customer.IdPerson);

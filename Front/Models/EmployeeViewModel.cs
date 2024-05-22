@@ -6,15 +6,22 @@ namespace Front.Models
 {
     public class EmployeeViewModel
     {
+        public EmployeeViewModel()
+        {
+            Person = new List<SelectListItem>();
+            DocumentTypes = new List<SelectListItem>();
+        }
+
         [DisplayName("Id")]
         public int IdEmployee { get; set; }
         public int IdPerson { get; set; }
         public IEnumerable<SelectListItem> Person { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
 
         public int IdDocumentType { get; set; }
-        public IEnumerable<SelectListItem> DocumentType { get; set; }
+        public IEnumerable<SelectListItem> DocumentTypes { get; set; }
         [DisplayName("Document Type")]
         public string Document { get; set; }
 

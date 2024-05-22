@@ -22,14 +22,14 @@ namespace Front.Controllers
             _client.BaseAddress = baseAddress;
         }
 
-        /*  [HttpGet]
-          public IActionResult Registro()
+          [HttpGet]
+          public IActionResult RegistroS()
           {
               return View();
           }
 
           [HttpPost]
-          public async Task<IActionResult> Registro(PersonLoginWM model)
+          public async Task<IActionResult> RegistroS(PersonLoginWM model)
           {
               if (model.Password != model.ConfirmPassword)
               {
@@ -46,7 +46,7 @@ namespace Front.Controllers
                       if (response.IsSuccessStatusCode)
                       {
                           TempData["successMessage"] = "User Created";
-                          return RedirectToAction("Login", "PersonLogin");
+                          return RedirectToAction("LoginS", "AccesoSystem");
                       }
                   }
                   catch (Exception ex)
@@ -56,7 +56,7 @@ namespace Front.Controllers
                   }
                   return View();
               }
-          }*/
+          }
 
 
         [HttpGet]
@@ -67,7 +67,7 @@ namespace Front.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginS(PersonLoginWM model)
+        public async Task<IActionResult> LoginS(LoginSystem model)
         {
             try
             {

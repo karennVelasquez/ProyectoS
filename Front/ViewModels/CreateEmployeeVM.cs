@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
+﻿using Front.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Front.ViewModels
 {
     public class CreateEmployeeVM

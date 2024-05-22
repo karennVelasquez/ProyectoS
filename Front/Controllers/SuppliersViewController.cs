@@ -38,8 +38,11 @@ namespace Front.Controllers
                 {
                     suppliers.Name = person.FirstOrDefault(p => p.IdPerson == suppliers.IdPerson)?.Name;
                     suppliers.LastName = person.FirstOrDefault(p => p.IdPerson == suppliers.IdPerson)?.Lastname;
+                    suppliers.Email = person.FirstOrDefault(p => p.IdPerson == suppliers.IdPerson)?.Email;
                     suppliers.NumDocument = person.FirstOrDefault(ni => ni.IdPerson == suppliers.IdPerson).NumDocument;
                     suppliers.Waste_Type = wasteTypes.FirstOrDefault(wt => wt.IdWasteType  == suppliers.IdWasteType)?.Waste_Type;
+                    suppliers.Description = wasteTypes.FirstOrDefault(wt => wt.IdWasteType == suppliers.IdWasteType)?.Description;
+                    suppliers.Descomposition = wasteTypes.FirstOrDefault(wt => wt.IdWasteType == suppliers.IdWasteType)?.Descomposition;
 
                     var wasteTypeInfo = wasteTypes.FirstOrDefault(wt => wt.IdWasteType == suppliers.IdPerson);
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == suppliers.IdPerson);

@@ -1,4 +1,6 @@
-﻿namespace Front.ViewModels
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
+namespace Front.ViewModels
 {
     public class EmployeeVM
     {

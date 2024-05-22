@@ -1,6 +1,8 @@
 ﻿using Azure;
 using Front.Models;
+using Front.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using SGRA2._0.Model;
 using System.Text;
@@ -28,13 +30,14 @@ namespace Front.Controllers
 
                 //Obtener datos adicionales
                 List<Person> person = GetPerson();
-                List<DocumentType> documentTypes = GetDocumentType();
+                List<DocumentType> documentTypes = GetDocumentTypes();
 
                 //Mapear datos relacionados
                 foreach (var employee in Loginlist)
                 {
                     employee.Name = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Name;
                     employee.LastName = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Lastname;
+                    employee.Email = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Email;
                     employee.NumDocument = person.FirstOrDefault(ni => ni.IdPerson == employee.IdPerson).NumDocument;
 
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson);
@@ -65,7 +68,7 @@ namespace Front.Controllers
             return new List<Person>();
         }
         ///
-        private List<DocumentType> GetDocumentType()
+        private List<DocumentType> GetDocumentTypes()
         {
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
             if (response.IsSuccessStatusCode)
@@ -76,31 +79,92 @@ namespace Front.Controllers
             return new List<DocumentType>();
         }
 
+        //createemployee
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            CreateEmployeeVM createEmployeeVM = new CreateEmployeeVM
+            {
+                EmployeeModel = new EmployeeVM(),
+                PersonModel = new PersonVM(),
+                DocumentTypeModel = new DocumentTypeVM(),
+                DocumentTypes = GetDocumentTypesSelectList(),
+            };
+            return View(createEmployeeVM);
         }
         [HttpPost]
-        public IActionResult Create(EmployeeViewModel model)
+        public async Task<IActionResult>Create(CreateEmployeeVM createEmployeeVM)
         {
+            if (!ModelState.IsValid)
+            {
+                createEmployeeVM.DocumentTypes = GetDocumentTypesSelectList();
+                return View(createEmployeeVM);
+            }
+
             try
             {
-                String data = JsonConvert.SerializeObject(model);
+                createEmployeeVM.DocumentTypes = GetDocumentTypesSelectList();
+
+                int id = 5; //no se todavia
+                int TI = 1;
+                //crearpersona
+                var personData = JsonConvert.SerializeObject(createEmployeeVM.PersonModel);
+                var personContent = new StringContent(personData, Encoding.UTF8, "application/json");
+                var personResponde = await _client.PostAsync(_client.BaseAddress + $"/Employee?Name={createEmployeeVM.PersonModel.Name}&LastName{createEmployeeVM.PersonModel.Lastname}" +
+                    $"&Email={createEmployeeVM.PersonModel.Email}&IdDocumentType={TI}&NumDocument={createEmployeeVM.PersonModel.NumDocument}", personContent);
+
+                if (!personResponde.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creting person";
+                    return View();
+                }
+                var personResponseData = await personResponde.Content.ReadAsStringAsync();
+                var createPerson = JsonConvert.DeserializeObject<PersonViewModel>(personResponseData);
+                int personId = createPerson.IdPerson;
+
+                //Crear empleados
+                var employeeData = JsonConvert.SerializeObject(createEmployeeVM.EmployeeModel);
+                var employeeContent = new StringContent(employeeData, Encoding.UTF8, "application/json");
+                var employeeResponse = await _client.PostAsync(_client.BaseAddress + $"/Employee?IdPerson={personId}", employeeContent);
+                if (!employeeResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating employee";
+                    return View();
+                }
+
+                TempData["successMessage"] = "Employee created successfully";
+                return RedirectToAction("EmployeeGet");
+
+                /*String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Employee/Create?IdPerson={model.IdPerson}&Position={model.Position}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Employee Created";
                     return RedirectToAction("EmployeeGet");
-                }
+                }*/
             }
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
                 return View();
             }
-            return View();
+        }
+
+        private List<SelectListItem> GetDocumentTypesSelectList()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                var typeIdentifications = JsonConvert.DeserializeObject<List<DocumentType>>(data);
+                return typeIdentifications.Select(ti => new SelectListItem
+                {
+                    Value = ti.IdDocumentType.ToString(),
+                    Text = ti.Document
+                }).ToList();
+            }
+            return new List<SelectListItem>();
         }
 
         [HttpGet]
