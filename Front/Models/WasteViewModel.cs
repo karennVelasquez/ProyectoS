@@ -20,7 +20,8 @@ namespace Front.Models
         public IEnumerable<SelectListItem> WasteType { get; set; }
         [DisplayName("Waste Type")]
         public string Waste_Type { get; set; }
-
+        public string Description { get; set; }
+        public string Descomposition { get; set; }
         public bool IsDelete { get; set; }
     }
 }

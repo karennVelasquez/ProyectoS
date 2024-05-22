@@ -2,6 +2,7 @@
 using Front.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SGRA2._0.Model;
 using System.Text;
 namespace Front.Controllers
 {
@@ -24,10 +25,53 @@ namespace Front.Controllers
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<ChemicalCompositionViewModel>>(data);
+
+                List<Waste> waste = GetWaste();
+                List<WasteType> wasteTypes = GetWasteType();
+
+                foreach (var chemicalComposition in Loginlist)
+                {
+                    var wasteInfo = waste.FirstOrDefault(ch => ch.IdWaste == chemicalComposition.IdWaste);
+                    var wasteTypeInfo = wasteTypes.FirstOrDefault(ch => ch.IdWasteType == chemicalComposition.IdWasteType); 
+
+                    if(wasteInfo != null || wasteTypeInfo !=null)
+                    {
+                        var waste_type = wasteTypes.FirstOrDefault(wt => wt.IdWasteType == wasteInfo.IdWasteType);
+
+                        if(waste_type != null)
+                        {
+                            chemicalComposition.Waste_Type = waste_type.Waste_Type;
+                        }
+                    }
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.IsDelete).ToList();
 
             return View(inactiveLogins);
+        }
+
+        ///
+        private List<Waste> GetWaste()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Waste").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Waste>>(data);
+            }
+            return new List<Waste>();
+        }
+
+        ///
+        private List<WasteType> GetWasteType()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/WasteType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<WasteType>>(data);
+            }
+            return new List<WasteType>();
         }
 
         [HttpGet]

@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Front.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using SGRA2._0.Model;
 using System.Net;
@@ -29,7 +30,7 @@ namespace Front.Controllers
 
                 //Obtener datos adicionales
 
-                List<DocumentType> documentTypes = GetDocumentType();
+                List<DocumentType> documentTypes = GetDocumentTypes();
 
                 //Mapear datos
 
@@ -43,7 +44,7 @@ namespace Front.Controllers
             return View(inactiveLogins);
         }
 
-        private List<DocumentType> GetDocumentType()
+        private List<DocumentType> GetDocumentTypes()
         {
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
             if (response.IsSuccessStatusCode)
@@ -57,11 +58,22 @@ namespace Front.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            var model = new PersonViewModel
+            {
+
+                DocumentTypes = GetDocumentTypesSelectList()
+            };   
             return View();
         }
         [HttpPost]
         public IActionResult Create(PersonViewModel model)
         {
+            if(!ModelState.IsValid)
+            {
+                model.DocumentTypes = GetDocumentTypesSelectList();
+
+                return View(model);
+            }
             try
             {
                 String data = JsonConvert.SerializeObject(model);
@@ -76,10 +88,33 @@ namespace Front.Controllers
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
-                return View();
+                //return View();
             }
+
+            //
+            model.DocumentTypes = GetDocumentTypesSelectList();
             return View();
+
         }
+
+        //
+
+        private List<SelectListItem> GetDocumentTypesSelectList()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                var typeIdentifications = JsonConvert.DeserializeObject<List<DocumentType>>(data);
+                return typeIdentifications.Select(ti => new SelectListItem
+                {
+                    Value = ti.IdDocumentType.ToString(),
+                    Text = ti.Document
+                }).ToList();
+            }
+            return new List<SelectListItem>();
+        }
+      
 
         [HttpGet]
         public IActionResult Update(int id)

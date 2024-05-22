@@ -10,7 +10,7 @@ namespace Front.Models
         public CustomerViewModel()
         {
             Person = new List<SelectListItem>();
-            DocumentType = new List<SelectListItem>();
+            DocumentTypes = new List<SelectListItem>();
         }
 
             [DisplayName("Id")]
@@ -21,7 +21,7 @@ namespace Front.Models
             public string LastName { get; set; }
 
             public int IdDocumentType { get; set; }
-            public IEnumerable<SelectListItem> DocumentType { get; set; }
+            public IEnumerable<SelectListItem> DocumentTypes { get; set; }
             [DisplayName("Document Type")]
             public string Document {  get; set; }
 

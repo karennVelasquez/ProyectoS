@@ -11,8 +11,8 @@ namespace Front.Models
         public SuppliersViewModel()
         {
             Person = new List<SelectListItem>();
-            DocumentType = new List<SelectListItem>();
-            WasteType = new List<SelectListItem>();
+            DocumentTypes = new List<SelectListItem>();
+            WasteTypes = new List<SelectListItem>();
         }
         [DisplayName("Id")]
         public int IdSuppliers { get; set; }
@@ -23,7 +23,7 @@ namespace Front.Models
         public string LastName { get; set; }
 
         public int IdDocumentType { get; set; }
-        public IEnumerable<SelectListItem> DocumentType { get; set; }
+        public IEnumerable<SelectListItem> DocumentTypes { get; set; }
         [DisplayName("Document Type")]
         public string Document { get; set; }
 
@@ -33,9 +33,11 @@ namespace Front.Models
 
 
         public int IdWasteType { get; set; }
-        public IEnumerable<SelectListItem> WasteType { get; set; }
+        public IEnumerable<SelectListItem> WasteTypes { get; set; }
         [DisplayName("Waste Type")]
         public string Waste_Type { get; set; }
+        public string Description { get; set; }
+        public string Descomposition { get; set; }
         public bool IsDelete { get; set; }
     }
 }

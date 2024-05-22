@@ -18,12 +18,15 @@ namespace Front.Models
         [DisplayName("Id")]
         public int IdChemicalComposition { get; set; }
 
+
         public int IdWaste { get; set; }
         public IEnumerable<SelectListItem> Waste { get; set; }
         public int IdWasteType { get; set; }
+
         public IEnumerable<SelectListItem> WasteType { get; set; }
         [DisplayName("Waste Type")]
         public string Waste_Type { get; set; }
+
 
         [DisplayName("Chemical Composition")]
         public string Chemical_Composition { get; set; }

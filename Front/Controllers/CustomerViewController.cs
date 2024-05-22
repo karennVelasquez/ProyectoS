@@ -1,6 +1,9 @@
 ﻿using Azure;
 using Front.Models;
+using Front.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using SGRA2._0.Model;
 using System.Text;
@@ -28,7 +31,7 @@ namespace Front.Controllers
 
                 //Obtener datos adicionales
                 List<Person> person = GetPerson();
-                List<DocumentType> documentTypes = GetDocumentType();
+                List<DocumentType> documentTypes = GetDocumentTypes();
 
                 //Mapear datos relacionados
                 foreach (var customer in Loginlist)
@@ -65,7 +68,7 @@ namespace Front.Controllers
             return new List<Person>();
         }
         ///
-        private List<DocumentType> GetDocumentType ()
+        private List<DocumentType> GetDocumentTypes ()
         {
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
             if (response.IsSuccessStatusCode)
@@ -76,31 +79,94 @@ namespace Front.Controllers
             return new List<DocumentType>();
         }
 
+
+        //createcustomer
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            CreateCustomerVM createCustomerVM = new CreateCustomerVM
+            {
+                CustomerModel = new CustomerVM(),
+                PersonModel = new PersonVM(),
+                DocumentTypeModel = new DocumentTypeVM(),
+                DocumentTypes = GetDocumentTypesSelectList(),
+
+            };
+            return View(createCustomerVM);
         }
         [HttpPost]
-        public IActionResult Create(CustomerViewModel model)
+        public async Task<IActionResult>Create(CreateCustomerVM createCustomerVM)
         {
+            if(!ModelState.IsValid)
+            {
+                createCustomerVM.DocumentTypes = GetDocumentTypesSelectList();
+                return View(createCustomerVM);
+            }
+
             try
             {
-                String data = JsonConvert.SerializeObject(model);
+                createCustomerVM.DocumentTypes = GetDocumentTypesSelectList();
+
+                int id = 5; //no se todavia
+                int TI = 1;
+                //crearpersona
+                var personData = JsonConvert.SerializeObject(createCustomerVM.PersonModel);
+                var personContent = new StringContent(personData, Encoding.UTF8, "application/json");
+                var personResponde = await _client.PostAsync(_client.BaseAddress + $"/Customer?Name={createCustomerVM.PersonModel.Name}&LastName{createCustomerVM.PersonModel.Lastname}" +
+                    $"&Email={createCustomerVM.PersonModel.Email}&IdDocumentType={TI}&NumDocument={createCustomerVM.PersonModel.NumDocument}", personContent);
+
+                if(!personResponde.IsSuccessStatusCode) 
+                {
+                    TempData["errorMessage"] = "Error creting person";
+                    return View();
+                }
+                var personResponseData = await personResponde.Content.ReadAsStringAsync();
+                var createPerson = JsonConvert.DeserializeObject<PersonViewModel>(personResponseData);
+                int personId = createPerson.IdPerson;
+
+                //Crearcliente
+                var customerData = JsonConvert.SerializeObject(createCustomerVM.CustomerModel);
+                var customerContent = new StringContent(customerData, Encoding.UTF8, "application/json");
+                var customerResponse = await _client.PostAsync(_client.BaseAddress + $"/Customer?IdPerson={personId}", customerContent);
+                if(!customerResponse.IsSuccessStatusCode) 
+                {
+                    TempData["errorMessage"] = "Error creating customer";
+                    return View();
+                }
+
+                TempData["successMessage"] = "Customer created successfully";
+                return RedirectToAction("CustomerGet");
+                
+                /* String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Customer/Create?IdPerson={model.IdPerson}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Customer Created";
                     return RedirectToAction("CustomerGet");
-                }
+                }*/
             }
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
                 return View();
             }
-            return View();
+        }
+
+        private List<SelectListItem> GetDocumentTypesSelectList()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                var typeIdentifications = JsonConvert.DeserializeObject<List<DocumentType>>(data);
+                return typeIdentifications.Select(ti => new SelectListItem
+                {
+                    Value = ti.IdDocumentType.ToString(),
+                    Text = ti.Document
+                }).ToList();
+            }
+            return new List<SelectListItem>();
         }
 
         [HttpGet]

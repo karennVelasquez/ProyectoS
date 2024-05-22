@@ -2,6 +2,7 @@
 using Front.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SGRA2._0.Model;
 using System.Text;
 namespace Front.Controllers
 {
@@ -24,10 +25,92 @@ namespace Front.Controllers
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<CollectWasteViewModel>>(data);
+
+                //Obtener datos adicionales
+
+                List<DocumentType> documentTypes = GetDocumentType();
+                List<Suppliers> suppliers = GetSuppliers();
+                List<Person> persons = GetPerson();
+                List<Composter> composter = GetComposter();
+
+                foreach (var collectWaste in Loginlist)
+                {
+                    
+                    collectWaste.Material = composter.FirstOrDefault(c => c.IdComposter == collectWaste.IdComposter)?.Material;
+                    collectWaste.DrainageSystem = composter.FirstOrDefault(c => c.IdComposter == collectWaste.IdComposter)?.DrainageSystem;
+
+                    var suppliersInfo = suppliers.FirstOrDefault(p => p.IdSuppliers == collectWaste.IdSuppliers);
+                    var personInfo = persons.FirstOrDefault(p => p.IdPerson == suppliersInfo.IdPerson);
+                    
+                    if(suppliersInfo !=null || personInfo !=null)
+                    {
+                        var name = persons.FirstOrDefault(ti => ti.IdPerson == suppliersInfo.IdPerson);
+                        var lastname = persons.FirstOrDefault(ti => ti.IdPerson == suppliersInfo.IdPerson);
+                        var email = persons.FirstOrDefault(ti => ti.IdPerson == suppliersInfo.IdPerson);
+                        var numDocument = persons.FirstOrDefault(ti => ti.IdPerson == suppliersInfo.IdPerson);
+
+                        var documentType = documentTypes.FirstOrDefault(c => c.IdDocumentType == personInfo.IdDocumentType);
+
+
+                        if (name != null || lastname != null || email != null || numDocument != null || documentType != null)
+                        {
+                            collectWaste.Name = name.Name;
+                            collectWaste.LastName = lastname.Lastname;
+                            collectWaste.Email = email.Email;
+                            collectWaste.NumDocument = numDocument.NumDocument;
+                            collectWaste.Document = documentType.Document;
+                        }
+                    }
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.IsDelete).ToList();
 
             return View(inactiveLogins);
+        }
+
+        ///
+        private List<Person> GetPerson()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Person>>(data);
+            }
+            return new List<Person>();
+        }
+        private List<DocumentType> GetDocumentType()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/DocumentType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<DocumentType>>(data);
+            }
+            return new List<DocumentType>();
+        }
+        ///
+        private List<Suppliers> GetSuppliers()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Suppliers").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Suppliers>>(data);
+            }
+            return new List<Suppliers>();
+        }
+
+        ///
+        private List<Composter> GetComposter()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Composter").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Composter>>(data);
+            }
+            return new List<Composter>();
         }
 
         [HttpGet]
