@@ -12,21 +12,22 @@ namespace Front.Models
     {
         public ChemicalCompositionViewModel()
         {
-            Waste = new List<SelectListItem>();
-            WasteType = new List<SelectListItem>();
+            Wastes = new List<SelectListItem>();
+            WasteTypes = new List<SelectListItem>();
         }
         [DisplayName("Id")]
         public int IdChemicalComposition { get; set; }
 
 
         public int IdWaste { get; set; }
-        public IEnumerable<SelectListItem> Waste { get; set; }
+        public IEnumerable<SelectListItem> Wastes { get; set; }
         public int IdWasteType { get; set; }
 
-        public IEnumerable<SelectListItem> WasteType { get; set; }
+        public IEnumerable<SelectListItem> WasteTypes { get; set; }
         [DisplayName("Waste Type")]
         public string Waste_Type { get; set; }
-
+        public string Description { get; set; }
+        public string Descomposition { get; set; }
 
         [DisplayName("Chemical Composition")]
         public string Chemical_Composition { get; set; }

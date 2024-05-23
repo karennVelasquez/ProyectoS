@@ -51,7 +51,7 @@ namespace Front.Controllers
                         if(name !=null || lastname !=null || email !=null || numDocument !=null || documentType !=null)
                         {
                             sale.Name = name.Name;
-                            sale.LastName = lastname.Lastname;
+                            sale.Lastname = lastname.Lastname;
                             sale.Email = email.Email;
                             sale.NumDocument = numDocument.NumDocument;
                             sale.Document = documentType.Document;

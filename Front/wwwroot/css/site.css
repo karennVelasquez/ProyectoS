@@ -34,3 +34,18 @@ body {
     padding: 10px 15px; /* Ajusta el relleno según sea necesario */
     text-align: left; /* Alinea el texto a la izquierda */
 }
+.background-image {
+    background-image: url(/src/a_very_neglected_environment_abandoned_by_pollution_a_lot_of_garbage_that_is_foggy_cartoon_pixar_dis_4112623749.png);
+    background-size: cover; /* Ajustar la imagen al tamaño del contenedor */
+    background-position: center; /* Centrar la imagen */
+    height: 100vh; /* Hacer que el contenedor ocupe toda la altura de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-container {
+    text-align: center;
+    color: white; /* Cambiar el color del texto si es necesario para que sea legible */
+}
+

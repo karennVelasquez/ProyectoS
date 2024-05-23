@@ -36,7 +36,7 @@ namespace Front.Controllers
                 foreach (var employee in Loginlist)
                 {
                     employee.Name = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Name;
-                    employee.LastName = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Lastname;
+                    employee.Lastname = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Lastname;
                     employee.Email = person.FirstOrDefault(p => p.IdPerson == employee.IdPerson)?.Email;
                     employee.NumDocument = person.FirstOrDefault(ni => ni.IdPerson == employee.IdPerson).NumDocument;
 

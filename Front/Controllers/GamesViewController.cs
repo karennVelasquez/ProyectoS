@@ -1,7 +1,9 @@
 ﻿using Azure;
 using Front.Models;
+using Front.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SGRA2._0.Model;
 using System.Text;
 namespace Front.Controllers
 {
@@ -24,10 +26,35 @@ namespace Front.Controllers
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<GamesViewModel>>(data);
+
+                List<Level> levels = GetLevels();
+
+                // Mapear datos relacionados
+                foreach (var games in Loginlist)
+                {
+
+                    var level = levels.FirstOrDefault(l => l.IdLevel == games.IdLevel);
+
+                    if (level != null)
+                    {
+                        games.NumLevel = level.NumLevel;
+                    }
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.IsDelete).ToList();
 
             return View(inactiveLogins);
+        }
+
+        private List<Level> GetLevels()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Level").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Level>>(data);
+            }
+            return new List<Level>();
         }
 
         [HttpGet]

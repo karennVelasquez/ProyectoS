@@ -5,9 +5,6 @@
 }
 
 <h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult FinalCompost</h1>
-<p>
-    <a asp-action="Create" style="color: darkslategrey;">Create New</a>
-</p>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +45,13 @@
                 @Html.DisplayNameFor(model => model.IdFinalCompost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdWaste)
+                @Html.DisplayNameFor(model => model.Waste_Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descomposition)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.HumidityLevel)
@@ -70,7 +73,13 @@
                     @Html.DisplayFor(modelItem => item.IdFinalCompost)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdWaste)
+                    @Html.DisplayFor(modelItem => item.Waste_Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descomposition)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HumidityLevel)

@@ -4,14 +4,19 @@
     ViewData["Title"] = "Home Game";
 }
 
-<div class="text-center">
+<div class="background-image">
+    <div class="content-container">
+        <h1>Vuelva a la aplicación del juego</h1>
 
-    @if (User.Identity!.IsAuthenticated)
-    {
-        <h1 class="display-4">
-            Welcome Game
-            @User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()
-        </h1>
-    }
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        @if (User.Identity!.IsAuthenticated)
+        {
+            <h2>Bienvenido al juego, @User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()!</h2>
+        }
+        else
+        {
+            <h2>Por favor, inicie sesión para acceder al juego.</h2>
+        }
+
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
 </div>

@@ -55,7 +55,7 @@ namespace Front.Controllers
                         if (name != null || lastname != null || email != null || numDocument != null || documentType != null)
                         {
                             collectWaste.Name = name.Name;
-                            collectWaste.LastName = lastname.Lastname;
+                            collectWaste.Lastname = lastname.Lastname;
                             collectWaste.Email = email.Email;
                             collectWaste.NumDocument = numDocument.NumDocument;
                             collectWaste.Document = documentType.Document;

@@ -17,7 +17,7 @@ namespace Front.Models
         public int IdPerson { get; set; }
         public IEnumerable<SelectListItem> Person { get; set; }
         public string Name { get; set; }
-        public string LastName { get; set; }
+        public string Lastname { get; set; }
         public string Email { get; set; }
 
         public int IdDocumentType { get; set; }

@@ -46,7 +46,7 @@
                 @Html.DisplayNameFor(model => model.IdGames)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdLevel)
+                @Html.DisplayNameFor(model => model.NumLevel)
             </th>
             <th></th>
         </tr>
@@ -59,7 +59,7 @@
                     @Html.DisplayFor(modelItem => item.IdGames)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdLevel)
+                    @Html.DisplayFor(modelItem => item.NumLevel)
                 </td>
                 <td>
                     @Html.ActionLink("Update", "Update", new { id = item.IdGames }, new { style = "color: darkslategrey;" }) |

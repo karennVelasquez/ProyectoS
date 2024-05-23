@@ -48,7 +48,14 @@
                 @Html.DisplayNameFor(model => model.IdWaste)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdWasteType)
+                @Html.DisplayNameFor(model => model.Waste_Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descomposition)
             </th>
             <th></th>
         </tr>
@@ -61,7 +68,13 @@
                     @Html.DisplayFor(modelItem => item.IdWaste)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdWasteType)
+                    @Html.DisplayFor(modelItem => item.Waste_Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descomposition)
                 </td>
                 <td>
                     @Html.ActionLink("Update", "Update", new { id = item.IdWaste }, new { style = "color: darkslategrey;" }) |

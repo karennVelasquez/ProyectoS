@@ -31,6 +31,8 @@ namespace Front.Controllers
                 foreach (var waste in Loginlist)
                 {
                     waste.Waste_Type = wasteTypes.FirstOrDefault(wt => wt.IdWasteType == waste.IdWasteType)?.Waste_Type;
+                    waste.Description = wasteTypes.FirstOrDefault(wt => wt.IdWasteType == waste.IdWasteType)?.Description;
+                    waste.Descomposition = wasteTypes.FirstOrDefault(wt => wt.IdWasteType == waste.IdWasteType)?.Descomposition;
                 }
         
             }

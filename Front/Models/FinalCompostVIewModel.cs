@@ -12,8 +12,8 @@ namespace Front.Models
     {
         public FinalCompostVIewModel()
         {
-            Waste = new List<SelectListItem>();
-            WasteType = new List<SelectListItem>();
+            Wastes = new List<SelectListItem>();
+            WasteTypes = new List<SelectListItem>();
         }
 
         [DisplayName("Id")]
@@ -21,12 +21,13 @@ namespace Front.Models
 
 
         public int IdWaste { get; set; }
-        public IEnumerable<SelectListItem> Waste { get; set; }
+        public IEnumerable<SelectListItem> Wastes { get; set; }
         public int IdWasteType { get; set; }
-        public IEnumerable<SelectListItem> WasteType { get; set; }
+        public IEnumerable<SelectListItem> WasteTypes { get; set; }
         [DisplayName("Waste Type")]
         public string Waste_Type { get; set; }
-
+        public string Description { get; set; }
+        public string Descomposition { get; set; }
 
         public string HumidityLevel { get; set; }
         //Nivel de humedad
